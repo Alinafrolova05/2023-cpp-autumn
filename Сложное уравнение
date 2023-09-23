@@ -1,17 +1,22 @@
 #include <iostream>
 int main() {
-	int a, b, c, d ;
-	std:: cin >> a >> b >> c >> d ;
+	int a, b, c, d;
+	std::cin >> a >> b >> c >> d;
 	bool x = b % a == 0;
 	bool CD = c != 0 && d != 0;
-	if ( d == 0 && c != 0 && b == 0 ) {
-		std::cout << "No";
-	}
-	if (CD) {
-		std::cout << "No";
-	}
-	if ( b != d && a != c && x && a != 0 ) {
-		std::cout << (-1) * (b / a);
+	if (d == 0 && c != 0 && b == 0) {
+		if (CD) {
+			std::cout << "No";
+			if (b != d && a != c && x && a != 0) {
+				std::cout << (-1) * (b / a);
+			}
+			else {
+				std::cout << "No";
+			}
+		}
+		else {
+			std::cout << "No";
+		}
 	}
 	else {
 		std::cout << "No";
