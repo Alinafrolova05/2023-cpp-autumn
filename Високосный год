@@ -1,6 +1,6 @@
 #include <iostream>
 int main() {
-	int year;
+	int year = 0;
 	std:: cin >> year;
 	bool mod400 = year % 400 == 0;
 	if ((year % 4 == 0 && year % 100 != 0) || mod400) {
