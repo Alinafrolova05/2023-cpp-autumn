@@ -1,6 +1,6 @@
 #include <iostream>
 int main() {
-	int N ;
+	int N = 0 ;
 	std::cin >> N;
 	if (N % 10 == 1) {
 		std::cout << N << " " << "bochka";
