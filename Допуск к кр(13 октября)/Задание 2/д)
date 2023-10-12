@@ -1,0 +1,18 @@
+#include <iostream>
+
+int main(int argc, char* argv[])
+{
+	for (int i = 1; i < 6 ; ++i)
+	{
+		for (int j = 1; j < 6; ++j)
+		{
+			bool k = i == 1 || i == 5;
+			bool k1 = j == 2 || j == 4;
+			bool k2 = j == 3;
+			bool k3 = i == 2 || i == 4;
+			std::cout << ((i % 4) + (i / 4) * 2 - (i / 5) * 2) + k * k1 + k * k2 * 2 + k2 * k3;
+		}
+		std::cout << std::endl;
+	}
+	return EXIT_SUCCESS;
+}
