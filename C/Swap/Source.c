@@ -1,28 +1,21 @@
 #define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include <math.h>
 
-int main(int argc, char arrgv[])
-{
-	int a = 0;
-	int b = 0;
-	printf("Введите два числа: \n");
-	scanf_s("%d", &a);
-	scanf_s("%d", &b);
-	if (a > b)
-	{
-		a += b;
-		b = -b;
-		b += a;
-		a -= b;
-	}
-	else if (b > a)
-	{
-		b += a;
-		a = -a;
-		a += b;
-		b -= a;
-	}
-	printf("%d , %d", a, b);
-	return 0;
+void swap(int * left, int* right) {
+    *left ^= *right;
+    *right ^= *left;
+    *left ^= *right;
+}
+
+int main(void) {
+    int a = 0;
+    int b = 0;
+    printf("Enter two numbers: \n");
+    int result = scanf_s("%d", &a);
+    result = scanf_s("%d", &b);
+    swap(&a, &b);
+    printf("\n%d, %d", a, b);
+    return 0;
 }

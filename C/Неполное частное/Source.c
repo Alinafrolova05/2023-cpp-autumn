@@ -1,46 +1,34 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include<stdio.h>
-int main(int argc, char argv[])
-{
-	int a = 0;
-	int b = 0;
-	printf("Введите делимое: ");
-	scanf_s("%d", &a);
-	printf("Введите делитель: ");
-	scanf_s("%d", &b);
-	for (int i = 0; i >= 0; ++i)
-	{
-		if (b == 0)
-		{
-			printf("Ошибка");
-			break;
-		}
-		if (a == 0)
-		{
-			printf("0");
-			break;
-		}
-		if (b * i > a && a > 0 && b > 0)
-		{
-			printf("Остаток равен: %d", a - b * (i - 1));
-			break;
-		}
-		if (a > 0 && b < 0 && b * (-i) > a)
-		{
 
-			printf("Остаток равен: %d", a + b * (i - 1));
-			break;
-		}
-		if (a < 0 && b > 0 && b * (-i) < a)
-		{
-			printf("Остаток равен: %d", a + b * i);
-			break;
-		}
-		if (b * i < a && a < 0 && b < 0)
-		{
-			printf("Остаток равен: %d", a - b * i);
-			break;
-		}
-	}
-	return 0;
+#include <stdio.h>
+#include <math.h>
+
+void Dividing(int a, int b) {
+    if (b == 0) {
+        printf("Error");
+    }
+    if (a == 0) {
+        printf("0");
+    } else {
+        int i = -abs(a);
+        while (1) {
+            if (a - b * i >= 0 && a - b * i < abs(b)) {
+                printf("Incomplete quotient: %d", i);
+                break;
+            }
+            ++i;
+        }
+    }
+}
+
+int main(void)
+{
+    const int a = 0;
+    const int b = 0;
+    printf("Enter the dividend: ");
+    int result = scanf("%d", &a);
+    printf("Enter the divisor: ");
+    result = scanf("%d", &b);
+    Dividing(a, b);
+    return 0;
 }
