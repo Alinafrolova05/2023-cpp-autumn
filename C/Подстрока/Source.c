@@ -2,40 +2,50 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
-void NumberOfOccurrences(char str[], char sub[])
+bool MismatchedLetters(char string[],char substring[], int j, int indexSubstring) {
+    return string[j] == substring[indexSubstring];
+}
+
+void NumberOfOccurrences(char string[], char substring[], int* countSubstrings)
 {
-    int countsub = 0;
-    for (int i = 0; sub[i] != '\0'; ++i) {
-        countsub++;
-    }
-    int count = 0;
-    int isub = 0;
-    int check = 0;
-    for (int jstr = 0; str[jstr] != '\0'; ++jstr) {
-        if (str[jstr] == sub[isub]) {
-            check++;
-            isub++;
-        } else {
-            check = 0;
-            isub = 0;
+    int countSubstringsVoid = 0;
+    int indexSubstring = 0;
+    int checkIdenticalLetters = 0;
+
+    for (int j = 0; string[j] != '\0'; ++j) {
+
+        if (!MismatchedLetters(string, substring, j, indexSubstring)) {
+            checkIdenticalLetters = 0;
+            indexSubstring = 0;
+            continue;
         }
-        if (check == countsub - 1) {
-            count++;
-            check = 0;
-            isub = 0;
+
+        checkIdenticalLetters++;
+        indexSubstring++;
+
+        if (checkIdenticalLetters == strlen(substring) - 1) {
+            countSubstringsVoid++;
+            checkIdenticalLetters = 0;
+            indexSubstring = 0;
         }
     }
-    printf("Number of occurrences of S1 in S as substrings: %d", count);
+
+    *countSubstrings = countSubstringsVoid;
 }
 
 int main(void)
 {
-    char str[100] = "x";
-    char sub[100] = "w";
+    char string[100] = "x";
+    char substring[100] = "w";
+    int countSubstrings = 1;
+
     printf("Enter a string S with less than 100 characters: ");
-    fgets(str, 100, stdin);
+    fgets(string, 100, stdin);
     printf("Enter a substring S1 with less than 100 characters: ");
-    fgets(sub, 100, stdin);
-    NumberOfOccurrences(str, sub);
+    fgets(substring, 100, stdin);
+
+    NumberOfOccurrences(string, substring, &countSubstrings);
+    printf("Number of occurrences of S1 in S as substrings: %d", countSubstrings);
 }
