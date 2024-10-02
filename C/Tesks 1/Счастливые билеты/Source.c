@@ -17,7 +17,7 @@ int main(int argc, char argv[])
 				mas[i + j + k]++;
 			}
 		}
-	}
+	} 
 	int count = 0;
 	for (int i = 0; i < 28; ++i)
 	{
