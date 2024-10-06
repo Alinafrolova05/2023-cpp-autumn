@@ -1,0 +1,57 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 2\\Semi-sort\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{89E7E285-3A67-4606-99D0-482A7BC5C41A}|Semi-sort.vcxproj|C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 2\\Semi-sort\\Semi-sort.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{89E7E285-3A67-4606-99D0-482A7BC5C41A}|Semi-sort.vcxproj|solutionrelative:Semi-sort.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{a0c5197d-0ac7-4b63-97cd-8872a789d233}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{4a9b7e51-aa16-11d0-a8c5-00a0c921a4d2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Semi-sort.c",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 2\\Semi-sort\\Semi-sort.c",
+              "RelativeDocumentMoniker": "Semi-sort.c",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 2\\Semi-sort\\Semi-sort.c",
+              "RelativeToolTip": "Semi-sort.c",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAA4AAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-10-02T17:56:48.757Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

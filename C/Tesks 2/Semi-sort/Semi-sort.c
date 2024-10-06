@@ -16,7 +16,9 @@ void sort(int *mas, int size) {
     int indexfinish = size - 1;
     int i = 1;
     while (i <= indexfinish) {
+
         if (mas[i] < value0) {
+
             swap(&mas[i], &mas[indexmas0]);
             indexmas0++;
             i++;
@@ -24,6 +26,7 @@ void sort(int *mas, int size) {
             if (i == indexfinish) {
                 break;
             }
+           
             swap(&mas[i], &mas[indexfinish]);
             indexfinish--;
         }
@@ -36,7 +39,7 @@ int main()
     printf("Specify the number of elements in the array: ");
     int result = scanf("%d", &size);
     int* mas = (int*)calloc(size, sizeof(int));
-
+    srand(time(NULL));
     for (int i = 0; i < size; ++i) {
         mas[i] = rand() % 100;
     }
