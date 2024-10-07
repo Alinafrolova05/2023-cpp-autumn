@@ -10,7 +10,7 @@ bool testSize(float size) {
         count++;
     }
     return size == count && size >= 0;
-}
+} 
 bool testSwap(int* left, int* right) {
     return left != right;
 }

@@ -6,7 +6,7 @@
 
 bool testScanf(int result) {
     return result == 1;
-}
+} 
 bool test(int size, int checkSize) {
     return size == checkSize && size > 0;
 }
