@@ -1,7 +1,0 @@
-﻿  Search.c
-C:\Users\user\source\repos\2023-cpp-autumn\C\Tesks 3\Search\Search.c(105,31): warning C4244: функция: преобразование "float" в "size_t", возможна потеря данных
-C:\Users\user\source\repos\2023-cpp-autumn\C\Tesks 3\Search\Search.c(106,32): warning C4244: функция: преобразование "float" в "size_t", возможна потеря данных
-C:\Users\user\source\repos\2023-cpp-autumn\C\Tesks 3\Search\Search.c(107,11): warning C4013: time: нет определения; предполагается "extern" с возвратом типа "int"
-C:\Users\user\source\repos\2023-cpp-autumn\C\Tesks 3\Search\Search.c(118,25): warning C4244: функция: преобразование "float" в "int", возможна потеря данных
-C:\Users\user\source\repos\2023-cpp-autumn\C\Tesks 3\Search\Search.c(133,31): warning C4244: функция: преобразование "float" в "int", возможна потеря данных
-  Search.vcxproj -> C:\Users\user\source\repos\2023-cpp-autumn\C\Tesks 3\Search\x64\Debug\Search.exe
