@@ -3,18 +3,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
 
 double testFaster(double clock1, double clock2) {
     return clock1 - clock2;
 }
 
-void swap(int* left, int* right) {
+bool testSwap(int* left, int* right) {
+    return left != right;
+}
+void swap(int *left, int *right) {
+    if (!testSwap(left, right)) {
+        return;
+    }
     *left ^= *right;
     *right ^= *left;
     *left ^= *right;
 }
 
-void Bubblesort(int* array, int  size) {
+void bubbleSort(int *array, int  size) {
     for (size_t i = 0; i < size; ++i) {
         int count = 0;
         for (int j = 0; j < size - 1; ++j) {
@@ -28,8 +35,19 @@ void Bubblesort(int* array, int  size) {
         }
     }
 }
+bool testBubbleSort(int *array) {
+    bubbleSort(array, 5);
+    int count = 0;
+    for (int i = 0; i < 4; ++i) {
+        if (array[i] <= array[i + 1]) {
+            count++;
+        }
+    }
+    return count == 4;
+}
 
-void Countsort(int* array, int *array2, int  size) {
+void countSort(int *array, int  size) {
+    int* array2 = (int*)calloc(size, sizeof(int));
     for (size_t i = 0; i < size; ++i) {
         array2[array[i]]++;
     }
@@ -42,9 +60,20 @@ void Countsort(int* array, int *array2, int  size) {
         }
         move++;
     }
+    free(array2);
+}
+bool testCountSort(int *array) {
+    countSort(array, 5);
+    int count = 0;
+    for (int i = 0; i < 4; ++i) {
+        if (array[i] <= array[i + 1]) {
+            count++;
+        }
+    }
+    return count == 4;
 }
 
-void Print(int* array, int  size) {
+void Print(int *array, int size) {
     printf("\n");
     for (size_t i = 0; i < size; ++i) {
         printf("%d ", array[i]);
@@ -56,15 +85,23 @@ int main(int argc, char argv[])
     const size = 100000;
     printf("The program compares Bubblesort and Countsort on an array of %d elements...", size);
     int* array = (int*)calloc(size, sizeof(int));
-    srand(time(NULL));
+    if (!testBubbleSort(array)) {
+        printf("Error! Bubble sort doesn't work!");
+        return 0;
+    }
+    if (!testCountSort(array)) {
+        printf("Error! Counting sort doesn't work!");
+        return 0;
+    }
 
+    srand(time(NULL));
     for (int i = 0; i < size; ++i) {
         array[i] = rand() % 10;
     }
 
-    int *array2 = (int *)calloc(size, sizeof(int));
+    
     clock_t start1 = clock();
-    Bubblesort(array, size);
+    bubbleSort(array, size);
     clock_t end1 = clock();
     double clockBubblesort = 1000.0 * (end1 - start1) / CLOCKS_PER_SEC;
 
@@ -73,7 +110,7 @@ int main(int argc, char argv[])
     }
 
     clock_t start2 = clock();
-    Countsort(array, array2, size);
+    countSort(array, size);
     clock_t end2 = clock();
     double clockCountsort = 1000.0 * (end2 - start2) / CLOCKS_PER_SEC;
    
@@ -88,6 +125,5 @@ int main(int argc, char argv[])
     }
 
     free(array);
-    free(array2);
     return 0;
 }

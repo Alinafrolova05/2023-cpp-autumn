@@ -4,24 +4,31 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-bool test(float size) {
+bool testScanf(int result) {
+    return result == 1;
+}
+bool testPositive(float size) {
     return size >= 0;
 }
-
-bool test2(float size) {
+bool testInteger(float size) {
     int count = 0;
     for (int i = 0; i < size; ++i) {
         count++;
     }
     return count == size;
 }
+bool testSwap(int *left, int *right) {
+    return left != right;
+}
 
 void swap(int* left, int* right) {
+    if (!testSwap(left, right)) {
+        return;
+    }
     *left ^= *right;
     *right ^= *left;
     *left ^= *right;
-}
- 
+} 
 void sort(int* array, int start, int finish) {
     if (start >= finish) {
         return;
@@ -55,14 +62,8 @@ void search(int* array, int start, int finish, int k, int* count) {
         *count = 1;
         return;
     }
-    if (finish - start == 1) {
+    if (finish - start <= 1) {
         if (array[start] == k || array[start + 1] == k) {
-            *count = 1;
-        }
-        return;
-    }
-    if (finish - start <= 0) {
-        if (array[start] == k) {
             *count = 1;
         }
         return;
@@ -80,8 +81,11 @@ int main() {
     float size = 0;
     printf("Enter size of the array: ");
     int result = scanf("%f", &size);
-    
-    if (!test(size) || !test2(size)) {
+    if (!testScanf(result)) {
+        printf("Input error!");
+        return -1;
+    }
+    if (!testPositive(size) || !testInteger(size)) {
         printf("Error!!! the number must be a positive integer!");
         return -1;
     }
@@ -89,8 +93,11 @@ int main() {
     printf("Indicate the number of numbers whose presence should be checked in the previous array: ");
     float kSize = 0;
     result = scanf("%f", &kSize);
-
-    if (!test(kSize) || !test2(kSize)) {
+    if (!testScanf(result)) {
+        printf("Input error!");
+        return -1;
+    }
+    if (!testPositive(kSize) || !testInteger(kSize)) {
         printf("Error!!! the number must be a positive integer!");
         return -1;
     }
@@ -98,26 +105,21 @@ int main() {
     int* array = (int*)calloc(size, sizeof(int));
     int* kArray = (int*)calloc(kSize, sizeof(int));
     srand(time(NULL));
-
     for (int i = 0; i < size; ++i) {
         array[i] = rand() % 100;
     }
     for (int i = 0; i < kSize; ++i) {
         kArray[i] = rand() % 100;
     }
-
-    printf("\nThe resulting array: ");
+    printf("The resulting array: ");
     for (int i = 0; i < size; ++i) {
         printf("%d ", array[i]);
     }
-
     sort(array, 0, size - 1);
-
     printf("\nSorted array: ");
     for (int i = 0; i < size; ++i) {
         printf("%d ", array[i]);
     }
-
     printf("\nChecked numbers: ");
     for (int i = 0; i < kSize; ++i) {
         printf("%d ", kArray[i]);
@@ -137,5 +139,7 @@ int main() {
     if (counеIdenticalNumbers == 0) {
         printf(" no number belongs to the first array.");
     }
+    free(array);
+    free(kArray);
     return 0;
 }
