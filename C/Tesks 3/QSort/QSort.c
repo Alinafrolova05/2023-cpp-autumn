@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-bool testScanf(int result) {
+bool testScanf(int result) { 
     return result == 1;
 }
 bool test(int size) {

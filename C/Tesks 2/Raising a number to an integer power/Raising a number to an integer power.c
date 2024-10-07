@@ -6,7 +6,7 @@
 bool testScanf(int result) {
     return result == 1;
 }
-bool testInteger(float power, int additionalbool) {
+bool testInteger(float power, int additionalbool) { 
     if (power < 0) {
         power = -power;
     }

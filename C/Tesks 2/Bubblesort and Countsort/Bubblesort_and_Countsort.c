@@ -10,7 +10,7 @@ double testFaster(double clock1, double clock2) {
 }
 
 bool testSwap(int* left, int* right) {
-    return left != right;
+    return left != right; 
 }
 void swap(int *left, int *right) {
     if (!testSwap(left, right)) {
