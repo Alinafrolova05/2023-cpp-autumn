@@ -9,7 +9,7 @@ void swap(int* left, int* right) {
 	*left ^= *right;
 }
 
-void QSort(int* array, int indexStart, int indexFinish) {
+void QSort(int* array, int indexStart, int indexFinish) { 
 	if (indexStart >= indexFinish) {
 		return;
 	}
