@@ -3,53 +3,81 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdbool.h>
+
+bool testScanf(int result) {
+    return result == 1;
+}
+bool testPositive(int m) {
+    return m >= 0;
+}
+bool testSwap(int *left, int *right) {
+    return left != right;
+}
 
 void swap(int* left, int* right) {
-
+    if (!testSwap(left, right)) {
+        return;
+    }
     *left ^= *right;
     *right ^= *left;
     *left ^= *right;
 }
 
-void Transposition(int m, int n, int*mas) {
-    for (int i = 0; i < m / 2; ++i) {
-        swap(&mas[i], &mas[(m - i - 1)]);
-    }
-    for (int i = 0; i < n / 2; ++i) {
-        swap(&mas[i + m], &mas[n + m - i - 1]);
-    }
-    for (int i = 0; i != (n + m) / 2; ++i) {
-        swap(&mas[i], &mas[n + m - i - 1]);
-    }
-    printf("\n");
-    for (int i = 0; i < n + m; ++i) {
-        printf(" %d ", mas[i]);
+void cycle(int m, int n, int *array, int sign, int condition1, int condition2, int condition3) {
+    if (sign == 1) {
+        for (int i = 0; i < condition1; ++i) {
+            swap(&array[i + condition2], &array[m - i - 1 + condition3]);
+        }
+    } else {
+        for (int i = 0; i != condition1; ++i) {
+            swap(&array[i + condition2], &array[m - i - 1 + condition3]);
+        }
     }
 }
 
+void transpose(int m, int n, int *array) {
+    cycle(m, n, array, 1, m / 2, 0, 0);
+    cycle(m, n, array, 1, n / 2, m, n);
+    cycle(m, n, array, 0, (n + m) / 2, 0, n);
+}
+
 int main() {
-    int m = 0;
-    int n = 0;
+    int m = 1;
+    int n = 1;
     printf("Enter m - number of characters in the first part of the array: ");
     int result = scanf("%d", &m);
+    if (!testScanf(result) || !testPositive(m)) {
+        printf("Input error!");
+        return 0;
+    }
+
     printf("Enter n - number of characters in the second part of the array: ");
     result = scanf("%d", &n);
-    int* mas = (int*)calloc(m + n, sizeof(int));
+    if (!testScanf(result) || !testPositive(n)) {
+        printf("Input error!");
+        return 0;
+    }
 
+    int* array = (int*)calloc(m + n, sizeof(int));
     printf("Enter m numbers for the first part of the array: ");
     printf("\n");
     for (int i = 0; i < m; ++i) {
-        result = scanf("%d", &mas[i]);
+        result = scanf("%d", &array[i]);
     }
 
     printf("Enter n numbers for the second part of the array: ");
     printf("\n");
     for (int i = 0; i < n; ++i) {
-        result = scanf("%d", &mas[i + m]);
+        result = scanf("%d", &array[i + m]);
     }
 
-    Transposition(m, n, mas);
+    transpose(m, n, array);
+    printf("\n");
+    for (int i = 0; i < n + m; ++i) {
+        printf(" %d ", array[i]);
+    }
 
-    free(mas);
+    free(array);
     return 0;
 }

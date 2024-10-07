@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 bool testResult(int result) {
-    return 1;
+    return result == 1;
 }
 bool test(int b) {
     return b != 0;
