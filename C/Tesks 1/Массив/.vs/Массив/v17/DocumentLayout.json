@@ -5,6 +5,9 @@
     {
       "AbsoluteMoniker": "D:0:0:{48FF9759-E05C-4D42-B7ED-34A2011DAE3D}|\u041C\u0430\u0441\u0441\u0438\u0432.vcxproj|C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 1\\\u041C\u0430\u0441\u0441\u0438\u0432\\\u041C\u0430\u0441\u0441\u0438\u0432.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{48FF9759-E05C-4D42-B7ED-34A2011DAE3D}|\u041C\u0430\u0441\u0441\u0438\u0432.vcxproj|solutionrelative:\u041C\u0430\u0441\u0441\u0438\u0432.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 1\\Swap\\Source.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +17,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,13 +41,25 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Source.c",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 1\\Swap\\Source.c",
+              "RelativeDocumentMoniker": "..\\Swap\\Source.c",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 1\\Swap\\Source.c",
+              "RelativeToolTip": "..\\Swap\\Source.c",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAowBAAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-10-07T09:01:44.519Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "\u041C\u0430\u0441\u0441\u0438\u0432.c",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 1\\\u041C\u0430\u0441\u0441\u0438\u0432\\\u041C\u0430\u0441\u0441\u0438\u0432.c",
               "RelativeDocumentMoniker": "\u041C\u0430\u0441\u0441\u0438\u0432.c",
               "ToolTip": "C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 1\\\u041C\u0430\u0441\u0441\u0438\u0432\\\u041C\u0430\u0441\u0441\u0438\u0432.c",
               "RelativeToolTip": "\u041C\u0430\u0441\u0441\u0438\u0432.c",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAFAAAA",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAowCcAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2024-10-07T08:14:22.295Z",
               "EditorCaption": ""
