@@ -11,7 +11,7 @@ bool testScanf(int result) {
 bool testPositive(int m) {
     return m >= 0;
 }
-bool testSwap(int *left, int *right) {
+bool testSwap(int* left, int* right) {
     return left != right;
 }
 
@@ -24,19 +24,20 @@ void swap(int* left, int* right) {
     *left ^= *right;
 }
 
-void cycle(int m, int n, int *array, int sign, int condition1, int condition2, int condition3) {
+void cycle(int m, int n, int* array, int sign, int condition1, int condition2, int condition3) {
     if (sign == 1) {
         for (int i = 0; i < condition1; ++i) {
             swap(&array[i + condition2], &array[m - i - 1 + condition3]);
         }
-    } else {
+    }
+    else {
         for (int i = 0; i != condition1; ++i) {
             swap(&array[i + condition2], &array[m - i - 1 + condition3]);
         }
     }
 }
 
-void transpose(int m, int n, int *array) {
+void transpose(int m, int n, int* array) {
     cycle(m, n, array, 1, m / 2, 0, 0);
     cycle(m, n, array, 1, n / 2, m, n);
     cycle(m, n, array, 0, (n + m) / 2, 0, n);
