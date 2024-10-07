@@ -4,9 +4,12 @@
 #include <stdbool.h>
 #include <time.h>
 
-int fibonacciRecursion(int number, int* result) {
+int fibonacciRecursion(int number, int *result) {
 
-    if (number < 3) {
+    if (number < 0) {
+        return 1;
+    }
+    if (number <= 2) {
         return 0;
     }
     int previous = 0;
@@ -27,18 +30,19 @@ int fibonacciIteration(int number, int fibonacci1, int fibonacci2, int fibonacci
     return fibonaccimain;
 }
 
-bool integer(number) {
-    return number < 0;
-}
-bool clockbool(clock_t recursion, clock_t iteration) {
-    return recursion < iteration;
-}
 
 int main()
 {
     int result = 0;
     for (int i = 0; i < 10000; ++i) {
-
+        if (fibonacciRecursion(i, &result) != 0) {
+            printf("Recursion doesn't work!");
+            return 0;
+        }
+        if (fibonacciIteration(i, 0, 1, 0) < 0) {
+            printf("Iteration doesn't work!");
+            return 0;
+        }
         clock_t start1 = clock();
         fibonacciRecursion(i, &result);
         clock_t end1 = clock();
