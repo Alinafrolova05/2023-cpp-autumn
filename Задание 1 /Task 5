@@ -1,9 +1,0 @@
-#include <iostream>
-using namespace std;
-int main() {
-	int V,T;
-	int A=(V * T - 1) / 109;
-	cin >> V >> T;
-	cout << V*T/109 - A;
-	return 0;
-}
