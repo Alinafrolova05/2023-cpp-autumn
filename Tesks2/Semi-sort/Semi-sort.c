@@ -29,7 +29,7 @@ void swap(int *left,int *right) {
 void sort(int *array, int size) {
     int value0 = array[0];
     int indexarray0 = 0;
-    int indexfinish = size - 1;
+    int indexfinish = size - 1; 
     while (indexarray0 + 1 <= indexfinish) {
         if (array[indexarray0 + 1] < value0) {
 
