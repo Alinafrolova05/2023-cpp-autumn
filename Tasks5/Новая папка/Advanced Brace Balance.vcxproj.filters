@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Binary representation.c">
+    <ClCompile Include="Advanced Brace Balance.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="module.c">

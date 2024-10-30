@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{babb10dc-c229-4b27-91f5-7403c5edf399}</ProjectGuid>
-    <RootNamespace>modulesandfiles</RootNamespace>
+    <ProjectGuid>{70a7ea6f-343a-44c9-b6a8-f8eeef197d60}</ProjectGuid>
+    <RootNamespace>AdvancedBraceBalance</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,16 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Module.c" />
-    <ClCompile Include="Module.h" />
-    <ClCompile Include="modules and files.c" />
-    <ClCompile Include="test.c" />
+    <ClCompile Include="Advanced Brace Balance.c" />
+    <ClCompile Include="module.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="test.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="text.txt" />
+    <ClInclude Include="module.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
