@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{1dfd6ee9-6811-4a02-b967-3a7429553569}</ProjectGuid>
-    <RootNamespace>marshallingyard</RootNamespace>
+    <ProjectGuid>{0e3a02f8-5d99-4253-9bad-474416b9d4e6}</ProjectGuid>
+    <RootNamespace>Сountingrhyme</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="functions.c" />
-    <ClCompile Include="marshalling_yard.c" />
+    <ClCompile Include="Сounting_rhyme.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="functions.h" />
