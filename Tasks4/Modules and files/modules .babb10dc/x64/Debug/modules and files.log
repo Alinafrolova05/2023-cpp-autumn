@@ -1,0 +1,3 @@
+﻿  modules and files.c
+C:\Users\user\source\2023-cpp-autumn\Tasks4\Modules and files\modules and files.c(24,11): warning C4244: функция: преобразование "time_t" в "unsigned int", возможна потеря данных
+  modules and files.vcxproj -> C:\Users\user\source\2023-cpp-autumn\Tasks4\Modules and files\x64\Debug\modules and files.exe

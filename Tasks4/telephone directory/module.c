@@ -1,4 +1,8 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "module.h"
+#include <stdio.h>
+
 
 bool testScanf(int result) {
     return result == 1;
@@ -6,9 +10,9 @@ bool testScanf(int result) {
 
 void write(PhoneBook* entry, int size) {
     printf("name = ");
-    scanf("%s", entry[size].name);
+    int result = scanf("%s", entry[size].name);
     printf("number = ");
-    scanf("%s", entry[size].number);
+    result = scanf("%s", entry[size].number);
     size++;
 }
 

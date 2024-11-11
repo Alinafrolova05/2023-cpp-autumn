@@ -1,5 +1,3 @@
-#pragma once
-
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
@@ -7,11 +5,10 @@
 #include <time.h>
 #include <locale.h>
 #include <stdbool.h>
-#include "module.h"
+#include "Module.h"
 #include "test.h"
 
-int main()
-{
+int main() {
     setlocale(LC_ALL, "Rus");
     FILE* file = fopen("text.txt", "r");
     int size = 10;

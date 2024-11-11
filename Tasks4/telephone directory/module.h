@@ -1,6 +1,6 @@
 #ifndef H
+#include <stdio.h>
 #include <stdbool.h>
-FILE* file;
 typedef struct PhoneBook {
     char name[12];
     char number[14];
