@@ -1,0 +1,8 @@
+﻿  functions.c
+  Postfix_calculator.c
+  Создание кода...
+C:\Users\user\source\2023-cpp-autumn\Tasks5\Postfix_calculator\functions.c(28,13): warning C4013: printf: нет определения; предполагается "extern" с возвратом типа "int"
+C:\Users\user\source\2023-cpp-autumn\Tasks5\Postfix_calculator\Postfix_calculator.c(13,25): warning C4047: функция: "int" отличается по уровням косвенного обращения от "int *"
+C:\Users\user\source\2023-cpp-autumn\Tasks5\Postfix_calculator\Postfix_calculator.c(13,25): warning C4024: test: различные типы для формального и фактического параметров 2
+C:\Users\user\source\2023-cpp-autumn\Tasks5\Postfix_calculator\Postfix_calculator.c(19,5): warning C4013: gets: нет определения; предполагается "extern" с возвратом типа "int"
+  Postfix calculator.vcxproj -> C:\Users\user\source\2023-cpp-autumn\Tasks5\Postfix_calculator\x64\Debug\Postfix calculator.exe
