@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Сounting_rhyme.c">
+    <ClCompile Include="SearchTree.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="functions.c">
+    <ClCompile Include="tree.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="functions.h">
+    <ClInclude Include="tree.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
   </ItemGroup>

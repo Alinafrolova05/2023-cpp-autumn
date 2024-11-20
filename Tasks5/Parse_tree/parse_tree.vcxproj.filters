@@ -15,15 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sorted_list.c">
+    <ClCompile Include="parse_tree.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="functions.c">
+    <ClCompile Include="tree.c">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
+    <ClCompile Include="else.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="functions.h">
+    <ClInclude Include="tree.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
   </ItemGroup>

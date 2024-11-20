@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f4987f26-6f8a-4961-924b-042dd5bbf1d3}</ProjectGuid>
-    <RootNamespace>Mergesort</RootNamespace>
+    <ProjectGuid>{add03c9f-493b-48c8-88bb-cbe0109eb3c1}</ProjectGuid>
+    <RootNamespace>parsetree</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,10 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Merge_sort.c" />
+    <ClCompile Include="else.c" />
+    <ClCompile Include="parse_tree.c" />
+    <ClCompile Include="tree.c" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="text.txt" />
+    <ClInclude Include="tree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
