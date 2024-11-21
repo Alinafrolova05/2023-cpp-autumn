@@ -10,16 +10,22 @@ struct List {
     struct Element* front;
     struct Element* back;
 };
-
 bool testScanf(int result);
-//
+//checks scanf
+
 void Scanf(int* add);
-//
-void addElement(Element** front, int value);
-//
-void deleteElement(Element** front, int value);
-//
-void printList(Element* element1);
-//
-void pop(Element* head);
+//entering a number with verification
+
+void addElement(Element** head, Element* pointer, int value);
+//adds an element to the stack
+
+void deleteElement(Element* head, Element* pointer, int value);
+//deletes an element to the stack
+
+void printList(Element* element1, Element* pointer);
+//print stack
+
+void pop(Element** head);
+//removes the top element from the stack
+
 #endif

@@ -7,15 +7,9 @@
 
 int main() {
     Element* element = calloc(1, sizeof(Element));
-    Element* element2 = calloc(1, sizeof(Element));
-    element->value = 1;
-    element->next = element2;
-    element = element2;
+    Element* pointer = element;
 
-    Element* first = element;
-    int testFirst = 0;
-
-    int add = 6;
+    int add = 0;
     int number = 5;
 
     while (number != 0) {
@@ -28,25 +22,22 @@ int main() {
         else if (number == 1) {
             printf("\nSpecify the number that will go into the list: ");
             Scanf(&add);
-            Element* rememberStart = element;
-            addElement(&element, add);
-            element = rememberStart;
-            free(rememberStart);
+            addElement(&element, pointer, add);
+            printf(" %d", element->value);
         }
         else if (number == 2) {
             printf("\nIndicate the value you want to delete: ");
             Scanf(&add);
-            Element* rememberStart = element;
-            deleteElement(&element, add);
-            element = rememberStart;
-            free(rememberStart);
+            if (element->value == add) {
+                pop(&element);
+            }
+            else {
+                deleteElement(element, pointer, add);
+            }
         }
         else if (number == 3) {
             printf("The array looks like this:");
-            Element* rememberStart = element;
-            printList(element);
-            element = rememberStart;
-            free(rememberStart);
+            printList(element, pointer);
         }
         else {
             printf("\nInput wrong!");
@@ -54,9 +45,9 @@ int main() {
         }
     }
 
-    while (element != first) {
-        pop(element);
+    while (element != pointer) {
+        pop(&element);
     }
-    pop(element);
+    pop(&element);
     return 0;
 }
