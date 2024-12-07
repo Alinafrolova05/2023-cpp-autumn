@@ -1,4 +1,4 @@
-﻿#define CRT_SECURE_NO_WARNINGS
+﻿#define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,13 +6,10 @@
 #include "tree.h"
 
 int main(void) {
-    Element* element1 = calloc(1, sizeof(Element));
-    element1->key = NULL;
-    element1->value = NULL;
-    Element* pointer = element1;
-
-    int addingKey = 5;
-    char* addingValue = calloc(20, sizeof(char));
+    Node* root = NULL;
+    
+    char array[20] = { 0 };
+    int addingKey = 0;
     int answer = -1;
 
     while (answer != 0) {
@@ -25,28 +22,31 @@ int main(void) {
         else if (answer == 1) {
             printf("\nWrite the key: ");
             Scanf(&addingKey);
+            char* addingValue = calloc(256, sizeof(char));
             printf("\nWrite the key value with less than 20 characters: ");
-            fgets(&addingValue, 20, stdin);
-            add(&element1, addingKey, addingValue);
+            getchar();
+            fgets(addingValue, 256, stdin);
+            add(&root, addingKey, addingValue);
         }
         else if (answer == 2 || answer == 3) {
             printf("\nSpecify the key: ");
             Scanf(&addingKey);
-            if (search(element1, addingKey) == NULL) {
+            Node* founded = search(root, addingKey);
+            if (founded == NULL) {
                 printf("\nThere is no such key in the dictionary.");
             }
             else {
-                printf("\nValue: %s", addingValue[0]);
+                printf("\nValue: %s", founded->element->value);
             }
         }   
         else if (answer == 4) {
             printf("\nSpecify the key: ");
             Scanf(&addingKey);
-            if (search(element1, addingKey) == NULL) {
+            if (search(root, addingKey) == NULL) {
                 printf("\nThere is no such key in the dictionary.");
             }
             else {
-                deleteElement(element1, addingKey);
+                deleteElement(&root, addingKey);
                 printf("\nThe value and key have been deleted.");
             }
         }
@@ -55,5 +55,6 @@ int main(void) {
             break;
         }
     }
+    freeTree(root);
     return 0;
 }

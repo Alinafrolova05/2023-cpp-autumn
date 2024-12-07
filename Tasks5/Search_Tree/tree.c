@@ -2,6 +2,17 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+void freeTree(Node* root) {
+    if (root != NULL) {
+        freeTree(root->leftChild);
+        freeTree(root->rightChild);
+        free(root->element->value);
+        free(root->element);
+        free(root);
+    }
+}
 
 bool testScanf(int result) {
     return result == 1;
@@ -11,115 +22,143 @@ void Scanf(int* add) {
     int result = scanf("%d", add);
     if (!testScanf(result)) {
         printf("\nInput wrong!");
-        return -1;
+        exit(EXIT_FAILURE);
     }
 }
 
-Element* search(Node* root, int key1) {
-    while (true) {
-        if (root->element->key < key1) {
-            if (root->rightChild == NULL) {
-                return root;
-            }
-            else {
-                search(root->rightChild, key1);
-            }
+Node* search(Node* root, int key1) {
+    while (root != NULL) {
+        if (key1 < root->element->key) {
+            root = root->leftChild;
         }
-        else if (root->element->key > key1) {
-            if (root->leftChild == NULL) {
-                return root;
-            }
-            else {
-                search(root->leftChild, key1);
-            }
+        else if (key1 > root->element->key) {
+            root = root->rightChild;
         }
-        else if (root->element->key == key1) {
+        else {
             return root;
         }
     }
+    return NULL;
 }
 
-void add(Node* root, int key1, char* value1) {
-    Node* previos = search(root, key1);
-    if (previos->element->key == key1) {
-        previos->element->value = value1;
-        return;
-    }
-    else {
+void add(Node** root, int key1, char* value1) {
+    if (*root == NULL) {
         Node* node = calloc(1, sizeof(Node));
         Element* element1 = calloc(1, sizeof(Element));
+
         element1->key = key1;
         element1->value = value1;
-
-        node->parent = previos;
         node->element = element1;
         node->leftChild = NULL;
         node->rightChild = NULL;
-
-        if (previos->element->key > key1) {
-            previos->leftChild = node;
-        }
-        if (previos->element->key < key1) {
-            previos->rightChild = node;
-        }
+        *root = node;
+        return;
     }
-    return;
-}
 
-void deleteElement(Node* root, int key1) {
-    Node* node = search(root, key1);
-    if (node->element->key == key1) {
-        if (node->leftChild == NULL && node->rightChild == NULL) {
-            Node* tmp = node;
-            node = node->parent;
-            free(tmp);
+    Node* parent = NULL;
+    Node* current = *root;
+
+    while (current != NULL) {
+        parent = current;
+        if (key1 < current->element->key) {
+            current = current->leftChild;
         }
-        else if (node->leftChild != NULL) {
-            Node* tmp = node->leftChild;
-            free(node->element->value);
-            free(node->element);
-
-            if (tmp->rightChild == NULL) {
-                node->element = tmp->element;
-                node->leftChild = tmp->leftChild;
-                tmp->leftChild->parent = node;
-
-                free(tmp->element->value);
-                free(tmp->element);
-                free(tmp);
-                return;
-            }
-
-            while (tmp->rightChild != NULL) {
-                tmp = tmp->rightChild;
-            }
-            node->element = tmp->element;
-            if (tmp->leftChild != NULL) {
-                tmp->leftChild->parent = tmp->parent;
-                tmp->parent->rightChild = tmp->leftChild;
-            }
-            /*else {
-                tmp->parent->rightChild = NULL;
-            }*/
-            free(tmp->element->value);
-            free(tmp->element);
-            free(tmp);
+        else if (key1 > current->element->key) {
+            current = current->rightChild;
         }
         else {
-            Node* tmp = node->rightChild;
-            free(node->element->value);
-            free(node->element);
-
-            node->element = tmp->element;
-            node->leftChild = tmp->leftChild;
-            node->rightChild = tmp->rightChild;
-
-            tmp->leftChild->parent = node;
-            tmp->rightChild->parent = node;
-
-            free(tmp->element->value);
-            free(tmp->element);
+            char* tmp = current->element->value;
+            current->element->value = value1;
             free(tmp);
+            return;
         }
     }
+
+    Node* node = calloc(1, sizeof(Node));
+    Element* element1 = calloc(1, sizeof(Element));
+
+    element1->key = key1;
+    element1->value = value1;
+    node->element = element1;
+    node->leftChild = NULL;
+    node->rightChild = NULL;
+
+    if (key1 < parent->element->key) {
+        parent->leftChild = node;
+    }
+    else {
+        parent->rightChild = node;
+    }
 }
+
+void deleteElement(Node** root, int key1) {
+    Node* parent = NULL;
+    Node* node = *root;
+    
+    while (node != NULL && node->element->key != key1) {
+        parent = node;
+        if (key1 < node->element->key) {
+            node = node->leftChild;
+        }
+        else {
+            node = node->rightChild;
+        }
+    }
+
+    if (node == NULL) {
+        printf("Element not found.\n");
+        return;
+    }
+
+    if (node->leftChild == NULL && node->rightChild == NULL) {
+        if (parent == NULL) {
+            *root = NULL;
+        }
+        else if (parent->leftChild == node) {
+            parent->leftChild = NULL;
+        }
+        else {
+            parent->rightChild = NULL;
+        }
+        free(node->element->value);
+        free(node->element);
+        free(node);
+    }
+    else if (node->leftChild != NULL && node->rightChild != NULL) {
+        Node* minNode = node->rightChild;
+        while (minNode->leftChild != NULL) {
+            minNode = minNode->leftChild;
+        }
+
+        node->element->key = minNode->element->key;
+        char* tmpValue = node ->element->value;
+        node->element->value = minNode->element->value;
+        free(tmpValue);
+
+        deleteElement(&(minNode), minNode->element->key);
+    }
+    else {
+        Node* child = NULL;
+        if (node->leftChild != NULL) {
+            child = node->leftChild;
+        }
+        else {
+            child = node->rightChild;
+        }
+
+        if (parent == NULL) {
+            *root = child;
+        }
+        else if (parent->leftChild == node) {
+            parent->leftChild = child;
+        }
+        else {
+            parent->rightChild = child;
+        }
+
+        free(node->element->value);
+        free(node->element);
+        free(node);
+    }
+}
+
