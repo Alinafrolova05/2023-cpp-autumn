@@ -1,13 +1,26 @@
 #ifndef TREE
 typedef struct Element {
     char value;
-    struct Element* next1;
-    struct Element* next2;
-    struct Element* next;
-}Element;
+    int result;
+    struct Element* leftChild;
+    struct Element* rightChild;
+} Element;
 
-void push(Element** head, char value1);
-void pop(Element** head);
+typedef struct Stack {
+    Element* element;
+    struct Stack* next;
+} Stack;
 
-void print(Element* numbers);
+void push(Stack** head, Element* element);
+//puts on the stack
+Element* pop(Stack** head);
+//removes the top of the stack
+void print(Element* element);
+//prints tree
+void count(Element* element);
+//calculates the value of an expression
+int precedence(char value);
+//produces different numbers depending on the operator
+void tree(char* str, Stack** numberStack, Stack** operationStack);
+//builds a tree
 #endif
