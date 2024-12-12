@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{8813607c-ae34-4ce5-948b-e520b1a226ac}</ProjectGuid>
-    <RootNamespace>SearchTree</RootNamespace>
+    <ProjectGuid>{af8d14bc-488f-411c-b979-dfac768e4c89}</ProjectGuid>
+    <RootNamespace>AVLtree</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="SearchTree.c" />
+    <ClCompile Include="AVL-tree.c" />
     <ClCompile Include="tree.c" />
   </ItemGroup>
   <ItemGroup>
