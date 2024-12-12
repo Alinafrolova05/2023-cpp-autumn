@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
+<<<<<<<< HEAD:C/Tesks 4/Modules and files/modules and files.sln
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "modules and files", "modules and files.vcxproj", "{BABB10DC-C229-4B27-91F5-7403C5EDF399}"
+========
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AVL-tree", "AVL-tree.vcxproj", "{AF8D14BC-488F-411C-B979-DFAC768E4C89}"
+>>>>>>>> 7b8fc5e (New files):AVL-tree/AVL-tree.sln
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +17,7 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+<<<<<<<< HEAD:C/Tesks 4/Modules and files/modules and files.sln
 		{BABB10DC-C229-4B27-91F5-7403C5EDF399}.Debug|x64.ActiveCfg = Debug|x64
 		{BABB10DC-C229-4B27-91F5-7403C5EDF399}.Debug|x64.Build.0 = Debug|x64
 		{BABB10DC-C229-4B27-91F5-7403C5EDF399}.Debug|x86.ActiveCfg = Debug|Win32
@@ -21,11 +26,25 @@ Global
 		{BABB10DC-C229-4B27-91F5-7403C5EDF399}.Release|x64.Build.0 = Release|x64
 		{BABB10DC-C229-4B27-91F5-7403C5EDF399}.Release|x86.ActiveCfg = Release|Win32
 		{BABB10DC-C229-4B27-91F5-7403C5EDF399}.Release|x86.Build.0 = Release|Win32
+========
+		{AF8D14BC-488F-411C-B979-DFAC768E4C89}.Debug|x64.ActiveCfg = Debug|x64
+		{AF8D14BC-488F-411C-B979-DFAC768E4C89}.Debug|x64.Build.0 = Debug|x64
+		{AF8D14BC-488F-411C-B979-DFAC768E4C89}.Debug|x86.ActiveCfg = Debug|Win32
+		{AF8D14BC-488F-411C-B979-DFAC768E4C89}.Debug|x86.Build.0 = Debug|Win32
+		{AF8D14BC-488F-411C-B979-DFAC768E4C89}.Release|x64.ActiveCfg = Release|x64
+		{AF8D14BC-488F-411C-B979-DFAC768E4C89}.Release|x64.Build.0 = Release|x64
+		{AF8D14BC-488F-411C-B979-DFAC768E4C89}.Release|x86.ActiveCfg = Release|Win32
+		{AF8D14BC-488F-411C-B979-DFAC768E4C89}.Release|x86.Build.0 = Release|Win32
+>>>>>>>> 7b8fc5e (New files):AVL-tree/AVL-tree.sln
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+<<<<<<<< HEAD:C/Tesks 4/Modules and files/modules and files.sln
 		SolutionGuid = {9BB12CD0-9884-4F83-8497-7B0D74601BED}
+========
+		SolutionGuid = {413B89E3-612E-4B0F-A3C9-2DA9B5348750}
+>>>>>>>> 7b8fc5e (New files):AVL-tree/AVL-tree.sln
 	EndGlobalSection
 EndGlobal

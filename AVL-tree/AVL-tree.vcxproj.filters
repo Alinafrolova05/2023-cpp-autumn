@@ -15,7 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+<<<<<<<< HEAD:C/Tesks 4/Binary representation/Binary representation.vcxproj.filters
     <ClCompile Include="Binary representation.c">
+========
+    <ClCompile Include="AVL-tree.c">
+>>>>>>>> 7b8fc5e (New files):AVL-tree/AVL-tree.vcxproj.filters
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="module.c">
