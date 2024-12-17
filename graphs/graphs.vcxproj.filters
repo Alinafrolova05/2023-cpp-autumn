@@ -15,23 +15,20 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Task3.c">
+    <ClCompile Include="graphs.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="module.c">
+    <ClCompile Include="functions.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="input.txt">
-      <Filter>Файлы ресурсов</Filter>
-    </Text>
-    <Text Include="output.txt">
+    <Text Include="text.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="module.h">
+    <ClInclude Include="functions.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
   </ItemGroup>
