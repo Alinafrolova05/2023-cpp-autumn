@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f04b9bde-b9e5-40ee-8cf8-b544607f347a}</ProjectGuid>
-    <RootNamespace>graphs</RootNamespace>
+    <ProjectGuid>{7bf97aa1-ea36-4d8d-8581-fc1cb29a7981}</ProjectGuid>
+    <RootNamespace>Queue</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,14 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="functions.c" />
-    <ClCompile Include="graphs.c" />
+    <ClCompile Include="Queue.c" />
+    <ClCompile Include="stack.c" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="text.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="functions.h" />
+    <ClInclude Include="stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
