@@ -9,12 +9,8 @@ double testFaster(double clock1, double clock2) {
     return clock1 - clock2;
 }
 
-bool testSwap(int* left, int* right) {
-    return left != right; 
-}
-
 void swap(int *left, int *right) {
-    if (!testSwap(left, right)) {
+    if (left == right) {
         return;
     }
     *left ^= *right;
@@ -90,22 +86,20 @@ void initialization(int array[], int size) {
     }
 }
 
-void countTime(int* array, int size, double* pointer1, double* pointer2) {
-    clock_t start1 = clock();
+void countTimeOfBubbleSort(int* array, int size, double* pointer) {
+    clock_t start = clock();
     bubbleSort(array, size);
-    clock_t end1 = clock();
-    double clockBubblesort = 1000.0 * (end1 - start1) / CLOCKS_PER_SEC;
-    *pointer1 = clockBubblesort;
+    clock_t end = clock();
+    double clockBubblesort = 1000.0 * (end - start) / CLOCKS_PER_SEC;
+    *pointer = clockBubblesort;
+}
 
-    for (int i = 0; i < size; ++i) {
-        array[i] = rand() % 10;
-    }
-
-    clock_t start2 = clock();
+void countTimeOfCountSort(int* array, int size, double* pointer) {
+    clock_t start = clock();
     countSort(array, size);
-    clock_t end2 = clock();
-    double clockCountsort = 1000.0 * (end2 - start2) / CLOCKS_PER_SEC;
-    *pointer2 = clockCountsort;
+    clock_t end = clock();
+    double clockCountsort = 1000.0 * (end - start) / CLOCKS_PER_SEC;
+    *pointer = clockCountsort;
 }
 
 void printResultOfCounting(double clockBubblesort, double clockCountsort) {
@@ -139,7 +133,12 @@ int main(int argc, char argv[])
     double clockBubblesort = 0;
     double clockCountsort = 0;
 
-    countTime(array, size, &clockBubblesort, &clockCountsort);
+    countTimeOfBubbleSort(array, size, &clockBubblesort);
+    for (int i = 0; i < size; ++i) {
+        array[i] = rand() % 10;
+    }
+    countTimeOfCountSort(array, size, &clockCountsort);
+
     printf("\n");
     printResultOfCounting(clockBubblesort, clockCountsort);
 
