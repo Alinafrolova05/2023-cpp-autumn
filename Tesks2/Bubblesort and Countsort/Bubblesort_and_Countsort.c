@@ -12,6 +12,7 @@ double testFaster(double clock1, double clock2) {
 bool testSwap(int* left, int* right) {
     return left != right; 
 }
+
 void swap(int *left, int *right) {
     if (!testSwap(left, right)) {
         return;
@@ -35,6 +36,7 @@ void bubbleSort(int *array, int size) {
         }
     }
 }
+
 bool testBubbleSort() {
     int array[] = { 9, 2, 7, 1, 8 };
     bubbleSort(array, 5);
