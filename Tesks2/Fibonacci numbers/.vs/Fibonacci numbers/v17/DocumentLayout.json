@@ -1,0 +1,69 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tesks2\\Fibonacci numbers\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{61B94D05-76C3-4B5F-951A-C0AC90DE4156}|Fibonacci numbers.vcxproj|C:\\Users\\user\\source\\2023-cpp-autumn\\Tesks2\\Fibonacci numbers\\Fibonacci numbers.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{61B94D05-76C3-4B5F-951A-C0AC90DE4156}|Fibonacci numbers.vcxproj|solutionrelative:Fibonacci numbers.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{a0c5197d-0ac7-4b63-97cd-8872a789d233}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{4a9b7e51-aa16-11d0-a8c5-00a0c921a4d2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Fibonacci numbers.c",
+              "DocumentMoniker": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tesks2\\Fibonacci numbers\\Fibonacci numbers.c",
+              "RelativeDocumentMoniker": "Fibonacci numbers.c",
+              "ToolTip": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tesks2\\Fibonacci numbers\\Fibonacci numbers.c",
+              "RelativeToolTip": "Fibonacci numbers.c",
+              "ViewState": "AQIAAFoAAAAAAAAAAAAQwHUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-12-19T22:17:29.384Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
