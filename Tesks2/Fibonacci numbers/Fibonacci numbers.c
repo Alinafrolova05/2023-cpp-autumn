@@ -27,16 +27,55 @@ int fibonacciRecursion(int number, int *result) {
     return 0;
 }
 
-int fibonacciIteration(int number, int fibonacci1, int fibonacci2, int fibonaccimain) {
+bool testRecurtion() {
+    int result = 0;
+    int check1 = fibonacciRecursion(5, &result);
+    int check2 = fibonacciRecursion(10, &result);
+    int check3 = fibonacciRecursion(-5, &result);
+    return check1 == 0 && check2 == 0 && check3 == 1;
+}
+
+int fibonacciIteration(int number, int* result) {
+    int fibonacci1 = 0;
+    int fibonacci2 = 1;
+    int fibonaccimain = 0;
     for (int i = 0; i < number; ++i) {
         fibonaccimain = fibonacci1 + fibonacci2;
         fibonacci2 = fibonacci1;
         fibonacci1 = fibonaccimain;
     }
-    return fibonaccimain;
+    *result = fibonaccimain;
+    if (fibonaccimain <= 0) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
 }
 
-int main()
+bool testIteration() {
+    int result = 0;
+    int check1 = fibonacciIteration(5, &result);
+    int check2 = fibonacciIteration(-5, &result);
+    return check1 == 0 && check2 == 0;
+}
+
+void countTime(int i, double* pointer1, double* pointer2) {
+    int result = 0;
+    clock_t start1 = clock();
+    fibonacciRecursion(i, &result);
+    clock_t end1 = clock();
+    double recursion = 1000.0 * (end1 - start1) / CLOCKS_PER_SEC;
+    *pointer1 = recursion;
+
+    clock_t start2 = clock();
+    fibonacciIteration(i, &result);
+    clock_t end2 = clock();
+    double iteration = 1000.0 * (end2 - start2) / CLOCKS_PER_SEC;
+    *pointer2 = iteration;
+}
+
+int main(void)
 {
     int result = 0;
     printf("Enter the fibonacci number you want to know: ");
@@ -50,34 +89,24 @@ int main()
         printf("The number must be positive!");
         return 0;
     }
-    if (fibonacciRecursion(5, &result) != 0 || fibonacciIteration(5, 0, 1, 0) < 0 ) {
+    if (!testRecurtion() || testIteration()) {
         printf("The sequence does not count!");
         return 0;
     }
     
     fibonacciRecursion(number, &result);
     printf("Fibonacci number calculated by recursion: %d ", result);
-    printf("\nFibonacci number calculated iteratively: %d", fibonacciIteration(number, 0, 1, 0));
-    
+    fibonacciIteration(number, &result);
+    printf("\nFibonacci number calculated iteratively: %d", result);
 
     for (int i = 1; i < 10000; ++i) {
-        
-        if (fibonacciRecursion(i, &result) != 0 || fibonacciIteration(i, 0, 1, 0) < 0) {
-            printf("None of the fibbonacci sequence for %d counts work!", i);
-            return 0;
-        }
 
-        clock_t start1 = clock();
-        fibonacciRecursion(i, &result);
-        clock_t end1 = clock();
-        double recursion = 1000.0 * (end1 - start1) / CLOCKS_PER_SEC;
+        double recursion = 0;
+        double iteration = 0;
 
-        clock_t start2 = clock();
-        fibonacciIteration(i, 0, 1, 0);
-        clock_t end2 = clock();
-        double iteration = 1000.0 * (end2 - start2) / CLOCKS_PER_SEC;
+        countTime(i, &recursion, &iteration);
 
-        if (recursion > iteration) {
+        if (recursion > iteration + 100) {
             printf("\nFrom the %dth Fibonacci number, the recursive option is slower than the iterative one.\n", i);
             break;
         }        

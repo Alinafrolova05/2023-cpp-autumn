@@ -1,16 +1,16 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 2\\Raising a number to an integer power\\",
+  "WorkspaceRootPath": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tesks2\\Raising a number to an integer power\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{88916BF6-ED32-4BD6-8D91-9CB31B2F3DC0}|Raising a number to an integer power.vcxproj|C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 2\\Raising a number to an integer power\\Raising a number to an integer power.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{88916BF6-ED32-4BD6-8D91-9CB31B2F3DC0}|Raising a number to an integer power.vcxproj|C:\\Users\\user\\source\\2023-cpp-autumn\\Tesks2\\Raising a number to an integer power\\Raising a number to an integer power.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{88916BF6-ED32-4BD6-8D91-9CB31B2F3DC0}|Raising a number to an integer power.vcxproj|solutionrelative:Raising a number to an integer power.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
-      "VerticalTabListWidth": 177,
+      "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
           "DockedWidth": 200,
@@ -22,7 +22,32 @@
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Raising a number to an integer power.c",
+              "DocumentMoniker": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tesks2\\Raising a number to an integer power\\Raising a number to an integer power.c",
+              "RelativeDocumentMoniker": "Raising a number to an integer power.c",
+              "ToolTip": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tesks2\\Raising a number to an integer power\\Raising a number to an integer power.c*",
+              "RelativeToolTip": "Raising a number to an integer power.c*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-12-19T20:04:18.568Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -35,19 +60,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Raising a number to an integer power.c",
-              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 2\\Raising a number to an integer power\\Raising a number to an integer power.c",
-              "RelativeDocumentMoniker": "Raising a number to an integer power.c",
-              "ToolTip": "C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 2\\Raising a number to an integer power\\Raising a number to an integer power.c",
-              "RelativeToolTip": "Raising a number to an integer power.c",
-              "ViewState": "AQIAACYAAAAAAAAAAAAAACYAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2024-10-07T10:02:48.969Z",
-              "EditorCaption": ""
             }
           ]
         }

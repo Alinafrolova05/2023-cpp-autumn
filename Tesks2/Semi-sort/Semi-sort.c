@@ -4,21 +4,12 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-bool testSize(float size) {
-    int count = 0;
-    for (int i = 0; i < size; ++i) {
-        count++;
-    }
-    return size == count && size >= 0;
-} 
-bool testSwap(int* left, int* right) {
-    return left != right;
-}
 bool testScanf(int result) {
     return result == 1;
 }
+
 void swap(int *left,int *right) {
-    if (!testSwap(left, right)) {
+    if (left == right) {
         return;
     }
     *left ^= *right;
@@ -28,34 +19,29 @@ void swap(int *left,int *right) {
 
 void sort(int *array, int size) {
     int value0 = array[0];
-    int indexarray0 = 0;
-    int indexfinish = size - 1; 
-    while (indexarray0 + 1 <= indexfinish) {
-        if (array[indexarray0 + 1] < value0) {
+    int indexArray = 0;
+    int indexFinish = size - 1; 
 
-            swap(&array[indexarray0 + 1], &array[indexarray0]);
-            indexarray0++;
-        } else if (array[indexarray0 + 1] >= value0) {
-            if (indexarray0 + 1 == indexfinish) {
+    while (indexArray + 1 <= indexFinish) {
+        if (array[indexArray + 1] < value0) {
+            swap(&array[indexArray + 1], &array[indexArray]);
+            indexArray++;
+        } else if (array[indexArray + 1] >= value0) {
+            if (indexArray + 1 == indexFinish) {
                 break;
             }
-            swap(&array[indexarray0 + 1], &array[indexfinish]);
-            indexfinish--;
+            swap(&array[indexArray + 1], &array[indexFinish]);
+            indexFinish--;
         }
     }
 }
 
-int main()
-{
-    float size = 0;
+int main() {
+    int size = 0;
     printf("Specify the number of elements in the array: ");
-    int result = scanf("%f", &size);
-    if (!testScanf(result)) {
+    int result = scanf("%d", &size);
+    if (!testScanf(result) || size < 0) {
         printf("Input error!");
-        return 0;
-    }
-    if (!testSize(size)) {
-        printf("Error! Array size must be a positive natural number!");
         return 0;
     }
     int* array = (int*)calloc(size, sizeof(int));
@@ -63,7 +49,7 @@ int main()
     for (int i = 0; i < size; ++i) {
         array[i] = rand() % 100;
     }
-    printf("Primordial Array: \n");
+    printf("Original array: \n");
     for (int i = 0; i < size; ++i) {
         printf("%d ", array[i]);
     }
