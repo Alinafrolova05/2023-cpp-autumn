@@ -14,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -37,19 +37,6 @@
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Raising a number to an integer power.c",
-              "DocumentMoniker": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tesks2\\Raising a number to an integer power\\Raising a number to an integer power.c",
-              "RelativeDocumentMoniker": "Raising a number to an integer power.c",
-              "ToolTip": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tesks2\\Raising a number to an integer power\\Raising a number to an integer power.c*",
-              "RelativeToolTip": "Raising a number to an integer power.c*",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2024-12-19T20:04:18.568Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{a0c5197d-0ac7-4b63-97cd-8872a789d233}"
             },
@@ -60,6 +47,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Raising a number to an integer power.c",
+              "DocumentMoniker": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tesks2\\Raising a number to an integer power\\Raising a number to an integer power.c",
+              "RelativeDocumentMoniker": "Raising a number to an integer power.c",
+              "ToolTip": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tesks2\\Raising a number to an integer power\\Raising a number to an integer power.c",
+              "RelativeToolTip": "Raising a number to an integer power.c",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-12-19T20:04:18.568Z",
+              "EditorCaption": ""
             }
           ]
         }

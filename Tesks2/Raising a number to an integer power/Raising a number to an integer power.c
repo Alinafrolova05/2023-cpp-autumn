@@ -3,9 +3,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-bool testScanf(int result) {
-    return result == 1;
-}
 bool testInteger(float power, int additionalbool) { 
     if (power < 0) {
         power = -power;
@@ -66,7 +63,7 @@ int main()
     printf("Enter number: ");
     float number = 0;
     int result = scanf("%f", &number);
-    if (!testScanf(result)) {
+    if (result != 1) {
         printf("Input error!");
         return 0;
     }
