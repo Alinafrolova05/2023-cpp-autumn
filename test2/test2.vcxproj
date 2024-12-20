@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{89e7e285-3a67-4606-99d0-482a7bc5c41a}</ProjectGuid>
-    <RootNamespace>Semisort</RootNamespace>
+    <ProjectGuid>{1c0fdd46-2afa-4b66-a267-d5af930946ca}</ProjectGuid>
+    <RootNamespace>test2</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,7 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Semi-sort.c" />
+    <ClCompile Include="functions.c" />
+    <ClCompile Include="test2.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="functions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
