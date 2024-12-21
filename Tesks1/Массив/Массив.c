@@ -5,18 +5,12 @@
 #include <math.h>
 #include <stdbool.h>
 
-bool testScanf(int result) {
-    return result == 1;
-}
-bool testPositive(int m) {
+bool isPositive(int m) {
     return m >= 0;
-}
-bool testSwap(int* left, int* right) {
-    return left != right;
 }
 
 void swap(int* left, int* right) {
-    if (!testSwap(left, right)) {
+    if (left == right) {
         return;
     }
     *left ^= *right;
@@ -43,19 +37,19 @@ void transpose(int m, int n, int* array) {
     cycle(m, n, array, 0, (n + m) / 2, 0, n);
 }
 
-int main() {
-    int m = 1;
-    int n = 1;
+int main(void) {
+    int m = 0;
+    int n = 0;
     printf("Enter m - number of characters in the first part of the array: ");
     int result = scanf("%d", &m);
-    if (!testScanf(result) || !testPositive(m)) {
+    if (result != 1 || !isPositive(m)) {
         printf("Input error!");
         return 0;
     }
 
     printf("Enter n - number of characters in the second part of the array: ");
     result = scanf("%d", &n);
-    if (!testScanf(result) || !testPositive(n)) {
+    if (result != 1 || !isPositive(n)) {
         printf("Input error!");
         return 0;
     }
