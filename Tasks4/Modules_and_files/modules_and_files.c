@@ -29,19 +29,9 @@ int main(void) {
     }
     printf("Размер массива: %d\n", size);
 
-    srand(time(NULL));
-    printf("Массив рандомных чисел от 0 до %d:\n", size);
     int* array = (int*)calloc(size, sizeof(int));
-    int max = 0;
-    for (int i = 0; i < size; ++i) {
-        array[i] = rand() % 100;
-        if (array[i] > max) {
-            max = array[i];
-        }
-        printf("%d ", array[i]);
-    }
 
-    printImplementation(array, size, max);
+    printImplementation(array, size, initialize(array, size));
 
     free(array);
     return 0;

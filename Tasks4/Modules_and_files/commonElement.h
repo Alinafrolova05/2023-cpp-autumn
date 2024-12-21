@@ -3,7 +3,11 @@
 
 int commonElement(int size, int* array, int max, int* pointerCountElement);
 //функци€ возвращает значение самого частого элемента
+
 void printImplementation(int* array, int size, int max);
 //функци€ печатает самый частый элемент или сообщает, что повтор€ющихс€ элементов нет
+
+int initialize(int* array, int size);
+//функци€ заполн€ет массив чмслами и возвращает максимальный элемент
 
 #endif 

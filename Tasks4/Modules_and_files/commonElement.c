@@ -19,6 +19,20 @@ int commonElement(int size, int* array, int max, int* pointerCountElement) {
     return mostCommonElement;
 }
 
+ int initialize(int* array, int size) {
+     srand(time(NULL));
+     printf("Массив рандомных чисел от 0 до %d:\n", size);
+     int max = 0;
+     for (int i = 0; i < size; ++i) {
+         array[i] = rand() % 100;
+         if (array[i] > max) {
+             max = array[i];
+         }
+         printf("%d ", array[i]);
+     }
+     return max;
+}
+
 void printImplementation(int* array, int size, int max) {
     int countElement = 0;
     commonElement(size, array, max, &countElement);
