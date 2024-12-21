@@ -1,5 +1,6 @@
-#ifndef Hi
+#ifndef TEST
 #include <stdbool.h>
-bool testScanf(int result);
-bool test(int size, int checkSizeInteger);
+
+bool test();
+
 #endif

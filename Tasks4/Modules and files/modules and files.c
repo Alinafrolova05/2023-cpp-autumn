@@ -8,46 +8,41 @@
 #include "Module.h"
 #include "test.h"
 
-int main() {
+int main(void) {
+    if (!test()) {
+        printf("Error!");
+        return -1;
+    }
     setlocale(LC_ALL, "Rus");
     FILE* file = fopen("text.txt", "r");
-    int size = 10;
-    int result = fscanf(file,"%d", &size);
-    printf("Размер массива: %d\n", size);
-    if (!testScanf(result)) {
+    if (!file) {
+        printf("Файл не открылся!");
+        return -1;
+    }
+    
+    int size = 0;
+    int result = fscanf(file, "%d", &size);
+    fclose(file);    
+    if (result != 1) {
         printf("Ошибка ввода! ");
         return -1;
     }
-
-    int* array = (int*)calloc(size, sizeof(int));
-    int maxElement = 0;
+    printf("Размер массива: %d\n", size);
+    
     srand(time(NULL));
     printf("Массив рандомных чисел от 0 до %d:\n", size);
-    int checkSizeInteger = 0;
+    int* array = (int*)calloc(size, sizeof(int));
+    int max = 0;
     for (int i = 0; i < size; ++i) {
-        array[i] = rand() % 100; 
-        if (array[i] > maxElement) { 
-            maxElement = array[i];
+        array[i] = rand() % 100;
+        if (array[i] > max) {
+            max = array[i];
         }
         printf("%d ", array[i]);
-        checkSizeInteger++;
-    }
-    if (!test(size, checkSizeInteger)) {
-        printf("Число должно быть натуральным! ");
-        return -1;
     }
 
-    int countElement = 0;
-    int mostCommonElement = 0;
-    commonElement(size, array, maxElement, &countElement, &mostCommonElement);
+    printImplementation(array, size, max);
 
-    if (countElement <= 1) {
-        printf("\nВ массиве нет одинаковых чисел. ");
-    }
-    else {
-        printf("\nЧисло %d - самый частый элемент. ", mostCommonElement);
-    }
-    fclose(file);
     free(array);
-	return 0;
+    return 0;
 }

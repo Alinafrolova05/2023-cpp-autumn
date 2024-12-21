@@ -1,5 +1,6 @@
-#ifndef H
+#ifndef BIT
 #include <stdbool.h>
-bool testScanf(int result);
+
 void printBit(int n);
+
 #endif
