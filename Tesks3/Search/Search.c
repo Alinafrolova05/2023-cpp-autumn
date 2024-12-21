@@ -3,107 +3,97 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <time.h>
 
-bool testScanf(int result) { 
-    return result == 1;
-}
-bool testPositive(float size) {
-    return size >= 0;
-}
-bool testInteger(float size) {
-    int count = 0;
-    for (int i = 0; i < size; ++i) {
-        count++;
-    }
-    return count == size;
-}
-bool testSwap(int *left, int *right) {
-    return left != right;
+bool isPositive(float value) {
+    return value > 0;
 }
 
 void swap(int* left, int* right) {
-    if (!testSwap(left, right)) {
+    if (left== right) {
         return;
     }
     *left ^= *right;
     *right ^= *left;
     *left ^= *right;
-} 
-void sort(int* array, int start, int finish) {
-    if (start >= finish) {
-        return;
-    }
-    int value0 = array[start];
-    int indexStart = start;
-    int indexFinish = finish;
-    while (indexStart + 1 <= indexFinish) {
-        if (array[indexStart + 1] < value0) {
-            swap(&array[indexStart + 1], &array[indexStart]);
-            if (indexStart + 1 == indexFinish) {
-                break;
-            }
-            indexStart++;
-        }
-        else if (array[indexStart + 1] >= value0) {
-            if (indexStart + 1 == indexFinish) {
-                break;
-            }
-            swap(&array[indexStart + 1], &array[indexFinish]);
-            indexFinish--;
-        }
-    }
-    sort(array, indexStart + 1, finish);
-    sort(array, start, indexStart);
 }
 
-void search(int* array, int start, int finish, int k, int* count) {
-    int middle = (finish - start) / 2;
-    if (array[start + middle] == k) {
-        *count = 1;
-        return;
-    }
-    if (finish - start <= 1) {
-        if (array[start] == k || array[start + 1] == k) {
-            *count = 1;
+void sort(int* array, int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (array[j] > array[j + 1]) {
+                swap(&array[j], &array[j + 1]);
+            }
         }
-        return;
-    }
-    if (array[start + middle] > k) {
-        search(array, start, start + middle - 1, k, count);
-        
-    }
-    if (array[start + middle] < k) {
-        search(array, start + middle + 1, finish, k, count);
     }
 }
 
-int main() {
-    float size = 0;
+bool binarySearch(int* array, int size, int k) {
+    sort(array, size);
+    int left = 0, right = size - 1;
+    while (left <= right) {
+        int middle = left + (right - left) / 2;
+        if (array[middle] == k) {
+            return true;
+        }
+        if (array[middle] < k) {
+            left = middle + 1;
+        }
+        else {
+            right = middle - 1;
+        }
+    }
+    return false;
+}
+
+bool test(void) {
+    int array[] = { 2, 67, 45, 8, 3, 90 };
+    return binarySearch(array, 6, 3) == true && binarySearch(array, 6, 46) == false;
+}
+
+void printArray(int* array, int size) {
+    for (int i = 0; i < size; ++i) {
+        printf(" %d", array[i]);
+    }
+}
+
+void printSearch(int* array, int size, int* kArray, int kSize) {
+    int countIdenticalNumbers = 0;
+    for (int i = 0; i < kSize; ++i) {
+        if (binarySearch(array, size, kArray[i])) {
+            countIdenticalNumbers++;
+            printf("%d ", kArray[i]);
+        }
+    }
+    if (countIdenticalNumbers == 0) {
+        printf("No number belongs to the first array.");
+    }
+}
+
+int main(void) {
+    if (!test()) {
+        printf("Error!!!");
+        return -1;
+    }
+    int size = 0;
     printf("Enter size of the array: ");
-    int result = scanf("%f", &size);
-    if (!testScanf(result)) {
-        printf("Input error!");
-        return -1;
-    }
-    if (!testPositive(size) || !testInteger(size)) {
-        printf("Error!!! the number must be a positive integer!");
+    int result = scanf("%d", &size);
+    if (result != 1 || !isPositive(size)) {
+        printf("Input error! The number must be a positive integer.\n");
         return -1;
     }
 
-    printf("Indicate the number of numbers whose presence should be checked in the previous array: ");
-    float kSize = 0;
-    result = scanf("%f", &kSize);
-    if (!testScanf(result)) {
-        printf("Input error!");
-        return -1;
-    }
-    if (!testPositive(kSize) || !testInteger(kSize)) {
-        printf("Error!!! the number must be a positive integer!");
+    int kSize = 0;
+    printf("Enter the number of numbers to check: ");
+    result = scanf("%d", &kSize);
+    if (result != 1 || !isPositive(kSize)) {
+        printf("Input error! The number must be a positive integer.\n");
         return -1;
     }
 
     int* array = (int*)calloc(size, sizeof(int));
     int* kArray = (int*)calloc(kSize, sizeof(int));
+
     srand(time(NULL));
     for (int i = 0; i < size; ++i) {
         array[i] = rand() % 100;
@@ -111,34 +101,17 @@ int main() {
     for (int i = 0; i < kSize; ++i) {
         kArray[i] = rand() % 100;
     }
+
     printf("The resulting array: ");
-    for (int i = 0; i < size; ++i) {
-        printf("%d ", array[i]);
-    }
-    sort(array, 0, size - 1);
-    printf("\nSorted array: ");
-    for (int i = 0; i < size; ++i) {
-        printf("%d ", array[i]);
-    }
+    printArray(array, size);
+
     printf("\nChecked numbers: ");
-    for (int i = 0; i < kSize; ++i) {
-        printf("%d ", kArray[i]);
-    }
+    printArray(kArray, kSize);
 
-    int counеIdenticalNumbers = 0;
     printf("\nNumbers that are in the first array: ");
-    for (int i = 0; i < kSize; ++i) {
+    
+    printSearch(array, size, kArray, kSize);
 
-        int count = 0;
-        search(array, 0, size - 1, kArray[i], &count);
-        if (count == 1) {
-            counеIdenticalNumbers++;
-            printf(" %d", kArray[i]);
-        }
-    }
-    if (counеIdenticalNumbers == 0) {
-        printf(" no number belongs to the first array.");
-    }
     free(array);
     free(kArray);
     return 0;

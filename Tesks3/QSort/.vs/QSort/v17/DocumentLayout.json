@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 3\\QSort\\",
+  "WorkspaceRootPath": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tesks3\\QSort\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6BDD7853-30B6-49B1-B3A8-82A307A6320F}|QSort.vcxproj|C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 3\\QSort\\QSort.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{6BDD7853-30B6-49B1-B3A8-82A307A6320F}|QSort.vcxproj|C:\\Users\\user\\source\\2023-cpp-autumn\\Tesks3\\QSort\\QSort.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{6BDD7853-30B6-49B1-B3A8-82A307A6320F}|QSort.vcxproj|solutionrelative:QSort.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -14,11 +14,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Bookmark",
@@ -40,13 +52,13 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "QSort.c",
-              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 3\\QSort\\QSort.c",
+              "DocumentMoniker": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tesks3\\QSort\\QSort.c",
               "RelativeDocumentMoniker": "QSort.c",
-              "ToolTip": "C:\\Users\\user\\source\\repos\\2023-cpp-autumn\\C\\Tesks 3\\QSort\\QSort.c",
+              "ToolTip": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tesks3\\QSort\\QSort.c",
               "RelativeToolTip": "QSort.c",
-              "ViewState": "AQIAAEAAAAAAAAAAAAAYwFsAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2024-10-07T11:47:14.437Z",
+              "WhenOpened": "2024-12-20T23:41:40.475Z",
               "EditorCaption": ""
             }
           ]

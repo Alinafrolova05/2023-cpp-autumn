@@ -3,18 +3,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <time.h>
 
-bool testScanf(int result) { 
-    return result == 1;
-}
-bool test(int size) {
-    return size >= 0;
-}
-bool testSwap(int* left, int* right) {
-    return left != right;
-}
 void swap(int* left, int* right) {
-    if (!testSwap(left, right)) {
+    if (left == right) {
         return;
     }
     *left ^= *right;
@@ -22,15 +14,16 @@ void swap(int* left, int* right) {
     *left ^= *right;
 }
 
-void selectionSort(int *array, int start, int finish) {
+void selectionSort(int* array, int start, int finish) {
     for (int i = start; i < finish; ++i) {
         for (int j = i + 1; array[j] < array[j - 1] && j - 1 >= start; --j) {
             swap(&array[j], &array[j - 1]);
         }
     }
 }
+
 void sort(int* array, int start, int finish) {
-    if (finish - start <= 5) {
+    if (finish - start <= 10) {
         selectionSort(array, start, finish);
         return;
     }
@@ -56,16 +49,32 @@ void sort(int* array, int start, int finish) {
     sort(array, start, indexStart);
 }
 
-int main()
+bool test(void) {
+    int array[] = { 67, 3, 5, 89, 1 };
+    sort(array, 0, 4);
+    int array2[] = { 1, 3, 5, 67, 89 };
+    for (int i = 0; i < 5; ++i) {
+        if (array[i] != array2[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main(void)
 {
+    if (!test()) {
+        printf("Error!!!");
+        return -1;
+    }
     int size = 0;
     printf("Enter size of the array: ");
     int result = scanf("%d", &size);
-    if (!testScanf(result)) {
+    if (result != 1) {
         printf("Input error!");
         return -1;
     }
-    if (!test(size)) {
+    if (size <= 0) {
         printf("The number must be positive!");
         return -1;
     }
