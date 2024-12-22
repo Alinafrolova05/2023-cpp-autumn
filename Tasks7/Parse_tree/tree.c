@@ -111,3 +111,19 @@ void tree(char* str, Stack** numberStack, Stack** operationStack) {
         push(numberStack, operatorNode);
     }
 }
+
+void printAlgorithm(void) {
+    printf("Enter the string: ");
+    char str[256] = { 0 };
+    fgets(str, 256, stdin);
+
+    Stack* numberStack = NULL;
+    Stack* operationStack = NULL;
+
+    tree(str, &numberStack, &operationStack);
+    Element* root = numberStack->element;
+    count(root);
+
+    print(pop(&numberStack));
+    printf("\nValue is: %d", root->result);
+}

@@ -127,7 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="else.c" />
     <ClCompile Include="parse_tree.c" />
     <ClCompile Include="tree.c" />
   </ItemGroup>
