@@ -1,4 +1,5 @@
 #ifndef MERGE_SORT
+
 typedef struct Number {
     char* name;
     char* number;
@@ -18,4 +19,7 @@ void merge(Number* phone, Number* left, Number* right, int size, int choise);
 
 void mergeSort(Number* phone, int size, int choise);
 //splits into two arrays
+
+void sort(void);
+
 #endif

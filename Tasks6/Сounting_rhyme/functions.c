@@ -1,14 +1,11 @@
 #include "functions.h"
-#include <malloc.h>
+#include <stdlib.h>
 
-void push(Element** head, int value, Element** firstElement) {
-    Element* element = malloc(sizeof(Element));
+void push(Element** front, int value) {
+    Element* element = calloc(1, sizeof(Element));
     element->value = value;
-    element->next = (*head);
-    *head = element;
-    if (element->value == 1) {
-        (*firstElement)->next = element;
-    }
+    element->next = (*front)->next;
+    (*front)->next = element;
 }
 
 void deleteElement(Element* front) {

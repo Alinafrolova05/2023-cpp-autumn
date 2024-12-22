@@ -18,7 +18,7 @@
     <ClCompile Include="Merge_sort.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="functions.c">
+    <ClCompile Include="sort.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
   </ItemGroup>
@@ -28,7 +28,7 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="functions.h">
+    <ClInclude Include="sort.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
   </ItemGroup>
