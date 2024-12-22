@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="marshalling_yard.c">
+    <ClCompile Include="Advanced_Brace_Balance_.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="stack.c">
+    <ClCompile Include="balance.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stack.h">
+    <ClInclude Include="balance.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
   </ItemGroup>

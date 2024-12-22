@@ -2,15 +2,14 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "stack.h"
+#include "balance.h"
 
 int main(void)
 {
-    int answer = 0;
-    Element* element1 = calloc(1, sizeof(Element));
-    if (!test(element1, &answer)) {
+    if (!test()) {
         printf("Error!!!");
         return -1;
     }
+
     return 0;
 }

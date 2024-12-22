@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="marshalling_yard.c">
+    <ClCompile Include="Postfix_calculator.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="stack.c">

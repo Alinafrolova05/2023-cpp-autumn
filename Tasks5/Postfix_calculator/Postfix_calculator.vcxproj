@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{1dfd6ee9-6811-4a02-b967-3a7429553569}</ProjectGuid>
-    <RootNamespace>marshallingyard</RootNamespace>
+    <ProjectGuid>{7603edc2-e7e8-406f-a8e5-e723d6637a6c}</ProjectGuid>
+    <RootNamespace>Postfixcalculator</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,8 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Postfix_calculator.c" />
     <ClCompile Include="stack.c" />
-    <ClCompile Include="marshalling_yard.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stack.h" />

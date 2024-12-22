@@ -1,0 +1,103 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks5\\Advanced Brace Balance\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{70A7EA6F-343A-44C9-B6A8-F8EEEF197D60}|Advanced Brace Balance.vcxproj|C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks5\\Advanced Brace Balance\\advanced_Brace_Balance.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{70A7EA6F-343A-44C9-B6A8-F8EEEF197D60}|Advanced Brace Balance.vcxproj|solutionrelative:advanced_Brace_Balance.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70A7EA6F-343A-44C9-B6A8-F8EEEF197D60}|Advanced Brace Balance.vcxproj|C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks5\\Advanced Brace Balance\\balance.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{70A7EA6F-343A-44C9-B6A8-F8EEEF197D60}|Advanced Brace Balance.vcxproj|solutionrelative:balance.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70A7EA6F-343A-44C9-B6A8-F8EEEF197D60}|Advanced Brace Balance.vcxproj|C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks5\\Advanced Brace Balance\\balance.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{70A7EA6F-343A-44C9-B6A8-F8EEEF197D60}|Advanced Brace Balance.vcxproj|solutionrelative:balance.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{a0c5197d-0ac7-4b63-97cd-8872a789d233}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{4a9b7e51-aa16-11d0-a8c5-00a0c921a4d2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "advanced_Brace_Balance.c",
+              "DocumentMoniker": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks5\\Advanced Brace Balance\\advanced_Brace_Balance.c",
+              "RelativeDocumentMoniker": "advanced_Brace_Balance.c",
+              "ToolTip": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks5\\Advanced Brace Balance\\advanced_Brace_Balance.c",
+              "RelativeToolTip": "advanced_Brace_Balance.c",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAUwBgAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-12-22T00:07:13.919Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "balance.h",
+              "DocumentMoniker": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks5\\Advanced Brace Balance\\balance.h",
+              "RelativeDocumentMoniker": "balance.h",
+              "ToolTip": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks5\\Advanced Brace Balance\\balance.h",
+              "RelativeToolTip": "balance.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-22T00:06:10.947Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "balance.c",
+              "DocumentMoniker": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks5\\Advanced Brace Balance\\balance.c",
+              "RelativeDocumentMoniker": "balance.c",
+              "ToolTip": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks5\\Advanced Brace Balance\\balance.c",
+              "RelativeToolTip": "balance.c",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAuwDwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-12-22T00:05:55.903Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
