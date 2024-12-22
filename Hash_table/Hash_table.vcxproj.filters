@@ -18,7 +18,7 @@
     <ClCompile Include="Hash_table.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="functions.c">
+    <ClCompile Include="table.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
     <ClCompile Include="list.c">
@@ -31,7 +31,7 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="functions.h">
+    <ClInclude Include="table.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
   </ItemGroup>

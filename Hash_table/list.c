@@ -1,4 +1,4 @@
-#include "functions.h"
+#include "table.h"
 
 int hash(char* key) {
     int hash_index = 0;
