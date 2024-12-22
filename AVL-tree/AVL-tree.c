@@ -5,7 +5,7 @@
 #include <string.h>
 #include "tree.h"
 
-int main() {
+int main(void) {
     if (!test()) {
         printf(stderr, "Doesn't work!!!");
         return -1;

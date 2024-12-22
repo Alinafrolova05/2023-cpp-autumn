@@ -165,7 +165,7 @@ Node* search(Node* root, int key) {
     }
 }
 
-bool test() {
+bool test(void) {
     Node* root = NULL;
     int array[] = { 9, 11, 13, 17, 19 };
     int arraySize = sizeof(array) / sizeof(array[0]);

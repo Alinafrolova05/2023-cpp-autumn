@@ -1,4 +1,5 @@
 #ifndef TREE
+
 typedef struct Node {
     int key;
     char* value;
