@@ -5,20 +5,19 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct Element {
-    int value;
-    struct Element* next;
-}Element;
+typedef struct Element Element;
 
-void push(Element** head, int value);
+void push(Element** head, int value, bool* errorCode);
 //puts on the stack
 
 void pop(Element** head);
 //removes the top of the stack
 
-void program(Element** list);
+void solution(Element** list, bool* errorCode);
 //input and output
 
 bool test(void);
+
+Element* createList(void);
 
 #endif

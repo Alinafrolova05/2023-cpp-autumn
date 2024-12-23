@@ -12,9 +12,14 @@ int main(void)
         return -1;
     }
 
-    Element* list = NULL;
+    Element* list = createList();
     
-    program(&list);
+    bool errorCode = true;
+    solution(&list, &errorCode);
+    if (errorCode == false) {
+        printf("Error!");
+        return -1;
+    }
 
     while (list != NULL) {
         pop(&list);
