@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f4e34184-3469-4a59-92da-1b18fa07c4cb}</ProjectGuid>
-    <RootNamespace>stack</RootNamespace>
+    <ProjectGuid>{7603edc2-e7e8-406f-a8e5-e723d6637a6c}</ProjectGuid>
+    <RootNamespace>Postfixcalculator</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,11 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Postfix_calculator.c" />
+    <ClCompile Include="operations.c" />
     <ClCompile Include="stack.c" />
-    <ClCompile Include="stackMain.c" />
-    <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="operations.h" />
     <ClInclude Include="stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
