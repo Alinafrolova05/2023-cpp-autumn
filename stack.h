@@ -8,7 +8,7 @@
 typedef struct Element Element;
 
 // Adds an element to the top of the stack.
-void push(Element** head, char value, bool* errorCode);
+void push(Element** head, int value, bool* errorCode);
 
 // Removes the top element from the stack.
 void pop(Element** head);

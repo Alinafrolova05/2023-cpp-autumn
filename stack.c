@@ -3,11 +3,11 @@
 #include <malloc.h>
 
 typedef struct Element {
-    char value;
+    int value;
     struct Element* next;
 }Element;
 
-void push(Element** element1, char value, bool* errorCode) {
+void push(Element** element1, int value, bool* errorCode) {
     Element* element = malloc(sizeof(Element));
     if (element == NULL) {
         *errorCode = false;
