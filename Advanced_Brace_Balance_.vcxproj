@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f4e34184-3469-4a59-92da-1b18fa07c4cb}</ProjectGuid>
-    <RootNamespace>stack</RootNamespace>
+    <ProjectGuid>{8f4e3f89-85dd-4da2-a5c8-2132b2114af8}</ProjectGuid>
+    <RootNamespace>AdvancedBraceBalance</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,11 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Advanced_Brace_Balance_.c" />
+    <ClCompile Include="balance.c" />
     <ClCompile Include="stack.c" />
-    <ClCompile Include="stackMain.c" />
-    <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="balance.h" />
     <ClInclude Include="stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

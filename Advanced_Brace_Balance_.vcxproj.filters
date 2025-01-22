@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stackMain.c">
+    <ClCompile Include="Advanced_Brace_Balance_.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="test.c">
+    <ClCompile Include="balance.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
     <ClCompile Include="stack.c">
@@ -26,6 +26,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="balance.h">
+      <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
     <ClInclude Include="stack.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
