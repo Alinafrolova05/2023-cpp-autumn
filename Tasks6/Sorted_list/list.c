@@ -4,7 +4,12 @@
 #include <stdlib.h>
 #include "list.h"
 
-void Scanf(int* add) {
+struct List {
+    struct Element* front;
+    struct Element* back;
+};
+
+void scanfChecker(int* add) {
     int result = scanf("%d", add);
     if (result != 1) {
         printf("\nInput wrong!");
@@ -18,33 +23,42 @@ void pop(Element** head) {
     free(tmp);
 }
 
-void addElement(Element** head, int value1) {
-    Element* element1 = calloc(1, sizeof(Element));
-    element1->value = value1;
-    if ((*head) == NULL || (*head)->value <= value1) {
-        element1->next = *head;
-        *head = element1;
+void addElement(Element** head, int value, bool* errorCode) {
+    Element* element = calloc(1, sizeof(Element)); // Выделяем память для нового элемента
+    if (element == NULL) { // Проверка на успешное выделение памяти
+        *errorCode = false; // Устанавливаем код ошибки
         return;
     }
 
-    Element* pointer1 = *head;
-    while ((*head)->next != NULL && (*head)->next->value >= value1) {
-        *head = (*head)->next;
+    element->value = value; // Устанавливаем значение нового элемента
+
+    // Если список пуст или новое значение меньше или равно значению первого элемента
+    if (*head == NULL || (*head)->value >= value) {
+        element->next = *head; // Устанавливаем следующий элемент для нового элемента
+        *head = element; // Обновляем указатель на первый элемент
+        return;
     }
 
-    element1->next = (*head)->next;
-    (*head)->next = element1;
-    *head = pointer1;
+    Element* current = *head; // Указатель для навигации по списку
+
+    // Ищем место для вставки нового элемента
+    while (current->next != NULL && current->next->value < value) {
+        current = current->next; // Перемещаем указатель на следующий элемент
+    }
+
+    // Вставляем новый элемент в список
+    element->next = current->next; // Устанавливаем следующий элемент для нового элемента
+    current->next = element; // Вставляем новый элемент в список
 }
 
-void deleteElement(Element* head, int value1) {
-    if (head == NULL || head->value < value1) {
+void deleteElement(Element* head, int value) {
+    if (head == NULL || head->value < value) {
         return;
     }
-    Element* pointer1 = head;
-    while (head->next->value != value1) {
-        if (head->next == NULL || head->next->value < value1) {
-            head = pointer1;
+    Element* index = head;
+    while (head->next->value != value) {
+        if (head->next == NULL || head->next->value < value) {
+            head = index;
             return;
         }
         head = head->next;
@@ -52,83 +66,11 @@ void deleteElement(Element* head, int value1) {
     Element* deleting = head->next;
     head->next = head->next->next;
     free(deleting);
-    head = pointer1;
+    head = index;
 }
 
-void printList(Element* element1) {
-    Element* pointer1 = element1;
-    while (element1 != NULL) {
-        printf(" %d", element1->value);
-        element1 = element1->next;
+void freeList(Element** element) {
+    while (*element != NULL) {
+        pop(element);
     }
-    element1 = pointer1;
-}
-
-void menu(Element** element) {
-    int add = 0;
-    int number = 5;
-
-    while (number != 0) {
-        printf("\nSpecify the option number:\n0.Exit\n1.Add value to sorted list\n2.Remove value from list\n3.Print list");
-        printf("\nNumber of option: ");
-        Scanf(&number);
-        if (number == 0) {
-            break;
-        }
-        else if (number == 1) {
-            printf("\nSpecify the number that will go into the list: ");
-            Scanf("%d", &add);
-            addElement(element, add);
-            printf(" %d", (*element)->value);
-        }
-        else if (number == 2) {
-            printf("\nIndicate the value you want to delete: ");
-            Scanf(&add);
-            if ((*element)->value == add) {
-                pop(element);
-            }
-            else {
-                deleteElement(*element, add);
-            }
-        }
-        else if (number == 3) {
-            printf("The array looks like this:");
-            printList(*element);
-        }
-        else {
-            printf("\nInput wrong!");
-            break;
-        }
-    }
-}
-
-bool test(void) {
-    Element* element = NULL;
-
-    addElement(&element, 5);
-    addElement(&element, 6);
-
-    int array[] = { 5, 6 };
-    int checkArray[2] = { 0 };
-    int i = 0;
-
-    while (element != NULL) {
-        checkArray[i++] = element->value;
-        element = element->next;
-    }
-
-    if (sizeof(array) / sizeof(array[0]) != i) {
-        return false;
-    }
-
-    for (int j = 0; j < i; ++j) {
-        if (array[j] != checkArray[i - j - 1]) {
-            return false;
-        }
-    }
-
-    deleteElement(element, 5);
-    deleteElement(element, 6);
-
-    return element == NULL;
 }

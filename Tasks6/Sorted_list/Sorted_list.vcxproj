@@ -128,7 +128,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="list.c" />
+    <ClCompile Include="solution.c" />
     <ClCompile Include="Sorted_list.c" />
+    <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="list.h" />

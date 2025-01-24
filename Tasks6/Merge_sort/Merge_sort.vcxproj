@@ -127,8 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="sort.c" />
-    <ClCompile Include="Merge_sort.c" />
+    <ClCompile Include="mergeSorting.c" />
+    <ClCompile Include="solution.c" />
+    <ClCompile Include="inputOutput.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="text.txt" />

@@ -1,4 +1,7 @@
+#pragma once
+
 #ifndef SORTED_LIST
+#define SORTED_LIST
 
 #include <stdbool.h>
 
@@ -6,30 +9,32 @@ typedef struct Element {
     int value;
     struct Element* next;
 
-}Element;
+} Element;
 
-struct List {
-    struct Element* front;
-    struct Element* back;
-};
+struct List;
 
-void Scanf(int* add);
-//entering a number with verification
+// Prompts the user to enter a number and verifies the input for validity.
+void scanfChecker(int* add);
 
-void addElement(Element** head, int value);
-//adds an element to the stack
+// Adds a new element with the specified value to the stack (linked list).
+void addElement(Element** head, int value, bool* errorCode);
 
+// Deletes an element with the specified value from the stack (linked list).
 void deleteElement(Element* head, int value);
-//deletes an element to the stack
 
+// Prints the elements of the stack (linked list) in order.
 void printList(Element* element1);
-//print stack
 
+// Removes the top element from the stack (linked list).
 void pop(Element** head);
-//removes the top element from the stack
 
+// Displays a menu for user interaction with the stack operations.
 void menu(Element** element);
 
+// Frees the memory allocated for the entire stack (linked list).
+void freeList(Element** element);
+
+// Runs a test to verify the functionality of the stack operations.
 bool test();
 
 #endif

@@ -1,0 +1,6 @@
+﻿  test.c
+C:\Users\user\source\2023-cpp-autumn\Tasks6\Sorted_list\test.c(36,19): warning C4047: функция: "Element *" отличается по уровням косвенного обращения от "Element **"
+C:\Users\user\source\2023-cpp-autumn\Tasks6\Sorted_list\test.c(36,19): warning C4024: deleteElement: различные типы для формального и фактического параметров 1
+C:\Users\user\source\2023-cpp-autumn\Tasks6\Sorted_list\test.c(37,19): warning C4047: функция: "Element *" отличается по уровням косвенного обращения от "Element **"
+C:\Users\user\source\2023-cpp-autumn\Tasks6\Sorted_list\test.c(37,19): warning C4024: deleteElement: различные типы для формального и фактического параметров 1
+  Sorted_list.vcxproj -> C:\Users\user\source\2023-cpp-autumn\Tasks6\Sorted_list\x64\Debug\Sorted_list.exe
