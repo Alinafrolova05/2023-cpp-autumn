@@ -4,13 +4,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include "tree.h"
+#include "test.h"
+#include "solution.h"
 
 int main(void) {
-    Node* root = NULL;
-
-    solution(&root);
-    freeTree(&root);
-
+    if (!test()) {
+        printf("Error!");
+        return -1;
+    }
+    solution();
     return 0;
 }
-

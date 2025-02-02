@@ -16,7 +16,7 @@ struct Node {
     struct Node* right;
 };
 
-char* my_strdup(const char* str) {
+char* myStrdup(const char* str) {
     if (str == NULL) return NULL;
     size_t len = strlen(str) + 1;
     char* copy = (char*)malloc(len);
@@ -36,57 +36,97 @@ void freeTree(Node** root) {
 }
 
 Node* rotateLeft(Node* node) {
+    if (node == NULL || node->right == NULL) {
+        return node;
+    }
+
     Node* b = node->right;
     node->right = b->left;
     b->left = node;
 
-    node->left->parent = node;
+    if (node->left != NULL) {
+        node->left->parent = node;
+    }
     b->parent = node->parent;
     node->parent = b;
+
+    node->balance -= 2;
+    b->balance--;
 
     return b;
 }
 
 Node* rotateRight(Node* node) {
+    if (node == NULL || node->left == NULL) {
+        return node;
+    }
+
     Node* a = node->left;
     node->left = a->right;
     a->right = node;
 
-    node->left->parent = node;
+    if (node->left != NULL) {
+        node->left->parent = node;
+    }
     a->parent = node->parent;
     node->parent = a;
+
+    node->balance += 2;
+    a->balance++;
 
     return a;
 }
 
 Node* bigRotateLeft(Node* node) {
+    if (node == NULL || node->right == NULL || node->right->left == NULL) {
+        return node;
+    }
+
     Node* c = node->right->left;
     node->right->left = c->right;
     c->right = node->right;
     node->right = c->left;
     c->left = node;
 
-    c->left->right->parent = c->left;
-    c->right->left->parent = c->right;
+    if (c->left->right != NULL) {
+        c->left->right->parent = c->left;
+    }
+    if (c->right->left != NULL) {
+        c->right->left->parent = c->right;
+    }
     c->parent = node->parent;
     c->left->parent = c;
     c->right->parent = c;
+
+    c->left->balance -= 2;
+    c->right->balance++;
 
     return c;
 }
 
 Node* bigRotateRight(Node* node) {
+    if (node == NULL || node->left == NULL || node->left->right == NULL) {
+        return node;
+    }
+
     Node* c = node->left->right;
     node->left->right = c->left;
     c->left = node->left;
     node->left = c->right;
     c->right = node;
 
-    c->left->right->parent = c->left;
-    c->right->left->parent = c->right;
+    if (c->left->right != NULL) {
+        c->left->right->parent = c->left;
+    }
+    if (c->right->left != NULL) {
+        c->right->left->parent = c->right;
+    }
     c->parent = node->parent;
     c->left->parent = c;
     c->right->parent = c;
+
+    c->right->balance += 2;
+    c->left->balance--;
 
     return c;
 }
@@ -114,29 +154,23 @@ Node* insert(Node** root, const char* key, const char* value, bool* errorCode) {
             *errorCode = false;
             return NULL;
         }
-        newNode->key = my_strdup(key);
-        newNode->value = my_strdup(value);
+        newNode->key = myStrdup(key);
+        newNode->value = myStrdup(value);
         newNode->balance = 0;
-        newNode->parent = NULL;
+        newNode->parent = *root;
         newNode->left = NULL;
         newNode->right = NULL;
         *root = newNode;
-        return newNode;
-    }
-    if (strcmp(key, (*root)->key) < 0) {
-        (*root)->left = insert(&(*root)->left, key, value, errorCode);
-        (*root)->left->parent = *root;
-        --(*root)->balance;
-    }
-    else if (strcmp(key, (*root)->key) == 0) {
-        free((char*)(*root)->value);
-        (*root)->value = my_strdup(value);
         return *root;
     }
-    else {
+    if (strcmp(key, (*root)->key) < 0) {
+        (*root)->balance--;
+        (*root)->left = insert(&(*root)->left, key, value, errorCode);
+    } else if (strcmp(key, (*root)->key) == 0) {
+        return *root;
+    } else {
+        (*root)->balance++;
         (*root)->right = insert(&(*root)->right, key, value, errorCode);
-        (*root)->right->parent = *root;
-        ++(*root)->balance;
     }
     return balance(*root);
 }
@@ -148,11 +182,9 @@ Node* search(Node** root, const char* key) {
 
     if (cmp < 0) {
         return search(&(*root)->left, key);
-    }
-    else if (cmp > 0) {
+    } else if (cmp > 0) {
         return search(&(*root)->right, key);
-    }
-    else {
+    } else {
         return *root;
     }
 }
@@ -165,23 +197,23 @@ Node* deleteElement(Node** root, const char* key, bool* errorCode) {
         return *root;
     }
 
+    free((char*)node->key);
+    free((char*)node->value);
+
     if (node->left == NULL && node->right == NULL) {
         if (node->parent != NULL) {
             if (node->parent->left == node) {
                 node->parent->left = NULL;
-            }
-            else {
+            } else {
                 node->parent->right = NULL;
             }
             free(node);
-        }
-        else {
+        } else {
             free(node);
             *root = NULL;
             return *root;
         }
-    }
-    else if (node->left != NULL && node->right != NULL) {
+    } else if (node->left != NULL && node->right != NULL) {
         Node* minNode = node->right;
         while (minNode->left != NULL) {
             minNode = minNode->left;
@@ -189,132 +221,26 @@ Node* deleteElement(Node** root, const char* key, bool* errorCode) {
 
         const char* minNodeKey = minNode->key;
         const char* minNodeValue = minNode->value;
+
         deleteElement(root, minNode->key, errorCode);
 
-        node->key = minNodeKey;
-        node->value = minNodeValue;
-
-    }
-    else {
+        node->key = myStrdup(minNodeKey);
+        node->value = myStrdup(minNodeValue);
+    } else {
         Node* child = (node->left != NULL) ? node->left : node->right;
 
         if (node->parent == NULL) {
             *root = child;
-            return*root;
-        }
-        else {
+            child->parent = NULL;
+        } else {
             child->parent = node->parent;
             if (node->parent->left == node) {
                 node->parent->left = child;
-            }
-            else {
+            } else {
                 node->parent->right = child;
             }
         }
         free(node);
     }
-
     return balance(*root);
-}
-
-bool test(void) {
-    bool errorCode = true;
-    Node* root = NULL;
-
-    const char* keys[] = { "z", "n", "k", "m", "a" };
-    const char* values[] = { "val1", "val2", "val3", "val4", "val5" };
-
-    for (int i = 0; i < 5; ++i) {
-        root = insert(&root, keys[i], values[i], &errorCode);
-    }
-
-    if (!search(&root, "m")) {
-        errorCode = false;
-    }
-    deleteElement(&root, "m", &errorCode);
-
-    if (search(&root, "m")) {
-        errorCode = false;
-    }
-
-    freeTree(&root);
-    return errorCode;
-}
-
-bool test2(void) {
-    bool errorCode = true;
-    Node* root = NULL;
-    srand((unsigned int)time(NULL));
-
-    for (size_t i = 0; i < 1000000; ++i) {
-        char key = (char)('a' + (rand() % 26));
-        char value = (char)('a' + (rand() % 26));
-
-        if (insert(&root, (const char*)&key, (const char*)&value, &errorCode) == NULL) {
-            errorCode = false;
-        }
-    }
-
-    freeTree(&root);
-    return errorCode;
-}
-
-void solution(Node** root) {
-    bool errorCode = true;
-    int answer = -1;
-
-    while (answer != 0) {
-        printf("\nSpecify the option number:\n0.Exit\n1.Add value by key\n2.Get value by key\n3.Check for key availability\n4.Delete key.");
-        printf("\nNumber of option: ");
-        scanf("%d", &answer);
-        getchar();
-        if (answer == 0) {
-            break;
-        }
-        else if (answer == 1) {
-            char addingKey[256] = "";
-            printf("\nWrite the key: ");
-            fgets(addingKey, sizeof(addingKey), stdin);
-            addingKey[strcspn(addingKey, "\n")] = 0;
-
-            char addingValue[256];
-            printf("\nWrite the key value with less than 100 characters: ");
-            fgets(addingValue, sizeof(addingValue), stdin);
-            addingValue[strcspn(addingValue, "\n")] = 0;
-
-            insert(root, addingKey, addingValue, NULL);
-        }
-        else if (answer == 2 || answer == 3) {
-            char addingKey[256] = "";
-            printf("\nSpecify the key: ");
-            fgets(addingKey, sizeof(addingKey), stdin);
-            addingKey[strcspn(addingKey, "\n")] = 0;
-
-            Node* found = search(root, addingKey);
-            if (found == NULL) {
-                printf("\nThere is no such key in the dictionary.");
-            }
-            else {
-                printf("\nValue: %s", found->value);
-            }
-        }
-        else if (answer == 4) {
-            char addingKey[256];
-            printf("\nSpecify the key: ");
-            fgets(addingKey, sizeof(addingKey), stdin);
-            addingKey[strcspn(addingKey, "\n")] = 0;
-
-            if (search(root, addingKey) == NULL) {
-                printf("\nThere is no such key in the dictionary.");
-            }
-            else {
-                deleteElement(root, addingKey, NULL);
-                printf("\nThe value and key have been deleted.");
-            }
-        }
-        else {
-            printf("\nInput wrong!");
-            break;
-        }
-    }
 }

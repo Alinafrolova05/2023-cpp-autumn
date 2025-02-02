@@ -1,15 +1,9 @@
 #pragma once
 
-#ifndef TREE
-#define TREE
-
 #include <stdbool.h>
 
 // Definition of the Node structure for the AVL tree
 typedef struct Node Node;
-
-// Duplicates a string and returns a pointer to the newly allocated memory
-char* my_strdup(const char* str);
 
 // Frees the memory allocated for the entire tree
 void freeTree(Node** root);
@@ -40,14 +34,3 @@ Node* search(Node** root, const char* key);
 // Sets errorCode to false if the key is not found
 Node* deleteElement(Node** root, const char* key, bool* errorCode);
 
-// Runs a basic test of the tree operations and returns true if all tests pass
-bool test(void);
-
-// Runs a performance test by inserting a large number of random elements into the tree
-// Returns true if all insertions are successful
-bool test2(void);
-
-// Provides a command-line interface for interacting with the AVL tree
-void solution(Node** root);
-
-#endif
