@@ -1,9 +1,13 @@
-#include "table.h"
+#include "list.h"
 
 int hash(char* key) {
-    int hash_index = 0;
-    while (key[hash_index] != '\0') {
-        hash_index++;
+    int hashIndex = 0;
+    while (key[hashIndex] != '\0') {
+        hashIndex++;
     }
-    return hash_index;
+    return hashIndex;
+}
+
+int getValueHash(char* key) {
+    return hash(key);
 }

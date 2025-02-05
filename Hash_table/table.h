@@ -1,26 +1,33 @@
-#ifndef HASH_TABLE
+#pragma once
 
 #include <stdbool.h>
 
-typedef struct Element {
-    char* key;
-    struct Element* next;
-} Element;
+// Structure for an element in the hash table
+typedef struct Element Element;
 
-typedef struct Hash_table {
-    Element** table;
-} Hash_table;
+// Structure for a segment in the hash table
+typedef struct Segment Segment;
 
-int hash(char* key);
+// Inserts a new element with the given key into the hash table segment
+void insert(Segment** segment, char* key, bool* errorCode);
 
-Hash_table* createTable(void);
+// Searches for an element with the given key in the hash table segment; returns true if found, otherwise false
+bool search(Segment* segment, char* key);
 
-void insert(Hash_table* hash_table, char* key);
+// Frees the memory occupied by the hash table segments
+void freeSegments(Segment** segment);
 
-int search(Hash_table* hash_table, char* key);
+// Retrieves a value from the segment, possibly based on some criteria
+Element* getValue1(Segment* segment);
 
-void freeTable(Hash_table* hash_table);
+// Gets a string value from the element
+char* getValue2(Element* element);
 
-bool test(void);
+// Gets an integer value from the element
+int getValue3(Element* element);
 
-#endif
+// Retrieves the next segment from the current segment
+Segment* getValue4(Segment* segment);
+
+// Retrieves the next element from the current element
+Element* getValue5(Element* element);

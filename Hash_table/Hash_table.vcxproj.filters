@@ -24,6 +24,9 @@
     <ClCompile Include="list.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
+    <ClCompile Include="test.c">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="text.txt">
@@ -32,6 +35,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="table.h">
+      <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
+    <ClInclude Include="test.h">
+      <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
+    <ClInclude Include="list.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
   </ItemGroup>
