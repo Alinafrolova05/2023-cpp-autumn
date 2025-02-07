@@ -2,32 +2,38 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <malloc.h>
 #include <string.h>
 
-void freeTree(Node* root) {
-    if (root != NULL) {
-        freeTree(root->leftChild);
-        freeTree(root->rightChild);
-        free(root->element->value);
-        free(root->element);
-        free(root);
-    }
+typedef struct Node {
+    int key;
+    char* value;
+    struct Node* leftChild;
+    struct Node* rightChild;
+}Node;
+
+char* getValue(Node* node) {
+    return node->value;
 }
 
-void Scanf(int* add) {
+Node* createNode(void) {
+    return NULL;
+}
+
+void checkScanf(int* add, bool* errorCode) {
     int result = scanf("%d", add);
     if (result != 1) {
-        printf("\nInput wrong!");
-        exit(EXIT_FAILURE);
+        *errorCode = false;
+        return;
     }
 }
 
-Node* search(Node* root, int key1) {
+Node* search(Node* root, int key) {
     while (root != NULL) {
-        if (key1 < root->element->key) {
+        if (key < root->key) {
             root = root->leftChild;
         }
-        else if (key1 > root->element->key) {
+        else if (key > root->key) {
             root = root->rightChild;
         }
         else {
@@ -37,14 +43,16 @@ Node* search(Node* root, int key1) {
     return NULL;
 }
 
-void add(Node** root, int key1, char* value1) {
+void addElement(Node** root, int key, char* value, bool* errorCode) {
     if (*root == NULL) {
-        Node* node = calloc(1, sizeof(Node));
-        Element* element1 = calloc(1, sizeof(Element));
+        Node* node = malloc(sizeof(Node));
+        if (node == NULL) {
+            *errorCode = false;
+            return;
+        }
 
-        element1->key = key1;
-        element1->value = value1;
-        node->element = element1;
+        node->key = key;
+        node->value = value;
         node->leftChild = NULL;
         node->rightChild = NULL;
         *root = node;
@@ -56,30 +64,31 @@ void add(Node** root, int key1, char* value1) {
 
     while (current != NULL) {
         parent = current;
-        if (key1 < current->element->key) {
+        if (key < current->key) {
             current = current->leftChild;
         }
-        else if (key1 > current->element->key) {
+        else if (key > current->key) {
             current = current->rightChild;
         }
         else {
-            char* tmp = current->element->value;
-            current->element->value = value1;
-            free(tmp);
+            free(current->value);
+            current->value = value;
             return;
         }
     }
 
-    Node* node = calloc(1, sizeof(Node));
-    Element* element1 = calloc(1, sizeof(Element));
+    Node* node = malloc(sizeof(Node));
+    if (node == NULL) {
+        *errorCode = false;
+        return;
+    }
 
-    element1->key = key1;
-    element1->value = value1;
-    node->element = element1;
+    node->key = key;
+    node->value = value;
     node->leftChild = NULL;
     node->rightChild = NULL;
 
-    if (key1 < parent->element->key) {
+    if (key < parent->key) {
         parent->leftChild = node;
     }
     else {
@@ -87,13 +96,13 @@ void add(Node** root, int key1, char* value1) {
     }
 }
 
-void deleteElement(Node** root, int key1) {
+void deleteElement(Node** root, int key, bool* errorCode) {
     Node* parent = NULL;
     Node* node = *root;
     
-    while (node != NULL && node->element->key != key1) {
+    while (node != NULL && node->key != key) {
         parent = node;
-        if (key1 < node->element->key) {
+        if (key < node->key) {
             node = node->leftChild;
         }
         else {
@@ -102,7 +111,7 @@ void deleteElement(Node** root, int key1) {
     }
 
     if (node == NULL) {
-        printf("Element not found.\n");
+        *errorCode = false;
         return;
     }
 
@@ -116,8 +125,7 @@ void deleteElement(Node** root, int key1) {
         else {
             parent->rightChild = NULL;
         }
-        free(node->element->value);
-        free(node->element);
+        free(node->value);
         free(node);
     }
     else if (node->leftChild != NULL && node->rightChild != NULL) {
@@ -126,12 +134,11 @@ void deleteElement(Node** root, int key1) {
             minNode = minNode->leftChild;
         }
 
-        node->element->key = minNode->element->key;
-        char* tmpValue = node ->element->value;
-        node->element->value = minNode->element->value;
-        free(tmpValue);
+        node->key = minNode->key;
+        free(node->value);
+        node->value = minNode->value;
 
-        deleteElement(&(minNode), minNode->element->key);
+        deleteElement(&(minNode), minNode->key, errorCode);
     }
     else {
         Node* child = NULL;
@@ -152,57 +159,17 @@ void deleteElement(Node** root, int key1) {
             parent->rightChild = child;
         }
 
-        free(node->element->value);
-        free(node->element);
+        free(node->value);
         free(node);
     }
 }
 
-void menu(Node** root) {
-    int answer = -1;
-    int addingKey = 0;
-
-    while (answer != 0) {
-        printf("\nSpecify the option number:\n0.Exit\n1.Add value by key\n2.Get value by key\n3.Check for key availability\n4.Delete key.");
-        printf("\nNumber of option: ");
-        Scanf(&answer);
-        if (answer == 0) {
-            break;
-        }
-        else if (answer == 1) {
-            printf("\nWrite the key: ");
-            Scanf("%d", &addingKey);
-            char* addingValue = calloc(256, sizeof(char));
-            printf("\nWrite the key value with less than 20 characters: ");
-            getchar();
-            fgets(addingValue, 256, stdin);
-            add(root, addingKey, addingValue);
-        }
-        else if (answer == 2 || answer == 3) {
-            printf("\nSpecify the key: ");
-            Scanf(&addingKey);
-            Node* founded = search(*root, addingKey);
-            if (founded == NULL) {
-                printf("\nThere is no such key in the dictionary.");
-            }
-            else {
-                printf("\nValue: %s", founded->element->value);
-            }
-        }
-        else if (answer == 4) {
-            printf("\nSpecify the key: ");
-            Scanf(&addingKey);
-            if (search(*root, addingKey) == NULL) {
-                printf("\nThere is no such key in the dictionary.");
-            }
-            else {
-                deleteElement(root, addingKey);
-                printf("\nThe value and key have been deleted.");
-            }
-        }
-        else {
-            printf("\nInput wrong!");
-            break;
-        }
+void freeTree(Node* root) {
+    if (root == NULL) {
+        return;
     }
+    freeTree(root->leftChild);
+    freeTree(root->rightChild);
+    free(root->value);
+    free(root);
 }

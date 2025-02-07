@@ -1,32 +1,30 @@
-#ifndef TREE
+#pragma once
 
 #include <stdbool.h>
 
-typedef struct Element {
-    int key;
-    char* value;
-}Element;
+// Defines the structure.
+typedef struct Node Node;
 
-typedef struct Node {
-    Element* element;
-    struct Node* leftChild;
-    struct Node* rightChild;
-}Node;
+// Returns the value stored in the structure.
+char* getValue(Node* node);
 
+// Creates structure.
+Node* createNode(void);
+
+// Frees the memory occupied by the tree.
 void freeTree(Node* root);
-//frees the tree
 
-void Scanf(int* add);
-//checks if choice is an integer
+// Checks if the input is an integer.
+void checkScanf(int* add, bool* errorCode);
 
-Node* search(Node* root, int key1);
+// Searches for a node in the tree by key.
+Node* search(Node* root, int key);
 
-void add(Node** root, int key1, char* value1);
-//adds in the tree
+// Adds an element to the tree.
+void addElement(Node** root, int key, char* value, bool* errorCode);
 
-void deleteElement(Node** root, int key1);
+// Deletes an element from the tree by key.
+void deleteElement(Node** root, int key, bool* errorCode);
 
+// Displays the menu with options.
 void menu(Node** root);
-//prints options
-
-#endif
