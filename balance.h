@@ -1,22 +1,24 @@
 #pragma once
 
-#ifndef ADVANCED_BRACE_BALANCE
-#define ADVANCED_BRACE_BALANCE
-
 #include <stdbool.h>
 
+// Defines the structure.
 typedef struct Element Element;
 
-// Adds an element to the stack
-void push(Element** element1, char value, bool* errorCode);
+// Function to get the value of the top element in the stack
+char top(Element* element);
 
-// Removes an element from the stack
-void pop(Element** element1);
+// Function to set the value of the top element in the stack
+void setTop(Element** element, char value);
 
-// Processes braces in the input string and removes valid elements from the stack
-void processBraces(char* str, Element** element1, bool* errorCode);
+// Function to set the next element of the current element to a given next element
+void setToNextElement(Element** element, Element* next);
 
-// Runs tests to validate the functionality of the stack operations
-bool test(void);
+// Function to set another element to the next element of the current element.
+void setNextElement(Element** element, Element* anotherElement);
 
-#endif
+// Function to create a new element and return a pointer to it
+Element* createElement(void);
+
+// Function to process braces in the input string and remove valid elements from the stack
+void processBraces(char* str, bool* errorCode, char check[]);

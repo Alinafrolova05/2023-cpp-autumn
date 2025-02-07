@@ -24,12 +24,18 @@
     <ClCompile Include="stack.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
+    <ClCompile Include="test.c">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="balance.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
     <ClInclude Include="stack.h">
+      <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
+    <ClInclude Include="test.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
   </ItemGroup>
