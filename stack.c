@@ -1,26 +1,26 @@
 #include "stack.h"
+#include "operations.h"
 #include <stdio.h>
 #include <malloc.h>
+#include <stdlib.h>
 
-typedef struct Element {
-    int value;
-    struct Element* next;
-}Element;
+#include <stdbool.h>
 
-void push(Element** element1, int value, bool* errorCode) {
-    Element* element = malloc(sizeof(Element));
+void push(Element** head, char value, bool* errorCode) {
+    Element* element = createElement();
     if (element == NULL) {
         *errorCode = false;
         return;
     }
-    element->value = value;
-    element->next = *element1;
-    *element1 = element;
+    setTop(&element, value);
+    setToNextElement(&element, *head);
+    *head = element;
 }
 
-void pop(Element** element1) {
-    if (*element1 == NULL) return;
-    Element* tmp = *element1;
-    *element1 = (*element1)->next;
+void pop(Element** element) {
+    if (*element == NULL) return;
+    Element* tmp = *element;
+    setNextElement(element, *element);
     free(tmp);
+    return;
 }

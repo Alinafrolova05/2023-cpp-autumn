@@ -15,18 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Postfix_calculator.c">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="operations.c">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
+    <ClCompile Include="test.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
     <ClCompile Include="stack.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
+    <ClCompile Include="postfixCalculator.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="operations.h">
+      <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
+    <ClInclude Include="test.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
     <ClInclude Include="stack.h">

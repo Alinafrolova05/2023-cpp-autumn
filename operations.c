@@ -1,50 +1,107 @@
-#include "operations.h"
+#include <stdio.h>
 #include <stdbool.h>
-#include <malloc.h>
+#include <stdlib.h>
+#include "operations.h"
+#include "stack.h"
 
 typedef struct Element {
-    int value;
+    char value;
     struct Element* next;
 } Element;
 
-void performOperation(Element* element, char str, int* answer, bool* errorCode) {
+Element* createElement(void) {
+    return calloc(1, sizeof(Element));
+}
+
+char top(Element* element) {
+    return element->value;
+}
+
+void setTop(Element** element, char value) {
+    (*element)->value = value;
+}
+
+void setToNextElement(Element** element, Element* next) {
+    (*element)->next = next;
+}
+
+void setNextElement(Element** element, Element* anotherElement) {
+    *element = anotherElement->next;
+}
+
+int performOperation(char str, int operand1, int operand2, bool* errorCode) {
     if (str == '+') {
-        element->next->value += element->value;
+        return operand1 + operand2;
     }
     if (str == '-') {
-        element->next->value -= element->value;
+        return operand1 - operand2;
     }
     if (str == '/') {
-        if (element->value == 0) {
+        if (operand2 == 0) {
             *errorCode = false;
-            return;
+            return 0;
         }
-        element->next->value /= element->value;
+        return operand1 / operand2;
     }
     if (str == '*') {
-        element->next->value *= element->value;
+        return operand1 * operand2;
     }
-    *answer = element->next->value;
+    *errorCode = false;
+    return 0;
 }
 
-void processNumbers(Element* element, char str[], int* answer, bool* errorCode) {
-    for (int i = 0; str[i] != '\0'; ++i) {
-        if (str[i] == '+' || str[i] == '-' || str[i] == '/' || str[i] == '*') {
-            performOperation(element, str[i], answer, errorCode);
-            pop(&element);
+int processNumbers(Element** element, bool* errorCode) {
+    if (*element == NULL) {
+        return 0;
+    }
+
+    char operatorChar = top(*element);
+    pop(element);
+
+    if (!(operatorChar == '+' || operatorChar == '-' || operatorChar == '/' || operatorChar == '*')) {
+        *errorCode = false;
+        return 0;
+    }
+
+    int operand1 = 0;
+    int operand2 = 0;
+
+    if (*element != NULL) {
+        char operandChar1 = top(*element);
+        if (operandChar1 == '+' || operandChar1 == '-' || operandChar1 == '/' || operandChar1 == '*') {
+            operand1 = processNumbers(element, errorCode);
         }
         else {
-            int number = (int)(str[i]) - '0';
-            push(&element, number, errorCode);
+            operand1 = operandChar1 - '0'; 
+            pop(element);
         }
     }
+
+    if (*element != NULL) {
+        char operandChar2 = top(*element);
+        if (operandChar2 == '+' || operandChar2 == '-' || operandChar2 == '/' || operandChar2 == '*') {
+            operand2 = processNumbers(element, errorCode);
+        }
+        else {
+            operand2 = operandChar2 - '0';
+            pop(element);
+        }
+    }
+
+    return performOperation(operatorChar, operand2, operand1, errorCode);
 }
 
-bool testStackOperations(void) {
-    bool errorCode = true;
-    int answer = 0;
+int solution(char str[], bool* errorCode) {
+    int size = 0;
+    for (int i = 0; str[i] != '\0'; ++i) {
+        size++;
+    }
     Element* element = NULL;
-    char str[20] = "96-12+*";
-    processNumbers(element, str, &answer, &errorCode);
-    return answer == 9 && errorCode == true;
+    for (int i = 0; i < size; ++i) {
+        push(&element, str[i], errorCode);
+        if (!*errorCode) {
+            return 0;
+        }
+    }
+    return processNumbers(&element, errorCode);
 }

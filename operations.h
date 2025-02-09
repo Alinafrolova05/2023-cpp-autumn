@@ -1,26 +1,24 @@
 #pragma once
 
-#ifndef POSTFIX_CALCULATOR
-#define POSTFIX_CALCULATOR
-
 #include <stdbool.h>
 
-// Forward declaration of the Element structure
+// Defines the structure.
 typedef struct Element Element;
 
-// Function to add an element to the stack
-void push(Element** head, int value, bool* errorCode);
+// Function to get the value of the top element in the stack.
+char top(Element* element);
 
-// Function to remove an element from the stack
-void pop(Element** head2);
+// Function to set the value of the top element in the stack.
+void setTop(Element** element, char value);
 
-// Function that performs one of the arithmetic operations
-void performOperation(Element* element1, char str, int* answer, bool* errorCode);
+// Function to set the next element of the current element to a given next element.
+void setToNextElement(Element** element, Element* next);
 
-// Function that either calls the "push" function or the "operation" function
-void processNumbers(Element* element1, char str[], int* answer, bool* errorCode);
+// Function to set another element to the next element of the current element.
+void setNextElement(Element** element, Element* anotherElement);
 
-// Function to test the correctness of the result
-bool testStackOperations(void);
+// Function to create a new element and return a pointer to it.
+Element* createElement(void);
 
-#endif
+// Returns the result of a calculation.
+int solution(char str[], bool* errorCode);
