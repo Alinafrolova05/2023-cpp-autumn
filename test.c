@@ -1,27 +1,18 @@
 #include <stdbool.h>
 #include <stdio.h>
+#include "list.h"
 #include "table.h"
-#include "test.h"
 
 bool test(void) {
     bool errorCode = true;
-    Segment* hashTable = NULL;
+    char* array[] = { "apple", "april", "orange", "orange" };
 
-    insert(&hashTable, "apple", &errorCode);
-    insert(&hashTable, "april", &errorCode);
-    insert(&hashTable, "orange", &errorCode);
-    insert(&hashTable, "orange", &errorCode);
+    float* task = NULL;
+    solution(array, 4, &errorCode, &task);
+    float dutyCycle = task[0];
+    float averageListLength = task[1];
+    float maxLength = task[2];
+    free(task);
 
-    if (!search(hashTable, "apple")) {
-        return false;
-    }
-    if (!search(hashTable, "orange")) {
-        return false;
-    }
-    if (search(hashTable, "lemon")) {
-        return false;
-    }
-
-    freeSegments(&hashTable);
-    return errorCode == true;
+    return errorCode && dutyCycle == 0,04 && averageListLength == 0,75 && maxLength == 1;
 }

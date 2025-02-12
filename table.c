@@ -1,148 +1,117 @@
 #define _CRT_SECURE_NO_WARNINGS
+#define HASH_TABLE 100
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
-#include <string.h>
 #include <stdbool.h>
-#include "list.h"
 #include "table.h"
+#include "hash.h"
+#include "list.h"
 
-typedef struct Element {
-    char* key;
-    int hash;
-    int count;
-    struct Element* next;
-} Element;
+int getSizeOfTable(void) {
+    return HASH_TABLE;
+}
 
 typedef struct Segment {
     Element* table;
-    struct Segment* next;
 } Segment;
 
-Element* getValue1(Segment* segment) {
-    return segment->table;
-}
-
-char* getValue2(Element* element) {
-    return element->key;
-}
-
-int getValue3(Element* element) {
-    return element->count;
-}
-
-Segment* getValue4(Segment* segment) {
-    return segment->next;
-}
-
-Element* getValue5(Element* element) {
-    return element->next;
-}
-
-char* myStrdup(char* str, bool* errorCode) {
-    if (str == NULL) return NULL;
-    size_t len = strlen(str) + 1;
-    char* copy = malloc(len);
-    if (copy) {
-        strcpy(copy, str);
-    }
-    else {
-        *errorCode = false;
-    }
-    return copy;
-}
-
-Segment* createSegment(bool* errorCode) {
-    Segment* hashTable = calloc(1, sizeof(Segment));
-    if (hashTable == NULL) {
+Segment* createHasnTable(bool* errorCode) {
+    Segment* segment = calloc(HASH_TABLE, sizeof(Segment));
+    if (segment == NULL) {
         *errorCode = false;
         return NULL;
     }
-    hashTable->table = NULL;
-    hashTable->next = NULL;
-    return hashTable;
+    return segment;
 }
 
-bool search(Segment* segment, char* key) {
+Element* search(Segment* segment, const char* key) {
     int index = getValueHash(key);
-    while (segment != NULL) {
-        if (segment->table != NULL && segment->table->hash == index) {
-            Element* current = segment->table;
-            while (current != NULL) {
-                if (strcmp(key, current->key) == 0) {
-                    current->count++;
-                    return true;
-                }
-                current = current->next;
-            }
-        }
-        segment = segment->next;
-    }
-    return false;
+    return searchValueOfElement(segment[index].table, key);
 }
 
-void insert(Segment** segment, char* key, bool* errorCode) {
-    if (search(*segment, key)) {
+void insert(Segment* segment, const char* key, bool* errorCode) {
+    Element* found = search(segment, key);
+    if (found) {
+        intcrValueCount(&found);
         return;
     }
-
     int index = getValueHash(key);
-    Element* element = malloc(sizeof(Element));
-    if (element == NULL) {
-        *errorCode = false;
-        return;
-    }
-
-    element->key = myStrdup(key, errorCode);
-    if (!(*errorCode)) {
-        free(element);
-        return;
-    }
-    element->count = 1;
-    element->hash = index;
-    element->next = NULL;
-
-    if (*segment == NULL) {
-        *segment = createSegment(errorCode);
-        if (!(*errorCode)) {
-            free(element->key);
-            free(element);
-            return;
-        }
-    }
-
-    Segment* current = *segment;
-    while (current != NULL) {
-        if (current->table == NULL || current->table->hash >= index) {
-            element->next = current->table;
-            current->table = element;
-            return;
-        }
-        current = current->next;
-    }
-
-    Segment* newTable = createSegment(errorCode);
-    if (!(*errorCode)) {
-        free(element->key);
-        free(element);
-        return;
-    }
-    newTable->table = element;
-    newTable->next = *segment;
-    *segment = newTable;
+    push(&(segment[index].table), key, errorCode);
 }
 
-void freeSegments(Segment** segment) {
-    while (*segment != NULL) {
-        Segment* temp = *segment;
-        while (temp->table != NULL) {
-            Element* element = temp->table;
-            temp->table = temp->table->next;
-            free(element->key);
-            free(element);
-        }
-        *segment = (*segment)->next;
-        free(temp);
+void freeSegments(Segment* segment) {
+    for (int i = 0; i < HASH_TABLE; ++i) {
+        Element* current = segment[i].table;
+        pop(&current);
     }
+    free(segment);
+}
+
+void printTable(Segment* segment) {
+    for (int i = 0; i < HASH_TABLE; ++i) {
+        printElements(segment[i].table);
+    }
+}
+
+float* calculate(Segment* segment, int arraySize) {
+    float* task = malloc(3 * sizeof(float));
+    task[0] = (float)arraySize / HASH_TABLE;
+
+    int length = 0;
+    int max = 0;
+    for (int i = 0; i < HASH_TABLE; ++i) {
+        Element* current = segment[i].table;
+        int len = 0;
+        while (current != NULL) {
+            len++;
+            setNextElement(&current);
+        }
+        length += len;
+        if (len > max) {
+            max = len;
+        }
+    }
+
+    if (arraySize > 0) {
+        task[1] = (float)length / arraySize;
+    }
+    task[2] = (float)max;
+    return task;
+}
+
+Segment* fillOutTheTable(const char* array[], int arraySize, bool* errorCode, float** task) {
+    Segment* segment = createHasnTable(errorCode);
+    if (!*errorCode) {
+        return NULL;
+    }
+    for (int i = 0; i < arraySize; ++i) {
+        insert(segment, array[i], errorCode);
+        if (!*errorCode) {
+            freeSegments(segment);
+            return NULL;
+        }
+
+        if (!search(segment, array[i])) {
+            *errorCode = false;
+            freeSegments(segment);
+            return NULL;
+        }
+    }
+    *task = calculate(segment, arraySize);
+    return segment;
+}
+
+void solution(char* array[], int arraySize, bool* errorCode, float** task) {
+    freeSegments(fillOutTheTable(array, arraySize, errorCode, task));
+}
+
+void printSolution(char* array[], int arraySize, bool* errorCode, float** task) {
+    Segment* segment = fillOutTheTable(array, arraySize, errorCode, task);
+    printTable(segment);
+    printf("\ndutyCycle: %.2f\n", (*task)[0]);
+    printf("averageListLength: %.2f\n", (*task)[1]);
+    printf("maxLength: %.0f", (*task)[2]);
+    freeSegments(segment);
 }

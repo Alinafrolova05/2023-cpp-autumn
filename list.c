@@ -1,13 +1,77 @@
-#include "list.h"
+#define _CRT_SECURE_NO_WARNINGS
 
-int hash(char* key) {
-    int hashIndex = 0;
-    while (key[hashIndex] != '\0') {
-        hashIndex++;
+#include <stdio.h>
+#include "list.h"
+#include <malloc.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+
+typedef struct Element {
+    char* key;
+    int count;
+    struct Element* next;
+} Element;
+
+char* myStrdup(char* str, bool* errorCode) {
+    if (str == NULL) return NULL;
+    size_t len = strlen(str) + 1;
+    char* copy = malloc(len);
+    if (copy) {
+        strcpy(copy, str);
     }
-    return hashIndex;
+    else {
+        *errorCode = false;
+    }
+    return copy;
 }
 
-int getValueHash(char* key) {
-    return hash(key);
+void setNextElement(Element** element) {
+    *element = (*element)->next;
+}
+
+void intcrValueCount(Element** element) {
+    (*element)->count++;
+}
+
+Element* createElement(void) {
+    return calloc(1, sizeof(Element));
+}
+
+void push(Element** head, char* value, bool* errorCode) {
+    Element* element = createElement();
+    if (element == NULL) {
+        *errorCode = false;
+        return;
+    }
+    element->key = myStrdup(value, errorCode);
+    element->count = 1;
+    element->next = *head;
+    *head = element;
+}
+
+void pop(Element** element) {
+    if (*element == NULL) return;
+    Element* tmp = *element;
+    *element = tmp->next;
+    free(tmp->key);
+    free(tmp);
+    return;
+}
+
+void printElements(Element* element) {
+    while (element != NULL) {
+        printf("%s   %d\n", element->key, element->count);
+        element = element->next;
+    }
+}
+
+Element* searchValueOfElement(Element* element, char* value) {
+    while (element != NULL) {
+        if (strcmp(value, element->key) == 0) {
+            return element;
+        }
+        element = element->next;
+    }
+    return element;
 }

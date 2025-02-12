@@ -15,16 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Hash_table.c">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="table.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
-    <ClCompile Include="list.c">
+    <ClCompile Include="hash.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
     <ClCompile Include="test.c">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
+    <ClCompile Include="hashTable.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="list.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,6 +41,9 @@
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
     <ClInclude Include="test.h">
+      <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
+    <ClInclude Include="hash.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
     <ClInclude Include="list.h">
