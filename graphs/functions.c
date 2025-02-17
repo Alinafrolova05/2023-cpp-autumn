@@ -1,8 +1,9 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include "functions.h"
 #include <stdlib.h>
 
-#define _CRT_SECURE_NO_WARNINGS
 #define INT_MAX 100
 
 void push(Graphs** element1, int number, int weight) {
