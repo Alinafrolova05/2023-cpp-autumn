@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\graphs"
   ],
-  "SelectedNode": "\\graphs.sln",
+  "SelectedNode": "\\graphs\\graphs.c",
   "PreviewInSolutionExplorer": false
 }
