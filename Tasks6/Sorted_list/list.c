@@ -4,17 +4,18 @@
 #include <stdlib.h>
 #include "list.h"
 
-struct List {
-    struct Element* front;
-    struct Element* back;
-};
+typedef struct Element {
+    int value;
+    struct Element* next;
+} Element;
 
-void scanfChecker(int* add) {
-    int result = scanf("%d", add);
-    if (result != 1) {
-        printf("\nInput wrong!");
-        return -1;
-    }
+int getElementValue(Element* element) {
+    return element->value;
+}
+
+Element* elementNext(Element* element) {
+    if (element == NULL || element->next == NULL) return NULL;
+    return element->next;
 }
 
 void pop(Element** head) {
@@ -24,50 +25,56 @@ void pop(Element** head) {
 }
 
 void addElement(Element** head, int value, bool* errorCode) {
-    Element* element = calloc(1, sizeof(Element)); // Выделяем память для нового элемента
-    if (element == NULL) { // Проверка на успешное выделение памяти
-        *errorCode = false; // Устанавливаем код ошибки
+    Element* element = calloc(1, sizeof(Element));
+    if (element == NULL) {
+        *errorCode = false;
         return;
     }
 
-    element->value = value; // Устанавливаем значение нового элемента
+    element->value = value;
 
-    // Если список пуст или новое значение меньше или равно значению первого элемента
     if (*head == NULL || (*head)->value >= value) {
-        element->next = *head; // Устанавливаем следующий элемент для нового элемента
-        *head = element; // Обновляем указатель на первый элемент
+        element->next = *head;
+        *head = element;
         return;
     }
 
-    Element* current = *head; // Указатель для навигации по списку
-
-    // Ищем место для вставки нового элемента
+    Element* current = *head;
     while (current->next != NULL && current->next->value < value) {
-        current = current->next; // Перемещаем указатель на следующий элемент
+        current = current->next;
     }
 
-    // Вставляем новый элемент в список
-    element->next = current->next; // Устанавливаем следующий элемент для нового элемента
-    current->next = element; // Вставляем новый элемент в список
+    element->next = current->next;
+    current->next = element;
 }
 
-void deleteElement(Element* head, int value) {
-    if (head == NULL || head->value < value) {
+void deleteElement(Element** head, int value) {
+    if (head == NULL || *head == NULL) {
         return;
     }
-    Element* index = head;
-    while (head->next->value != value) {
-        if (head->next == NULL || head->next->value < value) {
-            head = index;
-            return;
-        }
-        head = head->next;
+
+    Element* current = *head;
+    Element* previous = NULL;
+
+    while (current != NULL && current->value < value) {
+        previous = current;
+        current = current->next;
     }
-    Element* deleting = head->next;
-    head->next = head->next->next;
-    free(deleting);
-    head = index;
+
+    if (current == NULL || current->value != value) {
+        return;
+    }
+
+    if (previous == NULL) {
+        *head = current->next;
+    }
+    else {
+        previous->next = current->next;
+    }
+
+    free(current);
 }
+
 
 void freeList(Element** element) {
     while (*element != NULL) {
