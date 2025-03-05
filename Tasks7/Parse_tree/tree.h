@@ -1,35 +1,22 @@
-#ifndef TREE
+#pragma once
 
-typedef struct Element {
-    char value;
-    int result;
-    struct Element* leftChild;
-    struct Element* rightChild;
-} Element;
+typedef struct Element Element;
 
-typedef struct Stack {
-    Element* element;
-    struct Stack* next;
-} Stack;
+typedef struct Stack Stack;
 
+// Puts on the stack.
 void push(Stack** head, Element* element);
-//puts on the stack
 
+// Removes the top of the stack.
 Element* pop(Stack** head);
-//removes the top of the stack
 
+// Prints tree.
 void print(Element* element);
-//prints tree
 
-void count(Element* element);
-//calculates the value of an expression
+void printTree(char* str);
 
-int precedence(char value);
-//produces different numbers depending on the operator
+// Builds a tree.
+Stack* tree(char* str);
 
-void tree(char* str, Stack** numberStack, Stack** operationStack);
-//builds a tree
-
-void printAlgorithm(void);
-
-#endif
+//
+int resultOfCounting(char* str);

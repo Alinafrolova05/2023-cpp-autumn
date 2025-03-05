@@ -1,10 +1,33 @@
 #include "tree.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <malloc.h>
 #include <ctype.h>
+
+typedef struct Element {
+    char value;
+    int result;
+    struct Element* leftChild;
+    struct Element* rightChild;
+} Element;
+
+typedef struct Stack {
+    Element* element;
+    struct Stack* next;
+} Stack;
+
+void freeTree(Element* element) {
+    if (element == NULL) return;
+    freeTree(element->leftChild);
+    freeTree(element->rightChild);
+    free(element);
+}
 
 void push(Stack** head, Element* element) {
     Stack* newStackNode = (Stack*)calloc(1, sizeof(Stack));
+    if (newStackNode == NULL) {
+        return;
+    }
     newStackNode->element = element;
     newStackNode->next = *head;
     *head = newStackNode;
@@ -32,7 +55,7 @@ void print(Element* element) {
     }
 }
 
-void count(Element* element) {
+int count(Element* element) {
     if (element == NULL) return;
 
     count(element->leftChild);
@@ -55,75 +78,62 @@ void count(Element* element) {
             exit(EXIT_FAILURE);
         }
     }
+    return element->result;
 }
 
-int precedence(char value) {
-    if (value == '+' || value == '-') return 1;
-    if (value == '*' || value == '/') return 2;
-    return 0;
-}
-
-void tree(char* str, Stack** numberStack, Stack** operationStack) {
+Stack* tree(char* str) {
+    Stack* stream = NULL;
     for (int i = 0; str[i] != '\0'; ++i) {
         char currentChar = str[i];
-
         if (isspace(currentChar)) {
             continue;
         }
-
         if (isdigit(currentChar)) {
             Element* newNode = (Element*)calloc(1, sizeof(Element));
             newNode->value = currentChar;
             newNode->result = currentChar - '0';
-            push(numberStack, newNode);
-        }
-        else if (currentChar == '(') {
+            push(&stream, newNode);
+        } else if (currentChar == '(') {
             Element* newNode = (Element*)calloc(1, sizeof(Element));
             newNode->value = currentChar;
-            push(operationStack, newNode);
-        }
-        else if (currentChar == ')') {
-            while (*operationStack != NULL && (*operationStack)->element->value != '(') {
-                Element* operatorNode = pop(operationStack);
-                operatorNode->rightChild = pop(numberStack);
-                operatorNode->leftChild = pop(numberStack);
-                push(numberStack, operatorNode);
+            push(&stream, newNode);
+        } else if (currentChar == ')') {
+            while (stream != NULL && stream->element->value != '(') {
+                Element* leftChild = pop(&stream);
+                Element* rightChild = pop(&stream);
+                Element* operatorNode = pop(&stream);
+                
+                operatorNode->leftChild = leftChild;
+                operatorNode->rightChild = rightChild;
+
+                push(&stream, operatorNode);
             }
-            pop(operationStack);
-        }
-        else {
-            while (*operationStack != NULL && precedence((*operationStack)->element->value) >= precedence(currentChar)) {
-                Element* operatorNode = pop(operationStack);
-                operatorNode->rightChild = pop(numberStack);
-                operatorNode->leftChild = pop(numberStack);
-                push(numberStack, operatorNode);
-            }
-            Element* newNode = (Element*)calloc(1, sizeof(Element));
-            newNode->value = currentChar;
-            push(operationStack, newNode);
         }
     }
+    return stream;
+}
 
-    while (*operationStack != NULL) {
-        Element* operatorNode = pop(operationStack);
-        operatorNode->rightChild = pop(numberStack);
-        operatorNode->leftChild = pop(numberStack);
-        push(numberStack, operatorNode);
+void printTree(char* str) {
+    Stack* stream = tree(str);
+    Stack* stack = NULL;
+    Element* current = stream != NULL ? pop(&stream) : NULL;
+
+    while (current != NULL || stack != NULL) {
+        while (current != NULL) {
+            push(&stack, current);
+            current = current->leftChild;
+        }
+        if (stack != NULL) {
+            current = pop(&stack);
+            printf("%c ", current->value);
+            current = current->rightChild;
+        }
     }
 }
 
-void printAlgorithm(void) {
-    printf("Enter the string: ");
-    char str[256] = { 0 };
-    fgets(str, 256, stdin);
-
-    Stack* numberStack = NULL;
-    Stack* operationStack = NULL;
-
-    tree(str, &numberStack, &operationStack);
-    Element* root = numberStack->element;
-    count(root);
-
-    print(pop(&numberStack));
-    printf("\nValue is: %d", root->result);
+int resultOfCounting(char* str) {
+    printTree(str);
+    Stack* treeStack = tree(str);
+    Element* element = pop(&treeStack);
+    return count(element);
 }
