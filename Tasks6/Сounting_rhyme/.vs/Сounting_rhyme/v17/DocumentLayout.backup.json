@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0E3A02F8-5D99-4253-9BAD-474416B9D4E6}|\u0421ounting_rhyme.vcxproj|C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\\u0421ounting_rhyme.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{0E3A02F8-5D99-4253-9BAD-474416B9D4E6}|\u0421ounting_rhyme.vcxproj|solutionrelative:\u0421ounting_rhyme.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{0E3A02F8-5D99-4253-9BAD-474416B9D4E6}|\u0421ounting_rhyme.vcxproj|C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{0E3A02F8-5D99-4253-9BAD-474416B9D4E6}|\u0421ounting_rhyme.vcxproj|solutionrelative:test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0E3A02F8-5D99-4253-9BAD-474416B9D4E6}|\u0421ounting_rhyme.vcxproj|C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\test.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{0E3A02F8-5D99-4253-9BAD-474416B9D4E6}|\u0421ounting_rhyme.vcxproj|solutionrelative:test.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0E3A02F8-5D99-4253-9BAD-474416B9D4E6}|\u0421ounting_rhyme.vcxproj|C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{0E3A02F8-5D99-4253-9BAD-474416B9D4E6}|\u0421ounting_rhyme.vcxproj|solutionrelative:test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0E3A02F8-5D99-4253-9BAD-474416B9D4E6}|\u0421ounting_rhyme.vcxproj|C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\stack.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -29,6 +25,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{0E3A02F8-5D99-4253-9BAD-474416B9D4E6}|\u0421ounting_rhyme.vcxproj|C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\solution.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{0E3A02F8-5D99-4253-9BAD-474416B9D4E6}|\u0421ounting_rhyme.vcxproj|solutionrelative:solution.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0E3A02F8-5D99-4253-9BAD-474416B9D4E6}|\u0421ounting_rhyme.vcxproj|C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\\u0421ounting_rhyme.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{0E3A02F8-5D99-4253-9BAD-474416B9D4E6}|\u0421ounting_rhyme.vcxproj|solutionrelative:\u0421ounting_rhyme.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -74,26 +74,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "solution.h",
               "DocumentMoniker": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\solution.h",
               "RelativeDocumentMoniker": "solution.h",
               "ToolTip": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\solution.h",
               "RelativeToolTip": "solution.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-03-04T22:54:37.509Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "solution.c",
               "DocumentMoniker": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\solution.c",
               "RelativeDocumentMoniker": "solution.c",
               "ToolTip": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\solution.c",
               "RelativeToolTip": "solution.c",
-              "ViewState": "AgIAACYAAAAAAAAAAAAgwD8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2025-03-04T22:51:46.344Z",
               "EditorCaption": ""
@@ -106,59 +106,59 @@
               "RelativeDocumentMoniker": "test.h",
               "ToolTip": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\test.h",
               "RelativeToolTip": "test.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-03-04T19:49:06.028Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "test.c",
               "DocumentMoniker": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\test.c",
               "RelativeDocumentMoniker": "test.c",
-              "ToolTip": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\test.c",
-              "RelativeToolTip": "test.c",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\test.c*",
+              "RelativeToolTip": "test.c*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2025-03-04T19:48:56.746Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "stack.h",
               "DocumentMoniker": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\stack.h",
               "RelativeDocumentMoniker": "stack.h",
               "ToolTip": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\stack.h",
               "RelativeToolTip": "stack.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-12-22T03:27:53.235Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "stack.c",
               "DocumentMoniker": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\stack.c",
               "RelativeDocumentMoniker": "stack.c",
               "ToolTip": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\stack.c",
               "RelativeToolTip": "stack.c",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2024-12-22T03:27:48.647Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "\u0421ounting_rhyme.c",
               "DocumentMoniker": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\\u0421ounting_rhyme.c",
               "RelativeDocumentMoniker": "\u0421ounting_rhyme.c",
               "ToolTip": "C:\\Users\\user\\source\\2023-cpp-autumn\\Tasks6\\\u0421ounting_rhyme\\\u0421ounting_rhyme.c",
               "RelativeToolTip": "\u0421ounting_rhyme.c",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAgwAIAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2024-12-22T03:27:45.083Z",
               "EditorCaption": ""

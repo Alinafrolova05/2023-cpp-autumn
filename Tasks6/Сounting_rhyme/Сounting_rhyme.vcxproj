@@ -127,11 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="functions.c" />
+    <ClCompile Include="solution.c" />
+    <ClCompile Include="stack.c" />
+    <ClCompile Include="test.c" />
     <ClCompile Include="Сounting_rhyme.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="functions.h" />
+    <ClInclude Include="solution.h" />
+    <ClInclude Include="stack.h" />
+    <ClInclude Include="test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
