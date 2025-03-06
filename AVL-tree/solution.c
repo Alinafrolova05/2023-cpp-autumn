@@ -4,19 +4,29 @@
 #include <stdlib.h>
 #include <string.h>
 #include "tree.h"
-#include "tree.h"
 
-struct Node {
-    const char* key;
-    const char* value;
-    int balance;
-    struct Node* parent;
-    struct Node* left;
-    struct Node* right;
-};
+void printFoundOrNot(Dictionary** dictionary, char keyToAdd[]) {
+    if (search(dictionary, keyToAdd) == NULL) {
+        printf("\nThere is no such key in the dictionary.\n");
+    }
+    else {
+        printf("\nThere is such a key in the dictionary.\n");
+    }
+}
+
+void writeLine(char line[], bool* error) {
+    if (fgets(line, sizeof(line), stdin) != NULL) {
+        if (line[strcspn(line, "\n")] == '\0') {
+            while (getchar() != '\n');
+            *error = false;
+            return;
+        }
+        line[strcspn(line, "\n")] = 0;
+    }
+}
 
 void solution(void) {
-    Node* root = NULL;
+    Dictionary* dictionary = NULL;
     bool errorCode = true;
     int answer = -1;
 
@@ -31,86 +41,65 @@ void solution(void) {
         else if (answer == 1) {
             char keyToAdd[256] = "";
             printf("\nWrite the key: ");
-            if (fgets(keyToAdd, sizeof(keyToAdd), stdin) != NULL) {
-                if (keyToAdd[strcspn(keyToAdd, "\n")] == '\0') {
-                    while (getchar() != '\n');
-                    printf("Input was too long for the key, please try again.\n");
-                    continue;
-                }
-                keyToAdd[strcspn(keyToAdd, "\n")] = 0;
+            bool error = true;
+            writeLine(keyToAdd, &error);
+            if (!error) {
+                printf("Input was too long for the key, please try again.\n");
+                continue;
             }
 
             char valueToAdd[256] = "";
             printf("\nWrite the key value: ");
-            if (fgets(valueToAdd, sizeof(valueToAdd), stdin) != NULL) {
-                if (valueToAdd[strcspn(valueToAdd, "\n")] == '\0') {
-                    while (getchar() != '\n');
-                    printf("Input was too long for the value, please try again.\n");
-                    continue;
-                }
-                valueToAdd[strcspn(valueToAdd, "\n")] = 0;
+            writeLine(keyToAdd, &error);
+            if (!error) {
+                printf("Input was too long for the key, please try again.\n");
+                continue;
             }
-
-            insert(&root, keyToAdd, valueToAdd, NULL);
+            
+            insert(&dictionary, keyToAdd, valueToAdd, NULL);
         }
         else if (answer == 2) {
             char keyToAdd[256] = "";
             printf("\nSpecify the key: ");
-            if (fgets(keyToAdd, sizeof(keyToAdd), stdin) != NULL) {
-                if (keyToAdd[strcspn(keyToAdd, "\n")] == '\0') {
-                    while (getchar() != '\n');
-                    printf("Input was too long for the key, please try again.\n");
-                    continue;
-                }
-                keyToAdd[strcspn(keyToAdd, "\n")] = 0;
+            bool error = true;
+            writeLine(keyToAdd, &error);
+            if (!error) {
+                printf("Input was too long for the key, please try again.\n");
+                continue;
             }
 
-            Node* found = search(&root, keyToAdd);
+            Dictionary* found = search(&dictionary, keyToAdd);
             if (found == NULL) {
                 printf("\nThere is no such key in the dictionary.\n");
             } else {
-                printf("\nValue: %s\n", found->value);
+                printf("\nValue: %s\n", getValue(found));
             }
         } else if (answer == 3) {
             char keyToAdd[256] = "";
             printf("\nSpecify the key: ");
-            if (fgets(keyToAdd, sizeof(keyToAdd), stdin) != NULL) {
-                if (keyToAdd[strcspn(keyToAdd, "\n")] == '\0') {
-                    while (getchar() != '\n');
-                    printf("Input was too long for the key, please try again.\n");
-                    continue;
-                }
-                keyToAdd[strcspn(keyToAdd, "\n")] = 0;
+            bool error = true;
+            writeLine(keyToAdd, &error);
+            if (!error) {
+                printf("Input was too long for the key, please try again.\n");
+                continue;
             }
 
-            Node* found = search(&root, keyToAdd);
-            if (found == NULL) {
-                printf("\nThere is no such key in the dictionary.\n");
-            } else {
-                printf("\nThere is such a key in the dictionary.\n");
-            }
+            printFoundOrNot(&dictionary, keyToAdd);
         } else if (answer == 4) {
             char keyToAdd[256] = "";
             printf("\nSpecify the key: ");
-            if (fgets(keyToAdd, sizeof(keyToAdd), stdin) != NULL) {
-                if (keyToAdd[strcspn(keyToAdd, "\n")] == '\0') {
-                    while (getchar() != '\n');
-                    printf("Input was too long for the key, please try again.\n");
-                    continue;
-                }
-                keyToAdd[strcspn(keyToAdd, "\n")] = 0;
+            bool error = true;
+            writeLine(keyToAdd, &error);
+            if (!error) {
+                printf("Input was too long for the key, please try again.\n");
+                continue;
             }
 
-            if (search(&root, keyToAdd) == NULL) {
-                printf("\nThere is no such key in the dictionary.\n");
-            } else {
-                deleteElement(&root, keyToAdd, NULL);
-                printf("\nThe value and key have been deleted.\n");
-            }
+            printFoundOrNot(&dictionary, keyToAdd);
         } else {
             printf("\nInput wrong!");
             break;
         }
     }
-    freeTree(&root);
+    freeTree(&dictionary);
 }

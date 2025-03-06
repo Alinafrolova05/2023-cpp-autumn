@@ -1,20 +1,10 @@
 #include <stdio.h>
-#include <malloc.h>
 #include <time.h>
 #include "tree.h"
 
-struct Node {
-    const char* key;
-    const char* value;
-    int balance;
-    struct Node* parent;
-    struct Node* left;
-    struct Node* right;
-};
-
 bool testRotateLeft(void) {
     bool errorCode = true;
-    Node* root = NULL;
+    Dictionary* dictionary = NULL;
 
     const char* keys[] = { "i", "e", "d", "f", "y" };
     const char* values[] = { "val1", "val2", "val3", "val4", "val5" };
@@ -26,21 +16,21 @@ bool testRotateLeft(void) {
           (f)(0)                    (f)(0)  (y)(0)               (a)(0)  (f)(0)
     */
     for (int i = 0; i < 5; ++i) {
-        root = insert(&root, keys[i], values[i], &errorCode);
+        dictionary = insert(&dictionary, keys[i], values[i], &errorCode);
     }
 
-    if (!(root->balance == -1 && root->right->balance == 0 && root->left->balance == 0
-        && root->left->left->balance == 0 && root->left->right->balance == 0)) {
+    if (!(getBalance(dictionary) == -1 && getBalance(getRightChild(dictionary)) == 0 && getBalance(getLeftChild(dictionary)) == 0
+        && getBalance(getLeftChild(getLeftChild(dictionary))) == 0 && getBalance(getRightChild(getLeftChild(dictionary))) == 0)) {
         errorCode = false;
     }
 
-    freeTree(&root);
+    freeTree(&dictionary);
     return errorCode;
 }
 
 bool testRotateRight(void) {
     bool errorCode = true;
-    Node* root = NULL;
+    Dictionary* dictionary = NULL;
 
     const char* keys[] = { "4", "2", "5", "3", "1" };
     const char* values[] = { "val1", "val2", "val3", "val4", "val5" };
@@ -52,21 +42,22 @@ bool testRotateRight(void) {
             (3)(0)            (1)(0)  (3)(0)                                 (3)(0)  (5)(0)
     */
     for (int i = 0; i < 5; ++i) {
-        root = insert(&root, keys[i], values[i], &errorCode);
+        dictionary = insert(&dictionary, keys[i], values[i], &errorCode);
     }
 
-    if (!(root->balance == 1 && root->left->balance == 0 && root->right->balance == 0
-        && root->right->right->balance == 0 && root->right->left->balance == 0)) {
+    if (!(getBalance(dictionary) == 1 && getBalance(getLeftChild(dictionary)) == 0 && getBalance(getRightChild(dictionary)) == 0
+        && getBalance(getRightChild(getRightChild(dictionary))) == 0
+        && getBalance(getLeftChild(getRightChild(dictionary))) == 0)) {
         errorCode = false;
     }
 
-    freeTree(&root);
+    freeTree(&dictionary);
     return errorCode;
 }
 
 bool testBigRotateLeft(void) {
     bool errorCode = true;
-    Node* root = NULL;
+    Dictionary* dictionary = NULL;
 
     const char* keys[] = { "c", "e", "d" };
     const char* values[] = { "val1", "val2", "val3" };
@@ -78,20 +69,20 @@ bool testBigRotateLeft(void) {
           d(0)
     */
     for (int i = 0; i < 3; ++i) {
-        root = insert(&root, keys[i], values[i], &errorCode);
+        dictionary = insert(&dictionary, keys[i], values[i], &errorCode);
     }
 
-    if (!(root->balance == 0 && root->right->balance == 0 && root->left->balance == 0)) {
+    if (!(getBalance(dictionary) == 0 && getBalance(getLeftChild(dictionary)) == 0 && getBalance(getRightChild(dictionary)) == 0)) {
         errorCode = false;
     }
 
-    freeTree(&root);
+    freeTree(&dictionary);
     return errorCode;
 }
 
 bool testBigRotateRight(void) {
     bool errorCode = true;
-    Node* root = NULL;
+    Dictionary* dictionary = NULL;
 
     const char* keys[] = { "t", "h", "i" };
     const char* values[] = { "val1", "val2", "val3" };
@@ -103,60 +94,60 @@ bool testBigRotateRight(void) {
              i(0)
     */
     for (int i = 0; i < 3; ++i) {
-        root = insert(&root, keys[i], values[i], &errorCode);
+        dictionary = insert(&dictionary, keys[i], values[i], &errorCode);
     }
 
-    if (!(root->balance == 0 && root->right->balance == 0 && root->left->balance == 0)) {
+    if (!(getBalance(dictionary) == 0 && getBalance(getLeftChild(dictionary)) == 0 && getBalance(getRightChild(dictionary)) == 0)) {
         errorCode = false;
     }
 
-    freeTree(&root);
+    freeTree(&dictionary);
     return errorCode;
 }
 
 bool testRandomInsertions(void) {
     bool errorCode = true;
-    Node* root = NULL;
+    Dictionary* dictionary = NULL;
     srand((unsigned int)time(NULL));
 
     for (size_t i = 0; i < 1000000; ++i) {
         char* key = (char)('a' + (rand() % 26));
         char* value = (char)('a' + (rand() % 26));
 
-        root = insert(&root, (const char*)&key, (const char*)&value, &errorCode);
+        dictionary = insert(&dictionary, (const char*)&key, (const char*)&value, &errorCode);
 
-        Node* node = search(&root, (const char*)&key);
+        Dictionary* found = search(&dictionary, (const char*)&key);
 
-        if (node == NULL || node->balance < -1 || node->balance > 1) {
+        if (found == NULL || getBalance(found) < -1 || getBalance(found) > 1) {
             errorCode = false;
         }
     }
 
-    freeTree(&root);
+    freeTree(&dictionary);
     return errorCode;
 }
 
 bool testOtherFunctions(void) {
     bool errorCode = true;
-    Node* root = NULL;
+    Dictionary* dictionary = NULL;
 
     const char* keys[] = { "z", "n", "k", "m", "a" };
     const char* values[] = { "val1", "val2", "val3", "val4", "val5" };
 
     for (int i = 0; i < 5; ++i) {
-        root = insert(&root, keys[i], values[i], &errorCode);
+        dictionary = insert(&dictionary, keys[i], values[i], &errorCode);
     }
 
-    if (!search(&root, "m")) {
+    if (!search(&dictionary, "m")) {
         errorCode = false;
     }
-    deleteElement(&root, "m", &errorCode);
+    deleteElement(&dictionary, "m", &errorCode);
 
-    if (search(&root, "m")) {
+    if (search(&dictionary, "m")) {
         errorCode = false;
     }
 
-    freeTree(&root);
+    freeTree(&dictionary);
     return errorCode;
 }
 
@@ -176,4 +167,6 @@ bool test(void) {
     if (!testRandomInsertions()) {
         return false;
     }
+
+    return true;
 }
