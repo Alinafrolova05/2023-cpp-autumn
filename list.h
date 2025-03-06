@@ -5,8 +5,12 @@
 // Defines the structure.
 typedef struct Element Element; 
 
+Element* createElement(void);
+//
+void setNextElement(Element** element);
+
 // Increments the count of a element.
-void intcrValueCount(Element** element);
+void incrementValueCount(Element* element);
 
 // Adds a new value to the head of the list.
 void push(Element** head, char* value, bool* errorCode);
@@ -18,4 +22,4 @@ void pop(Element** element);
 void printElements(Element* element);
 
 // Searches for a value in the list and returns the corresponding element.
-Element* searchValueOfElement(Element* element, char* value);
+Element* searchByValueOfElement(Element* element, char* value);

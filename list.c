@@ -30,8 +30,8 @@ void setNextElement(Element** element) {
     *element = (*element)->next;
 }
 
-void intcrValueCount(Element** element) {
-    (*element)->count++;
+void incrementValueCount(Element* element) {
+    element->count++;
 }
 
 Element* createElement(void) {
@@ -45,7 +45,10 @@ void push(Element** head, char* value, bool* errorCode) {
         return;
     }
     element->key = myStrdup(value, errorCode);
-    element->count = 1;
+    if (element->key == NULL) {
+        *errorCode = false;
+        return;
+    }
     element->next = *head;
     *head = element;
 }
@@ -66,7 +69,7 @@ void printElements(Element* element) {
     }
 }
 
-Element* searchValueOfElement(Element* element, char* value) {
+Element* searchByValueOfElement(Element* element, char* value) {
     while (element != NULL) {
         if (strcmp(value, element->key) == 0) {
             return element;

@@ -130,14 +130,12 @@
     <ClCompile Include="hashTable.c" />
     <ClCompile Include="list.c" />
     <ClCompile Include="table.c" />
-    <ClCompile Include="hash.c" />
     <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="text.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="hash.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="table.h" />
     <ClInclude Include="test.h" />

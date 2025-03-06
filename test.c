@@ -7,12 +7,12 @@ bool test(void) {
     bool errorCode = true;
     char* array[] = { "apple", "april", "orange", "orange" };
 
-    float* task = NULL;
+    int* task = NULL;
     solution(array, 4, &errorCode, &task);
-    float dutyCycle = task[0];
-    float averageListLength = task[1];
-    float maxLength = task[2];
+    int dutyCycle = task[0];
+    int averageListLength = task[1];
+    int maxLength = task[2];
     free(task);
 
-    return errorCode && dutyCycle == 0,04 && averageListLength == 0,75 && maxLength == 1;
+    return errorCode && dutyCycle == 4 && averageListLength == 3 && maxLength == 1;
 }
