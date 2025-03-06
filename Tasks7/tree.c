@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "tree.h"
 #include <stdbool.h>
 #include <stdio.h>
@@ -5,18 +7,43 @@
 #include <malloc.h>
 #include <string.h>
 
-typedef struct Node {
+typedef struct Dictionary {
     int key;
     char* value;
-    struct Node* leftChild;
-    struct Node* rightChild;
-}Node;
+    struct Dictionary* leftChild;
+    struct Dictionary* rightChild;
+}Dictionary;
 
-char* getValue(Node* node) {
+char* createString(bool* errorCode) {
+    char* newStr = (char*)calloc(256, sizeof(char));
+    if (newStr == NULL) {
+        *errorCode = false;
+        return NULL;
+    }
+    return newStr;
+}
+
+char* myStrdup(const char* str, bool* errorCode) {
+    if (str == NULL) {
+        *errorCode = false;
+        return NULL;
+    }
+    size_t len = strlen(str) + 1;
+    char* copy = malloc(len);
+    if (copy) {
+        strcpy(copy, str);
+    }
+    else {
+        *errorCode = false;
+    }
+    return copy;
+}
+
+char* getValue(Dictionary* node) {
     return node->value;
 }
 
-Node* createNode(void) {
+Dictionary* createNode(void) {
     return NULL;
 }
 
@@ -28,7 +55,7 @@ void checkScanf(int* add, bool* errorCode) {
     }
 }
 
-Node* search(Node* root, int key) {
+Dictionary* search(Dictionary* root, int key) {
     while (root != NULL) {
         if (key < root->key) {
             root = root->leftChild;
@@ -43,9 +70,9 @@ Node* search(Node* root, int key) {
     return NULL;
 }
 
-void addElement(Node** root, int key, char* value, bool* errorCode) {
+void addElement(Dictionary** root, int key, char* value, bool* errorCode) {
     if (*root == NULL) {
-        Node* node = malloc(sizeof(Node));
+        Dictionary* node = malloc(sizeof(Dictionary));
         if (node == NULL) {
             *errorCode = false;
             return;
@@ -59,8 +86,8 @@ void addElement(Node** root, int key, char* value, bool* errorCode) {
         return;
     }
 
-    Node* parent = NULL;
-    Node* current = *root;
+    Dictionary* parent = NULL;
+    Dictionary* current = *root;
 
     while (current != NULL) {
         parent = current;
@@ -77,7 +104,7 @@ void addElement(Node** root, int key, char* value, bool* errorCode) {
         }
     }
 
-    Node* node = malloc(sizeof(Node));
+    Dictionary* node = malloc(sizeof(Dictionary));
     if (node == NULL) {
         *errorCode = false;
         return;
@@ -96,9 +123,9 @@ void addElement(Node** root, int key, char* value, bool* errorCode) {
     }
 }
 
-void deleteElement(Node** root, int key, bool* errorCode) {
-    Node* parent = NULL;
-    Node* node = *root;
+void deleteElement(Dictionary** root, int key, bool* errorCode) {
+    Dictionary* parent = NULL;
+    Dictionary* node = *root;
     
     while (node != NULL && node->key != key) {
         parent = node;
@@ -129,7 +156,7 @@ void deleteElement(Node** root, int key, bool* errorCode) {
         free(node);
     }
     else if (node->leftChild != NULL && node->rightChild != NULL) {
-        Node* minNode = node->rightChild;
+        Dictionary* minNode = node->rightChild;
         while (minNode->leftChild != NULL) {
             minNode = minNode->leftChild;
         }
@@ -141,7 +168,7 @@ void deleteElement(Node** root, int key, bool* errorCode) {
         deleteElement(&(minNode), minNode->key, errorCode);
     }
     else {
-        Node* child = NULL;
+        Dictionary* child = NULL;
         if (node->leftChild != NULL) {
             child = node->leftChild;
         }
@@ -164,7 +191,7 @@ void deleteElement(Node** root, int key, bool* errorCode) {
     }
 }
 
-void freeTree(Node* root) {
+void freeTree(Dictionary* root) {
     if (root == NULL) {
         return;
     }

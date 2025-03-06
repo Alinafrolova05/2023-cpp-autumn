@@ -24,6 +24,7 @@
     <ProjectGuid>{8813607c-ae34-4ce5-948b-e520b1a226ac}</ProjectGuid>
     <RootNamespace>SearchTree</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>searchTree</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -127,7 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="SearchTree.c" />
+    <ClCompile Include="searchTree.c" />
     <ClCompile Include="test.c" />
     <ClCompile Include="tree.c" />
   </ItemGroup>

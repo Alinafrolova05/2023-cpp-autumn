@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SearchTree.c">
+    <ClCompile Include="searchTree.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="tree.c">

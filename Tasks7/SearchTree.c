@@ -6,7 +6,7 @@
 #include "tree.h"
 #include "test.h"
 
-void menu(Node** root) {
+void solution(Dictionary** dictionary) {
     bool errorCode = true;
 
     int answer = -1;
@@ -22,25 +22,35 @@ void menu(Node** root) {
         else if (answer == 1) {
             printf("\nWrite the key: ");
             checkScanf("%d", &keyToAdd);
-            char* valueToAdd = calloc(256, sizeof(char));
+            char* valueToAdd = createString(&errorCode);
+            if (!errorCode) {
+                printf("Error!");
+                return;
+            }
             printf("\nWrite the key value with less than 20 characters: ");
             getchar();
             fgets(valueToAdd, 256, stdin);
-            addElement(root, keyToAdd, valueToAdd, &errorCode);
+            addElement(dictionary, keyToAdd, myStrdup(valueToAdd, &errorCode), &errorCode);
+            if (!errorCode) {
+                free(valueToAdd);
+                printf("Error!");
+                return;
+            }
+            free(valueToAdd);
         }
         else if (answer == 2) {
             printf("\nSpecify the key: ");
             checkScanf(&keyToAdd, &errorCode);
-            if (search(*root, keyToAdd) == NULL) {
+            if (search(*dictionary, keyToAdd) == NULL) {
                 printf("\nThere is no such key in the dictionary.");
             }
             else {
-                printf("\nValue: %s", getValue(search(*root, keyToAdd)));
+                printf("\nValue: %s", getValue(search(*dictionary, keyToAdd)));
             }
         } else if (answer == 3) {
             printf("\nSpecify the key: ");
             checkScanf(&keyToAdd, &errorCode);
-            if (search(*root, keyToAdd) == NULL) {
+            if (search(*dictionary, keyToAdd) == NULL) {
                 printf("\nThere is no such key in the dictionary.");
             } else {
                 printf("\nThere is such key in the dictionary.");
@@ -49,11 +59,11 @@ void menu(Node** root) {
         else if (answer == 4) {
             printf("\nSpecify the key: ");
             checkScanf(&keyToAdd, &errorCode);
-            if (search(*root, keyToAdd) == NULL) {
+            if (search(*dictionary, keyToAdd) == NULL) {
                 printf("\nThere is no such key in the dictionary.");
             }
             else {
-                deleteElement(root, keyToAdd, &errorCode);
+                deleteElement(dictionary, keyToAdd, &errorCode);
                 printf("\nThe value and key have been deleted.");
             }
         }
@@ -69,9 +79,8 @@ int main(void) {
         printf("Error!");
         return;
     }
-
-    Node* root = createNode();
-    menu(&root); 
-    freeTree(root);
+    Dictionary* dictionary = createNode();
+    solution(&dictionary);
+    freeTree(dictionary);
     return 0;
 }
