@@ -128,10 +128,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="parseTreeSolution.c" />
+    <ClCompile Include="stack.c" />
     <ClCompile Include="test.c" />
     <ClCompile Include="tree.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="stack.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="tree.h" />
   </ItemGroup>

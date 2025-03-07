@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include "stack.h"
 
 typedef struct Tree {
     char value;
@@ -11,36 +12,11 @@ typedef struct Tree {
     struct Tree* rightChild;
 } Tree;
 
-typedef struct Stack {
-    Tree* element;
-    struct Stack* next;
-} Stack;
-
 void freeTree(Tree** element) {
     if (*element == NULL) return;
     freeTree(&((*element)->leftChild));
     freeTree((&(*element)->rightChild));
     free(*element);
-}
-
-void push(Stack** head, Tree* element, bool* errorCode) {
-    Stack* newStackNode = (Stack*)calloc(1, sizeof(Stack));
-    if (newStackNode == NULL) {
-        *errorCode = false;
-        return;
-    }
-    newStackNode->element = element;
-    newStackNode->next = *head;
-    *head = newStackNode;
-}
-
-Tree* pop(Stack** head) {
-    if (*head == NULL) return NULL;
-    Stack* tmp = *head;
-    Tree* element = tmp->element;
-    *head = (*head)->next;
-    free(tmp);
-    return element;
 }
 
 Tree* createNode(char value, bool* errorCode) {

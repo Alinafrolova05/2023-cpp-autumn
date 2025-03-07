@@ -5,6 +5,8 @@
 // Defines the structure.
 typedef struct Tree Tree;
 
+void setValue(Tree** element, int value);
+
 // Prints tree.
 void printTree(Tree* element);
 
