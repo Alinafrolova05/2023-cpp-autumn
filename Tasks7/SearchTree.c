@@ -22,7 +22,7 @@ void solution(Dictionary** dictionary) {
         else if (answer == 1) {
             printf("\nWrite the key: ");
             checkScanf("%d", &keyToAdd);
-            char* valueToAdd = createString(&errorCode);
+            char valueToAdd[256] = "";
             if (!errorCode) {
                 printf("Error!");
                 return;
@@ -30,7 +30,7 @@ void solution(Dictionary** dictionary) {
             printf("\nWrite the key value with less than 20 characters: ");
             getchar();
             fgets(valueToAdd, 256, stdin);
-            addElement(dictionary, keyToAdd, myStrdup(valueToAdd, &errorCode), &errorCode);
+            addElement(dictionary, keyToAdd, valueToAdd, &errorCode);
             if (!errorCode) {
                 free(valueToAdd);
                 printf("Error!");

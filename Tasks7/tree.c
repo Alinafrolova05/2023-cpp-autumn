@@ -12,16 +12,7 @@ typedef struct Dictionary {
     char* value;
     struct Dictionary* leftChild;
     struct Dictionary* rightChild;
-}Dictionary;
-
-char* createString(bool* errorCode) {
-    char* newStr = (char*)calloc(256, sizeof(char));
-    if (newStr == NULL) {
-        *errorCode = false;
-        return NULL;
-    }
-    return newStr;
-}
+} Dictionary;
 
 char* myStrdup(const char* str, bool* errorCode) {
     if (str == NULL) {
@@ -71,6 +62,11 @@ Dictionary* search(Dictionary* root, int key) {
 }
 
 void addElement(Dictionary** root, int key, char* value, bool* errorCode) {
+    char* valueToAdd = myStrdup(value, &errorCode);
+    if (valueToAdd == NULL) {
+        *errorCode = false;
+        return;
+    }
     if (*root == NULL) {
         Dictionary* node = malloc(sizeof(Dictionary));
         if (node == NULL) {
@@ -79,7 +75,7 @@ void addElement(Dictionary** root, int key, char* value, bool* errorCode) {
         }
 
         node->key = key;
-        node->value = value;
+        node->value = valueToAdd;
         node->leftChild = NULL;
         node->rightChild = NULL;
         *root = node;
@@ -99,7 +95,7 @@ void addElement(Dictionary** root, int key, char* value, bool* errorCode) {
         }
         else {
             free(current->value);
-            current->value = value;
+            current->value = valueToAdd;
             return;
         }
     }
@@ -111,7 +107,7 @@ void addElement(Dictionary** root, int key, char* value, bool* errorCode) {
     }
 
     node->key = key;
-    node->value = value;
+    node->value = valueToAdd;
     node->leftChild = NULL;
     node->rightChild = NULL;
 
