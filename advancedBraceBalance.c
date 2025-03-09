@@ -5,15 +5,18 @@
 #include "stack.h"
 #include "test.h"
 
-void solution(void) {
+void printSolution(void) {
     bool errorCode = true;
     char str[256] = "";
-    char check[256] = "";
     printf("Enter string: ");
     fgets(str, 256, stdin);
-    processBraces(str, &errorCode, check);
-    printf("Incorrect parentheses: ");
-    puts(check);
+    char* answerString = solution(str, &errorCode);
+    if (!errorCode) {
+        printf("Error!!!");
+        return;
+    }
+    printf("Unbalanced parentheses: %s", answerString);
+    free(answerString);
 }
 
 int main(void)
@@ -22,6 +25,6 @@ int main(void)
         printf("Error!!!");
         return -1;
     }
-    solution();
+    printSolution();
     return 0;
 }
