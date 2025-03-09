@@ -1,11 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
-#include "list.h"
 #include <malloc.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
+#include "list.h"
 
 typedef struct Element {
     char* key;
@@ -78,20 +77,6 @@ void printElements(Element* element) {
         printf("%s   %d\n", element->key, element->count);
         element = element->next;
     }
-}
-
-Element* searchByValueOfElement3(HashTable* table, int sizeOfTable, char* value) {
-    printf("sss %s sss", value);
-    for (int i = 0; i < sizeOfTable; ++i) {
-        Element* current = getElement(table, i);
-        while (current != NULL) {
-            if (strcmp(value, current->key) == 0) {
-                return current;
-            }
-            current = current->next;
-        }
-    }
-    return NULL;
 }
 
 Element* searchByValueOfElement(Element* element, char* value) {

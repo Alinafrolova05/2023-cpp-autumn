@@ -27,6 +27,9 @@
     <ClCompile Include="list.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
+    <ClCompile Include="countTask.c">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="text.txt">
@@ -41,6 +44,9 @@
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
     <ClInclude Include="list.h">
+      <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
+    <ClInclude Include="countTask.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
   </ItemGroup>

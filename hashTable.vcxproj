@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="countTask.c" />
     <ClCompile Include="hashTable.c" />
     <ClCompile Include="list.c" />
     <ClCompile Include="table.c" />
@@ -136,6 +137,7 @@
     <Text Include="text.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="countTask.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="table.h" />
     <ClInclude Include="test.h" />

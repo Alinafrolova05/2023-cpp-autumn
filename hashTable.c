@@ -5,12 +5,13 @@
 #include <string.h>
 #include "test.h"
 #include "table.h"
+#include "countTask.h"
 
-void printSolution(char* array[], int arraySize, bool* errorCode, int** task) {
+void printSolution(char* array[], int arraySize, bool* errorCode, CountTask** task) {
     int sizeOfTable = printTable(array, arraySize, errorCode, task);
-    printf("\ndutyCycle: %d/%d\n", (*task)[0], sizeOfTable);
-    printf("averageListLength: %d/%d\n", (*task)[1], arraySize);
-    printf("maxLength: %d", (*task)[2]);
+    printf("\ndutyCycle: %d/%d\n", getArraySize(*task), sizeOfTable);
+    printf("averageListLength: %d/%d\n", getAverageListLength(*task), arraySize);
+    printf("maxLength: %d", getMaxListLength(*task));
 }
 
 void task(void) {
@@ -43,7 +44,7 @@ void task(void) {
     }
     fclose(file);
 
-    int* task = NULL;
+    CountTask* task = NULL;
     printSolution(array, i, &errorCode, &task);
     free(task);
 
