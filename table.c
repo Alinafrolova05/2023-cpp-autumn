@@ -3,11 +3,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <malloc.h>
 #include <stdbool.h>
 #include "table.h"
-#include "hash.h"
-#include "list.h"
 
 int getSizeOfTable(void) {
     return HASH_TABLE_SIZE;
@@ -16,6 +15,10 @@ int getSizeOfTable(void) {
 typedef struct HashTable {
     Element* table;
 } HashTable;
+
+Element* getElement(HashTable* hashTable, int i) {
+    return hashTable[i].table;
+}
 
 HashTable* createHashTable(int sizeOfTable, bool* errorCode) {
     HashTable* segment = calloc(sizeOfTable, sizeof(HashTable));
@@ -44,13 +47,44 @@ int hash(const char* key, int sizeOfTable) {
     return hashIndex % sizeOfTable;
 }
 
-Element* search(HashTable* segment, int sizeOfTable, const char* key) {
-    printf(" key ");
-    int index = hash(key, sizeOfTable);
-    return searchByValueOfElement(segment[index].table, key);
+Element* searchByValueOfElement2(HashTable* hashTable, int sizeOfTable, char* value) {
+    
+    for (int i = 0; i < sizeOfTable; ++i) {
+        //printf(" i = %d ", i);
+        Element* current = hashTable[i].table;
+        while (current != NULL) {
+            if (strcmp(value, getKey(current)) == 0) {
+                
+                return current;
+            }
+            current = getNextElement(current);
+        }
+    }
+    return NULL;
 }
 
+Element* search(HashTable* segment, int sizeOfTable, const char* key) {
+    int size = sizeOfTable;
+    while (size > 1) {
+        printf(" size = %d ", size);
+        int index = hash(key, size);
+        Element* found = searchByValueOfElement2(segment, size, key);
+        if (found) {
+            printf("  %s - %d  ", key, index);
+            return found;
+        }
+        size /= 2;
+    }
+    
+    return NULL;
+}
+
+/*Element* search(HashTable* segment, int sizeOfTable, const char* key) {
+    return searchByValueOfElement2(segment, sizeOfTable, key);
+}*/
+
 void insert(HashTable* segment, int sizeOfTable, const char* key, bool* errorCode) {
+    //printf("  !%s!  ", key);
     Element* found = search(segment, sizeOfTable, key);
     if (found) {
         incrementValueCount(found);
@@ -75,9 +109,7 @@ void hashTableSize(HashTable** table, int sizeOfTable, bool* errorCode) {
         return;
     }
     for (int i = 0; i < sizeOfTable; ++i) {
-        if (newTable[i].table == NULL) {
-            newTable[i].table = createElement();
-        }
+        newTable[i].table = NULL;
     }
     *table = newTable;
 }
@@ -94,7 +126,7 @@ int* calculate(HashTable* segment, int sizeOfTable, int arraySize) {
         int len = 0;
         while (current != NULL) {
             len++;
-            setNextElement(&current);
+            setNextElement(&current); 
         }
         length += len;
         if (len > max) {
@@ -121,14 +153,12 @@ HashTable* fillOutTheTable(const char* array[], int* sizeOfTable, int arraySize,
     for (int i = 0; i < arraySize; ++i) {
         insert(segment, *sizeOfTable, array[i], errorCode);
         if (!*errorCode) {
-            printf("!!!");
             freeTable(segment, *sizeOfTable);
             return NULL;
         }
         countInserts++;
 
         if (!search(segment, *sizeOfTable, array[i])) {
-            printf("!!!");
             *errorCode = false;
             freeTable(segment, *sizeOfTable);
             return NULL;
@@ -136,14 +166,11 @@ HashTable* fillOutTheTable(const char* array[], int* sizeOfTable, int arraySize,
 
         if (countInserts * 2 > *sizeOfTable) {
             *sizeOfTable *= 2;
-            printf(" !%d! ", *sizeOfTable);
             hashTableSize(&segment, *sizeOfTable, errorCode);
             if (!*errorCode) {
-                printf("!!!");
                 freeTable(segment, *sizeOfTable);
                 return NULL;
             }
-
         }
     }
 
@@ -158,12 +185,12 @@ int printTable(const char* array[], int arraySize, bool* errorCode, int** task) 
     for (int i = 0; i < sizeofTable; ++i) {
         printElements(hashTable[i].table);
     }
-    freeTable(hashTable, &sizeofTable);
+    freeTable(hashTable, sizeofTable);
     return sizeofTable;
 }
 
 void solution(const char* array[], int arraySize, bool* errorCode, int** task) {
     int sizeofTable = 100;
     HashTable* hashTable = fillOutTheTable(array, &sizeofTable, arraySize, errorCode, task);
-    freeTable(hashTable, &sizeofTable);
+    freeTable(hashTable, sizeofTable);
 }

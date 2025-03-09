@@ -13,6 +13,14 @@ typedef struct Element {
     struct Element* next;
 } Element;
 
+char* getKey(Element* element) {
+    return element->key;
+}
+
+Element* getNextElement(Element* element) {
+    return element->next;
+}
+
 char* myStrdup(char* str, bool* errorCode) {
     if (str == NULL) return NULL;
     size_t len = strlen(str) + 1;
@@ -31,7 +39,9 @@ void setNextElement(Element** element) {
 }
 
 void incrementValueCount(Element* element) {
-    element->count++;
+    if (element != NULL) {
+        element->count++;
+    }
 }
 
 Element* createElement(void) {
@@ -49,6 +59,7 @@ void push(Element** head, char* value, bool* errorCode) {
         *errorCode = false;
         return;
     }
+    element->count = 1;
     element->next = *head;
     *head = element;
 }
@@ -67,6 +78,20 @@ void printElements(Element* element) {
         printf("%s   %d\n", element->key, element->count);
         element = element->next;
     }
+}
+
+Element* searchByValueOfElement3(HashTable* table, int sizeOfTable, char* value) {
+    printf("sss %s sss", value);
+    for (int i = 0; i < sizeOfTable; ++i) {
+        Element* current = getElement(table, i);
+        while (current != NULL) {
+            if (strcmp(value, current->key) == 0) {
+                return current;
+            }
+            current = current->next;
+        }
+    }
+    return NULL;
 }
 
 Element* searchByValueOfElement(Element* element, char* value) {

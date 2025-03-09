@@ -1,9 +1,13 @@
 #pragma once
 
 #include <stdbool.h>
+#include "list.h"
 
 // Defines the structure.
 typedef struct HashTable HashTable;
+
+//
+//Element* getElement(HashTable* hashTable, int i);
 
 // Fills table.
 //HashTable* fillOutTheTable(const char* array[], int arraySize, bool* errorCode, int** task);

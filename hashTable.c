@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <string.h>
-#include "hash.h"
 #include "test.h"
 #include "table.h"
 
@@ -44,7 +43,7 @@ void task(void) {
     }
     fclose(file);
 
-    float* task = NULL;
+    int* task = NULL;
     printSolution(array, i, &errorCode, &task);
     free(task);
 
