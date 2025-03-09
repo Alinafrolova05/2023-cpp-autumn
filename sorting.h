@@ -1,10 +1,9 @@
 #pragma once
 
-#ifndef MARSHALLING_YARD
-#define MARSHALLING_YARD
-
 #include <stdbool.h>
+#include "stack.h"
 
+// Defines the structure.
 typedef struct Element Element;
 
 // Adds an element to the top of the stack.
@@ -16,7 +15,5 @@ void pop(Element** head);
 // Converts an infix expression to postfix notation using stacks.
 void processInput(char* str, Element** numbers, Element** operations, bool* errorCode);
 
-// Runs tests to verify the functionality of the stack operations.
-bool test(void);
-
-#endif
+// Solves the problem.
+char* solution(char str[], bool* errorCode);

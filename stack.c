@@ -7,6 +7,14 @@ typedef struct Element {
     struct Element* next;
 }Element;
 
+char getValueOfElement(Element* element) {
+    return element->value;
+}
+
+Element* getNextElement(Element* element) {
+    return element->next;
+}
+
 void push(Element** element1, char value, bool* errorCode) {
     Element* element = malloc(sizeof(Element));
     if (element == NULL) {

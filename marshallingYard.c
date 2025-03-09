@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "sorting.h"
-#include "stack.h"
+#include "test.h"
 
 int main(void) {
     if (!test()) {

@@ -130,10 +130,12 @@
     <ClCompile Include="sorting.c" />
     <ClCompile Include="marshalling_yard.c" />
     <ClCompile Include="stack.c" />
+    <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sorting.h" />
     <ClInclude Include="stack.h" />
+    <ClInclude Include="test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
