@@ -10,7 +10,6 @@ int main(void) {
         printf("Error!!!");
         return -1;
     }
-    bool errorCode = true;
     FILE* file = fopen("text.txt", "r");
     if (file == NULL) {
         printf("File doesn't open!!!");
@@ -18,7 +17,8 @@ int main(void) {
     }
 
     int numberOfStates = 0;
-    Table* states = fillingOutTable(file, &numberOfStates, &errorCode);
+    bool errorCode = true;
+    Table* states = fillOutTable(file, &numberOfStates, &errorCode);
     if (!errorCode) {
         printf("Error!!!");
     }

@@ -11,10 +11,10 @@ typedef struct Table Table;
 
 // Main function to solve the problem using data from the specified file 
 // and returns a table of cities in each state.
-Table* fillingOutTable(FILE* file, int* numberOfStates, bool* errorCode);
+Table* fillOutTable(FILE* file, int* numberOfStates, bool* errorCode);
 
 // Fills in a table of states.
-void solution(Table* table, Table* states, int size, int stateCount, bool* errorCode);
+void solve(Table* table, Table* states, int size, int stateCount, bool* errorCode);
 
 // Creates a new element.
 Element* createElement(void);
@@ -23,7 +23,7 @@ Element* createElement(void);
 Table* createTable(int size, bool* errorCode);
 
 // Sets the next element for the element.
-void setNextElement(Element** element);
+void moveToNext(Element** element);
 
 // Sets the another element to next element for the element.
 void setToNextElement(Element** element, Element* anotherElement);
@@ -35,7 +35,7 @@ void setValueVertex(Element** element, int vertex);
 void setValueWeight(Element** element, int weight);
 
 // Reads data from the file and creates a table.
-Table* printFromFile(FILE* file, int* size, bool* errorCode);
+Table* loadFromFile(FILE* file, int* size, bool* errorCode);
 
 // Prints the contents of the table.
 void printTable(Table* states, int size);

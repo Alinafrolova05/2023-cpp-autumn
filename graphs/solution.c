@@ -5,35 +5,9 @@
 #include <stdbool.h>
 #include "stack.h"
 
-typedef struct Element {
-    int vertex;
-    int weight;
-    struct Element* next;
-} Element;
-
 typedef struct Table {
     Element* element;
 } Table;
-
-void setNextElement(Element** element) {
-    *element = (*element)->next;
-}
-
-void setToNextElement(Element** element, Element* anotherElement) {
-    (*element)->next = anotherElement;
-}
-
-void setValueVertex(Element** element, int vertex) {
-    (*element)->vertex = vertex;
-}
-
-void setValueWeight(Element** element, int weight) {
-    (*element)->weight = weight;
-}
-
-Element* createElement(void) {
-    return calloc(1, sizeof(Element));
-}
 
 Table* createTable(int size, bool* errorCode) {
     Table* segment = calloc(size, sizeof(Table));
@@ -44,7 +18,7 @@ Table* createTable(int size, bool* errorCode) {
     return segment;
 }
 
-Table* printFromFile(FILE* file, int* size, bool* errorCode) {
+Table* loadFromFile(FILE* file, int* size, bool* errorCode) {
     fseek(file, 0, SEEK_SET);
     int edges = 0;
     fscanf(file, "%d %d", size, &edges);
@@ -73,13 +47,13 @@ void deleteElementInTable(Table** table, int size, int elementToDelete) {
         }
         Element** current = &(*table)[j].element;
         while (*current != NULL) {
-            if ((*current)->vertex == elementToDelete) {
+            if (getElementVertex(*current) == elementToDelete) {
                 Element* toDelete = *current;
-                *current = (*current)->next;
+                moveToNext(current);
                 free(toDelete);
             }
             else {
-                current = &(*current)->next;
+                moveToNext(current);
             }
         }
     }
@@ -87,18 +61,19 @@ void deleteElementInTable(Table** table, int size, int elementToDelete) {
 
 void findMinElement(Element* stateElements, Table* table, int* minWeight, int* minVertex) {
     while (stateElements != NULL) {
-        Element* current = table[stateElements->vertex - 1].element;
+        Element* current = table[getElementVertex(stateElements) - 1].element;
         if (current == NULL) {
             return;
         }
         while (current != NULL) {
-            if (current->weight < *minWeight) {
-                *minWeight = current->weight;
-                *minVertex = current->vertex;
+            if (getElementWeight(current) < *minWeight) {
+                *minWeight = getElementWeight(current);
+                *minVertex = getElementVertex(current);
             }
-            current = current->next;
+            moveToNext(&current);
         }
-        stateElements = stateElements->next;
+        moveToNext(&stateElements);
+
     }
 }
 
@@ -106,8 +81,8 @@ void printTable(Table* states, int size) {
     for (int i = 0; i < size; ++i) {
         Element* current = states[i].element;
         while (current != NULL) {
-            printf("%d ", current->vertex);
-            current = current->next;
+            printf("%d ", getElementVertex(current));
+            moveToNext(&current);
         }
         printf("\n");
     }
@@ -118,14 +93,13 @@ void deleteTable(Table** segment, int size) {
         Element* current = (*segment)[i].element;
         while (current != NULL) {
             Element* toDelete = current;
-            current = current->next;
+            moveToNext(&current);
             free(toDelete);
         }
     }
     free(*segment);
 }
-
-void solution(Table* table, Table* states, int size, int stateCount, bool* errorCode) {
+void solve(Table* table, Table* states, int size, int stateCount, bool* errorCode) {
     if (table == NULL || states == NULL) return;
     int count = size - stateCount;
     int check = 0;
@@ -153,11 +127,11 @@ void solution(Table* table, Table* states, int size, int stateCount, bool* error
     }
 }
 
-Table* fillingOutTable(FILE* file, int* numberOfStates, bool* errorCode) {
+Table* fillOutTable(FILE* file, int* numberOfStates, bool* errorCode) {
     int size = 0;
-    Table* table = printFromFile(file, &size, &errorCode);
+    Table* table = loadFromFile(file, &size, errorCode);
     if (!errorCode) {
-        return;
+        return NULL;
     }
 
     char buffer[256] = { 0 };
@@ -172,7 +146,7 @@ Table* fillingOutTable(FILE* file, int* numberOfStates, bool* errorCode) {
     else {
         *errorCode = false;
         deleteTable(&table, size);
-        return;
+        return NULL;
     }
     *numberOfStates = stateCount;
 
@@ -185,7 +159,7 @@ Table* fillingOutTable(FILE* file, int* numberOfStates, bool* errorCode) {
         push(&states[i].element, number, 0, errorCode);
     }
 
-    solution(table, states, size, stateCount, errorCode);
+    solve(table, states, size, stateCount, errorCode);
 
     deleteTable(&table, size);
     return states;
