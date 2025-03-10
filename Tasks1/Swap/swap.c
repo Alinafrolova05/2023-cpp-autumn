@@ -8,10 +8,11 @@ void swap(int* left, int* right) {
     *right = temp;
 }
 
-int main(void)
-{
+int main(void) {
     int a = 1;
-    swap(&a, &a);
-    printf("%d", a);
+    int b = 2;
+    printf("Before swap: a = %d, b = %d\n", a, b);
+    swap(&a, &b);
+    printf("After swap: a = %d, b = %d\n", a, b);
     return 0;
 }
