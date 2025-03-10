@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="mergeSorting.c" />
-    <ClCompile Include="solution.c" />
+    <ClCompile Include="sort.c" />
     <ClCompile Include="inputOutput.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="test.c" />
@@ -137,7 +137,10 @@
     <Text Include="text.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inputOutput.h" />
+    <ClInclude Include="mergeSorting.h" />
     <ClInclude Include="sort.h" />
+    <ClInclude Include="test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

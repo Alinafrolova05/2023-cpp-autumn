@@ -1,54 +1,86 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "sort.h"
+#include "mergeSorting.h"
 
-void merge(Number* phone, Number* left, Number* right, int size, SortChoice choice) {
-    int index1 = 0;
-    int index2 = 0;
-    int i = 0;
 
-    while (index1 < size / 2 && index2 < size - size / 2) {
-        if ((choice == SORT_BY_NAME && strcmp(left[index1].name, right[index2].name) <= 0) ||
-            (choice == SORT_BY_NUMBER && strcmp(left[index1].number, right[index2].number) <= 0)) {
-            phone[i] = left[index1];
-            index1++;
-        } else {
-            phone[i] = right[index2];
-            index2++;
-        }
-        i++;
-    }
-    while (index1 < size / 2) {
-        phone[i] = left[index1];
-        i++;
-        index1++;
-    }
-    while (index2 < size - size / 2) {
-        phone[i] = right[index2];
-        i++;
-        index2++;
+typedef struct List {
+    Number* element;
+    struct List* next;
+} List;
+
+void freeList(List** phoneList) {
+    while (*phoneList != NULL) {
+        List* temp = *phoneList;
+        *phoneList = (*phoneList)->next;
+        free(temp->element);
+        free(temp);
     }
 }
 
-void mergeSort(Number* phone, int size, SortChoice choice) {
-    if (size <= 1) {
+List* getNextList(List* list) {
+    return list->next;
+}
+
+Number* getNumberOfList(List* list) {
+    return list->element;
+}
+
+List* createNode(Number* element) {
+    List* newNode = (List*)malloc(sizeof(List));
+    newNode->element = element;
+    newNode->next = NULL;
+    return newNode;
+}
+
+List* merge(List* left, List* right, SortChoice choice) {
+    List* result = NULL;
+
+    if (!left) return right;
+    if (!right) return left;
+
+    if ((choice == SORT_BY_NAME && strcmp(getName(left->element), getName(right->element)) <= 0) ||
+        (choice == SORT_BY_NUMBER && strcmp(getNumber(left->element), getNumber(right->element)) <= 0)) {
+        result = left;
+        result->next = merge(left->next, right, choice);
+    }
+    else {
+        result = right;
+        result->next = merge(left, right->next, choice);
+    }
+    return result;
+}
+
+void split(List* source, List** left, List** right) {
+    List* fast;
+    List* slow;
+    slow = source;
+    fast = source->next;
+
+    while (fast != NULL) {
+        fast = fast->next;
+        if (fast != NULL) {
+            slow = slow->next;
+            fast = fast->next;
+        }
+    }
+
+    *left = source;
+    *right = slow->next;
+    slow->next = NULL;
+}
+
+void mergeSort(List** element, SortChoice choice) {
+    List* head = *element;
+    List* left;
+    List* right;
+
+    if (!head || !head->next) {
         return;
     }
-    Number* left = (Number*)calloc(size / 2, sizeof(Number));
-    Number* right = (Number*)calloc(size - size / 2, sizeof(Number));
 
-    for (int i = 0; i < size / 2; ++i) {
-        left[i] = phone[i];
-    }
-    for (int i = size / 2; i < size; ++i) {
-        right[i - size / 2] = phone[i];
-    }
-    mergeSort(left, size / 2, choice);
-    mergeSort(right, size - size / 2, choice);
-
-    merge(phone, left, right, size, choice);
-
-    free(left);
-    free(right);
+    split(head, &left, &right);
+    mergeSort(&left, choice);
+    mergeSort(&right, choice);
+    *element = merge(left, right, choice);
 }

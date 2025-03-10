@@ -1,13 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "sort.h"
+#include "mergeSorting.h"
 
-void scanfChecker(SortChoice* choice) {
+typedef struct Number {
+    char* name;
+    char* number;
+    struct Number* next;
+} Number;
+
+Number* createNumber() {
+    return calloc(1, sizeof(Number));
+}
+
+char* getName(Number* number) {
+    return number->name;
+}
+
+char* getNumber(Number* number) {
+    return number->number;
+}
+
+void toCheckScanf(SortChoice* choice) {
     while (true) {
         printf("Please enter your choice (%d for exit, %d for name, %d for number): ", EXIT, SORT_BY_NAME, SORT_BY_NUMBER);
         int result = scanf("%d", choice);
-        if (result != 1  || *choice < EXIT || *choice > SORT_BY_NUMBER) {
+        if (result != 1 || *choice < EXIT || *choice > SORT_BY_NUMBER) {
             printf("\nInput wrong! Please enter a valid number: ");
             while (getchar() != '\n');
         }
@@ -17,11 +37,11 @@ void scanfChecker(SortChoice* choice) {
     }
 }
 
-void writeInBuffer(FILE* file, Number** phone, int* size) {
+void writeInBuffer(FILE* file, List** phoneList) {
     while (!feof(file)) {
         char array[256] = { '\0' };
         if (fgets(array, 256, file) != NULL) {
-            Number* element = calloc(1, sizeof(Number));
+            Number element;
             char* arrayForName = calloc(256, sizeof(char));
             char* arrayForNumber = calloc(256, sizeof(char));
             int i = 0;
@@ -36,17 +56,24 @@ void writeInBuffer(FILE* file, Number** phone, int* size) {
                 i++;
                 j++;
             }
-            element->name = arrayForName;
-            element->number = arrayForNumber;
-            element->next = *phone;
-            *phone = element;
-            (*size)++;
+
+            strcpy(element.name, arrayForName);
+            strcpy(element.number, arrayForNumber);
+            free(arrayForName);
+            free(arrayForNumber);
+
+            List* newNode = createNode(element);
+            List* current = getNextList(newNode);
+            current = *phoneList;
+            *phoneList = newNode;
         }
     }
 }
 
-void print(Number* phone, int size) {
-    for (int i = 0; i < size; ++i) {
-        printf("%s%s", phone[i].name, phone[i].number);
+void printList(List* node) {
+    while (node != NULL) {
+        Number* element = getNumberOfList(node);
+        printf("Name: %s, Number: %s\n", element->name, element->number);
+        node = getNextList(node);
     }
 }
