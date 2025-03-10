@@ -36,5 +36,4 @@ void pop(Stack** element) {
     Stack* tmp = *element;
     *element = (*element)->next;
     free(tmp);
-    return;
 }

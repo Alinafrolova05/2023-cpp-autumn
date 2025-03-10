@@ -8,8 +8,6 @@ typedef struct Stack Stack;
 // Function to get the value of the top element in the stack.
 char top(Stack* stack);
 
-Stack* getNextElement(Stack* stack);
-
 // Function to create a new element and return a pointer to it.
 Stack* createElement(void);
 
