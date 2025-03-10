@@ -2,8 +2,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <stdbool.h>
+
+enum PartOfArray {
+    HalfTheArray,
+    TheWholeArray,
+};
 
 bool isPositive(int m) {
     return m >= 0;
@@ -18,69 +22,57 @@ void swap(int* left, int* right) {
     *left ^= *right;
 }
 
-enum partOfArray {
-    halfTheArray, 
-    theWholeArray,
-};
-
-void rearrangementOfArrays(int m, int n, int* array, enum partOfArray arrayPart, int theMiddleOfArray, int start, int finish) {
-    if (arrayPart == halfTheArray) {
-        for (int i = 0; i < theMiddleOfArray; ++i) {
-            swap(&array[i + start], &array[m - i - 1 + finish]);
-        }
-    }
-    else {
-        for (int i = 0; i != theMiddleOfArray; ++i) {
-            swap(&array[i + start], &array[m - i - 1 + finish]);
-        }
+void reverseArray(int* array, int start, int finish) {
+    for (int i = 0; i < (finish - start + 1) / 2; ++i) {
+        swap(&array[start + i], &array[finish - i]);
     }
 }
 
 void transpose(int m, int n, int* array) {
-    rearrangementOfArrays(m, n, array, halfTheArray, m / 2, 0, 0);
-    rearrangementOfArrays(m, n, array, halfTheArray, n / 2, m, n);
-    rearrangementOfArrays(m, n, array, theWholeArray, (n + m) / 2, 0, n);
+    reverseArray(array, 0, m - 1);
+    reverseArray(array, m, m + n - 1);
+    reverseArray(array, 0, m + n - 1);
 }
 
 int main(void) {
     int m = 0;
     int n = 0;
-    printf("Enter m - number of characters in the first part of the array: ");
-    int result = scanf("%d", &m);
-    if (result != 1 || !isPositive(m)) {
+
+    printf("Enter m - number of elements in the first part of the array: ");
+    if (scanf("%d", &m) != 1 || !isPositive(m)) {
         printf("Input error!");
-        return 0;
+        return -1;
     }
 
-    printf("Enter n - number of characters in the second part of the array: ");
-    result = scanf("%d", &n);
-    if (result != 1 || !isPositive(n)) {
+    printf("Enter n - number of elements in the second part of the array: ");
+    if (scanf("%d", &n) != 1 || !isPositive(n)) {
         printf("Input error!");
-        return 0;
+        return -1;
     }
 
     int* array = (int*)calloc(m + n, sizeof(int));
     if (array == NULL) {
-        printf("Error!!!");
+        printf("Error allocating memory!");
         return -1;
     }
-    printf("Enter m numbers for the first part of the array: ");
-    printf("\n");
+
+    printf("Enter %d numbers for the first part of the array:\n", m);
     for (int i = 0; i < m; ++i) {
-        result = scanf("%d", &array[i]);
+        scanf("%d", &array[i]);
     }
 
-    printf("Enter n numbers for the second part of the array: ");
-    printf("\n");
+    printf("Enter %d numbers for the second part of the array:\n", n);
     for (int i = 0; i < n; ++i) {
-        result = scanf("%d", &array[i + m]);
+        scanf("%d", &array[i + m]);
     }
 
     transpose(m, n, array);
-    printf("\n");
-    for (int i = 0; i < n + m; ++i) {
-        printf(" %d ", array[i]);
+
+    printf("\nResulting array:\n");
+    for (int i = 0; i < m + n; ++i) {
+        printf("%d ", array[i]);
     }
+    printf("\n");
 
     free(array);
     return 0;
