@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="sorting.c" />
-    <ClCompile Include="marshalling_yard.c" />
+    <ClCompile Include="marshallingYard.c" />
     <ClCompile Include="stack.c" />
     <ClCompile Include="test.c" />
   </ItemGroup>

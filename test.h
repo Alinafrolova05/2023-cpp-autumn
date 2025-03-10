@@ -2,5 +2,5 @@
 
 #include "stack.h"
 
-// Ñhecks the solution on a simple example.
+// Checks the solution on a simple example.
 bool test(void);

@@ -15,5 +15,5 @@ bool test(void) {
     }
     free(array);
    
-    return strcmp(correct, isCorrect) == 0 && errorCode == true;
+    return strcmp(correct, isCorrect) == 0 && errorCode;
 }
