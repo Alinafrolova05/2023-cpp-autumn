@@ -24,19 +24,29 @@ void printSolution(FILE* file, PhoneBook* entry, int size) {
             printAllFile(file);
         }
         else if (answer == 3) {
+            bool errorCode = true;
             char name[20] = { 0 };
             printf("\nInput name: ");
             int res = scanf("%s", name);
             char buffer[50] = { 0 };
-            find(file, name, buffer);
+            find(file, name, buffer, &errorCode);
+            if (!errorCode) {
+                printf("\nThis name was not found.");
+                continue;
+            }
             printf("%s", buffer);
         }
         else if (answer == 4) {
+            bool errorCode = true;
             char number[20] = { 0 };
             printf("\nInput number: ");
             int res = scanf("%s", number);
             char buffer[50] = { 0 };
-            find(file, number, buffer);
+            find(file, number, buffer, &errorCode);
+            if (!errorCode) {
+                printf("\nThis name was not found.");
+                continue;
+            }
             printf("%s", buffer);
         }
         else if (answer == 5) {

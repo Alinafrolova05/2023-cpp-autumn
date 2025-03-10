@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Telephone_directory.c">
+    <ClCompile Include="telephoneDirectory.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="directory.c">

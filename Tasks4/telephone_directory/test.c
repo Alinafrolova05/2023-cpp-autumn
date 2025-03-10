@@ -3,13 +3,12 @@
 #include "directory.h"
 
 bool test(FILE* file) {
+    bool errorCode = true;
     char buffer[50] = { 0 };
     char name[50] = "rtrt";
-    find(file, name, buffer);
-    for (int i = 0; i < strlen("rtrt"); ++i) {
-        if (buffer[i] != name[i]) {
-            return false;
-        }
+    find(file, name, buffer, &errorCode);
+    if (!errorCode) {
+        return false;
     }
     return true;
 }

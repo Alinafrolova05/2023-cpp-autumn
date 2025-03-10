@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="directory.c" />
-    <ClCompile Include="Telephone_directory.c" />
+    <ClCompile Include="telephoneDirectory.c" />
     <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
