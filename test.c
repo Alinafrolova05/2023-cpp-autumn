@@ -22,9 +22,10 @@ bool testStackOperations(void) {
 
     char str4[20] = "+*";
     solution(str4, &errorCode);
-    if (!errorCode) {
+    if (errorCode) {
         return false;
     }
+    errorCode = true;
 
     char str5[20] = "23+5-";
     if (solution(str5, &errorCode) != 0 || !errorCode) {

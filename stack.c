@@ -1,51 +1,40 @@
 #include "stack.h"
 #include "operations.h"
 #include <stdio.h>
-#include <malloc.h>
 #include <stdlib.h>
 
-#include <stdbool.h>
-
-typedef struct Element {
+typedef struct Stack {
     char value;
-    struct Element* next;
-} Element;
+    struct Stack* next;
+} Stack;
 
-Element* createElement(void) {
-    return calloc(1, sizeof(Element));
+Stack* createElement(void) {
+    return calloc(1, sizeof(Stack));
 }
 
-char top(Element* element) {
+char top(Stack* element) {
     return element->value;
 }
 
-void setTop(Element** element, char value) {
-    (*element)->value = value;
+Stack* getNextElement(Stack* element) {
+    return element->next;
 }
 
-void setToNextElement(Element** element, Element* next) {
-    (*element)->next = next;
-}
-
-void setNextElement(Element** element, Element* anotherElement) {
-    *element = anotherElement->next;
-}
-
-void push(Element** head, char value, bool* errorCode) {
-    Element* element = createElement();
+void push(Stack** head, char value, bool* errorCode) {
+    Stack* element = createElement();
     if (element == NULL) {
         *errorCode = false;
         return;
     }
-    setTop(&element, value);
-    setToNextElement(&element, *head);
+    element->value = value;
+    element->next = *head;
     *head = element;
 }
 
-void pop(Element** element) {
+void pop(Stack** element) {
     if (*element == NULL) return;
-    Element* tmp = *element;
-    setNextElement(element, *element);
+    Stack* tmp = *element;
+    *element = (*element)->next;
     free(tmp);
     return;
 }

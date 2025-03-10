@@ -1,28 +1,20 @@
 #pragma once
 
 #include <stdbool.h>
-#include "operations.h"
 
 // Defines the structure.
-typedef struct Element Element;
+typedef struct Stack Stack;
 
 // Function to get the value of the top element in the stack.
-char top(Element* element);
+char top(Stack* stack);
 
-// Function to set the value of the top element in the stack.
-void setTop(Element** element, char value);
-
-// Function to set the next element of the current element to a given next element.
-void setToNextElement(Element** element, Element* next);
-
-// Function to set another element to the next element of the current element.
-void setNextElement(Element** element, Element* anotherElement);
+Stack* getNextElement(Stack* stack);
 
 // Function to create a new element and return a pointer to it.
-Element* createElement(void);
+Stack* createElement(void);
 
 // Adds an element to the top of the stack.
-void push(Element** head, char value, bool* errorCode);
+void push(Stack** head, char value, bool* errorCode);
 
 // Removes the top element from the stack.
-void pop(Element** head);
+void pop(Stack** head);

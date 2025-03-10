@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Postfix_calculator", "Postfix_calculator.vcxproj", "{7603EDC2-E7E8-406F-A8E5-E723D6637A6C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "postfixCalculator", "postfixCalculator.vcxproj", "{7603EDC2-E7E8-406F-A8E5-E723D6637A6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
