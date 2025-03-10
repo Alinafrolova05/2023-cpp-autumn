@@ -6,11 +6,10 @@
 
 int main(void) {
     if (!test()) {
-        printf("Error!");
+        printf("Error!!!");
         return -1;
     }
-    Element* element = solution(41);
-    printf("The answer: %d  %d \n", getValue(element), getValue(getNext(element)));
-    deleteLine(&element);
+    printf("Answer: %d", count(41, 3));
+
     return 0;
 }

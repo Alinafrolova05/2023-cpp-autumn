@@ -1,63 +1,41 @@
 #include <stdio.h>
 #include <malloc.h>
-#include "stack.h"
 
 typedef struct Element {
     int value;
     struct Element* next;
 }Element;
 
-Element* createElement(void) {
-    return malloc(sizeof(Element));
+Element* createNode(int number) {
+    Element* newNode = (Element*)malloc(sizeof(Element));
+    newNode->value = number;
+    newNode->next = NULL;
+    return newNode;
 }
 
-int getValue(Element* element) {
-    return element->value;
-}
+int count(int numberOfWarriors, int warriorBeingKilled) {
+    Element* head = createNode(1);
+    Element* current = head;
 
-void setValue(Element** element, int value) {
-    (*element)->value = value;
-}
-
-Element* getNext(Element* element) {
-    if (element == NULL) return NULL;
-    return element->next;
-}
-
-void setNextElement(Element** element, Element* anotherElement) {
-    (*element)->next = anotherElement;
-}
-
-Element* count(Element** element, int value) {
-    if (value <= 2) {
-        return;
+    for (int i = 2; i <= numberOfWarriors; i++) {
+        current->next = createNode(i);
+        current = current->next;
     }
-    (*element)->value = value;
-    for (int i = value - 1; i > 0; --i) {
-        push(element, i);
-    }
+    current->next = head;
 
-    int i = 1;
-    *element = (*element)->next;
-    while ((*element)->next->next->value != (*element)->value) {
-        i++;
-        if (i % 3 == 0) {
-            deleteElement(element);
-            i = 1;
+    Element* currentWarrior = head;
+
+    while (currentWarrior->next != currentWarrior) {
+        for (int count = 1; count < warriorBeingKilled - 1; count++) {
+            currentWarrior = currentWarrior->next;
         }
-        *element = (*element)->next;
+        Element* toDelete = currentWarrior->next;
+        currentWarrior->next = toDelete->next;
+        free(toDelete);
+        currentWarrior = currentWarrior->next;
     }
-    return *element;
-}
 
-Element* solution(int value) {
-    Element* element = malloc(sizeof(Element));
-    element->next = element;
-    return count(&element, value);
-}
-
-void deleteLine(Element** element) {
-    while (*element == NULL || (*element)->next != *element) {
-        deleteElement(element);
-    }
+    int lastSurvivor = currentWarrior->value;
+    free(currentWarrior);
+    return lastSurvivor;
 }

@@ -2,11 +2,13 @@
 #include "solution.h"
 
 bool test(void) {
-    bool errorCode = true;
-    Element* element = solution(3);
-    if (getValue(element) != 1 || getValue(getNext(element)) != 2) {
-        errorCode = false;
-    }
-    deleteLine(&element);
-    return errorCode;
+	if (count(3, 3) != 2) {
+		return false;
+	}
+	if (count(7, 3) != 4) {
+		return false;
+	}
+	if (count(1, 1) != 1) {
+		return false;
+	}
 }
