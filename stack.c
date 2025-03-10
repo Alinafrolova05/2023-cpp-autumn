@@ -4,21 +4,17 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct Element {
+typedef struct Stack {
     char value;
-    struct Element* next;
-} Element;
+    struct Stack* next;
+} Stack;
 
-Element* createElement(void) {
-    return calloc(1, sizeof(Element));
-}
-
-char top(Element* element) {
+char top(Stack* element) {
     return element->value;
 }
 
-void push(Element** head, char value, bool* errorCode) {
-    Element* element = createElement();
+void push(Stack** head, char value, bool* errorCode) {
+    Stack* element = calloc(1, sizeof(Stack));
     if (element == NULL) {
         *errorCode = false;
         return;
@@ -28,9 +24,9 @@ void push(Element** head, char value, bool* errorCode) {
     *head = element;
 }
 
-void pop(Element** element) {
+void pop(Stack** element) {
     if (*element == NULL) return;
-    Element* tmp = *element;
+    Stack* tmp = *element;
     *element = (*element)->next;
     free(tmp);
 }

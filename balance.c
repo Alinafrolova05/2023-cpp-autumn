@@ -5,7 +5,7 @@
 #include "stack.h"
 
 bool processBraces(const char* str) {
-    Element* stack = NULL;
+    Stack* stack = NULL;
     for (int i = 0; str[i] != '\0'; ++i) {
         if (str[i] == '(' || str[i] == ')' || str[i] == '{' || str[i] == '}' || str[i] == '[' || str[i] == ']') {
             if (str[i] == ')' || str[i] == '}' || str[i] == ']') {
@@ -25,7 +25,14 @@ bool processBraces(const char* str) {
                     return false;
                 }
             } else {
-                push(&stack, str[i], NULL);
+                bool errorCode = true;
+                push(&stack, str[i], &errorCode);
+                if (!errorCode) {
+                    while (stack != NULL) {
+                        pop(&stack);
+                    }
+                    return false;
+                }
             }
         }
     }
