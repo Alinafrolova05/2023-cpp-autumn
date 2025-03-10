@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Advanced_Brace_Balance_.c">
+    <ClCompile Include="advancedBraceBalance.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="balance.c">

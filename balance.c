@@ -4,7 +4,7 @@
 #include "balance.h"
 #include "stack.h"
 
-void processBraces(char* str, bool* errorCode, char check[]) {
+bool processBraces(const char* str) {
     Element* stack = NULL;
     for (int i = 0; str[i] != '\0'; ++i) {
         if (str[i] == '(' || str[i] == ')' || str[i] == '{' || str[i] == '}' || str[i] == '[' || str[i] == ']') {
@@ -15,32 +15,25 @@ void processBraces(char* str, bool* errorCode, char check[]) {
                         (str[i] == '}' && lastBrace == '{') ||
                         (str[i] == ']' && lastBrace == '[')) {
                         pop(&stack);
+                    } else {
+                        while (stack != NULL) {
+                            pop(&stack);
+                        }
+                        return false;
                     }
-                    else {
-                        push(&stack, str[i], errorCode);
-                    }
+                } else {
+                    return false;
                 }
-                else {
-                    push(&stack, str[i], errorCode);
-                }
-            }
-            else {
-                push(&stack, str[i], errorCode);
+            } else {
+                push(&stack, str[i], NULL);
             }
         }
     }
-    popStack(stack, check);
-}
-
-char* solution(char str[], bool* errorCode) {
-    char* answerSting = (char*)calloc(256, sizeof(char));
-    if (answerSting == NULL) {
-        *errorCode = false;
-        return NULL;
+    if (stack != NULL) {
+        while (stack != NULL) {
+            pop(&stack);
+        }
+        return false;
     }
-    processBraces(str, errorCode, answerSting);
-    if (!*errorCode) {
-        return NULL;
-    }
-    return answerSting;
+    return true;
 }

@@ -2,5 +2,5 @@
 
 #include <stdbool.h>
 
-// Runs tests to validate the functionality of the stack operations
+// Checks the function processBraces.
 bool test(void);

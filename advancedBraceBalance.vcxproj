@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Advanced_Brace_Balance_.c" />
+    <ClCompile Include="advancedBraceBalance.c" />
     <ClCompile Include="balance.c" />
     <ClCompile Include="stack.c" />
     <ClCompile Include="test.c" />

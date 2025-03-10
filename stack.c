@@ -1,9 +1,8 @@
 #include "stack.h"
 #include "balance.h"
 #include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include <stdbool.h>
-
 
 typedef struct Element {
     char value;
@@ -11,32 +10,11 @@ typedef struct Element {
 } Element;
 
 Element* createElement(void) {
-    return malloc(sizeof(Element));
+    return calloc(1, sizeof(Element));
 }
 
 char top(Element* element) {
     return element->value;
-}
-
-void setTop(Element** element, char value) {
-    (*element)->value = value;
-}
-
-void setToNextElement(Element** element, Element* next) {
-    (*element)->next = next;
-}
-
-void setNextElement(Element** element, Element* anotherElement) {
-    *element = anotherElement->next;
-}
-
-void popStack(Element* stack, char check[]) {
-    int i = 0;
-    while (stack != NULL) {
-        check[i] = top(stack);
-        i++;
-        pop(&stack);
-    }
 }
 
 void push(Element** head, char value, bool* errorCode) {
@@ -45,14 +23,14 @@ void push(Element** head, char value, bool* errorCode) {
         *errorCode = false;
         return;
     }
-    setTop(&element, value);
-    setToNextElement(&element, *head);
+    element->value = value;
+    element->next = *head;
     *head = element;
 }
 
 void pop(Element** element) {
     if (*element == NULL) return;
     Element* tmp = *element;
-    setNextElement(element, *element);
+    *element = (*element)->next;
     free(tmp);
 }

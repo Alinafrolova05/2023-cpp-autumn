@@ -10,13 +10,14 @@ void printSolution(void) {
     char str[256] = "";
     printf("Enter string: ");
     fgets(str, 256, stdin);
-    char* answerString = solution(str, &errorCode);
-    if (!errorCode) {
-        printf("Error!!!");
-        return;
+    bool result = processBraces(str);
+
+    if (result) {
+        printf("Braces are balanced.\n");
     }
-    printf("Unbalanced parentheses: %s", answerString);
-    free(answerString);
+    else {
+        printf("Braces are not balanced.\n");
+    }
 }
 
 int main(void)
