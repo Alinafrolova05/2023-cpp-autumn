@@ -3,20 +3,10 @@
 #include <string.h>
 #include "mergeSorting.h"
 
-
 typedef struct List {
     Number* element;
     struct List* next;
 } List;
-
-void freeList(List** phoneList) {
-    while (*phoneList != NULL) {
-        List* temp = *phoneList;
-        *phoneList = (*phoneList)->next;
-        free(temp->element);
-        free(temp);
-    }
-}
 
 List* getNextList(List* list) {
     return list->next;
@@ -31,6 +21,38 @@ List* createNode(Number* element) {
     newNode->element = element;
     newNode->next = NULL;
     return newNode;
+}
+
+void push(List** head, Number* number) {
+    List* newNode = (List*)malloc(sizeof(List));
+    if (newNode == NULL) {
+        return;
+    }
+    newNode->element = number;
+    newNode->next = *head;
+    *head = newNode;
+}
+
+Number* pop(List** head) {
+    if (*head == NULL) {
+        return NULL;
+    }
+
+    List* temp = *head;
+    Number* deletedNumber = temp->element;
+    *head = (*head)->next;
+    free(temp);
+
+    return deletedNumber;
+}
+
+void freeList(List** phoneList) {
+    while (*phoneList != NULL) {
+        List* temp = *phoneList;
+        *phoneList = (*phoneList)->next;
+        freeNumber(&(temp->element));
+        free(temp);
+    }
 }
 
 List* merge(List* left, List* right, SortChoice choice) {
@@ -52,10 +74,8 @@ List* merge(List* left, List* right, SortChoice choice) {
 }
 
 void split(List* source, List** left, List** right) {
-    List* fast;
-    List* slow;
-    slow = source;
-    fast = source->next;
+    List* slow = source;
+    List* fast = source->next;
 
     while (fast != NULL) {
         fast = fast->next;
@@ -72,8 +92,8 @@ void split(List* source, List** left, List** right) {
 
 void mergeSort(List** element, SortChoice choice) {
     List* head = *element;
-    List* left;
-    List* right;
+    List* left = NULL;
+    List* right = NULL;
 
     if (!head || !head->next) {
         return;

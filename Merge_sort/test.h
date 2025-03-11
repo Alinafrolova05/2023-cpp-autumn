@@ -1,7 +1,6 @@
 #pragma once
 
-// 
-bool testSortByName(void);
+#include <stdbool.h>
 
-// 
-bool testSortByNumber(void);
+// Tests sorting on a simple example.
+bool test(void);

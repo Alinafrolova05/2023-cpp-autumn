@@ -1,28 +1,30 @@
 #pragma once
 
-#include "sort.h"
-#include "inputOutput.h"
+#include "numbers.h"
 
-// 
+typedef enum {
+    EXIT = 0,
+    SORT_BY_NAME = 1,
+    SORT_BY_NUMBER = 2,
+} SortChoice;
+
+// Defines the structure.
 typedef struct List List;
 
-// 
+// Frees the list
 void freeList(List** phoneList);
 
-// 
+// Returns the next element of the list.
 List* getNextList(List* list);
 
-// 
+// Returns the list element number.
 Number* getNumberOfList(List* list);
 
-// 
-List* createNode(Number* element);
+// Adds a new element to the list
+void push(List** head, Number* number);
 
-// 
-List* merge(List* left, List* right, SortChoice choice);
+// Removes the last element from the list.
+Number* pop(List** head);
 
-// 
-void split(List* source, List** left, List** right);
-
-// 
+// Sorts the list.
 void mergeSort(List** element, SortChoice choice);

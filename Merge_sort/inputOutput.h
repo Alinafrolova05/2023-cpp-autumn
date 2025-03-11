@@ -1,26 +1,10 @@
 #pragma once
 
-#include "sort.h"
-#include <stdio.h>
 #include "mergeSorting.h"
+#include <stdio.h>
 
-// 
-typedef struct Number Number;
-
-// 
-Number* createNumber();
-
-// 
-char* getName(Number* number);
-
-// 
-char* getNumber(Number* number);
-
-// 
-void toCheckScanf(SortChoice* choice);
-
-// 
+// Fills the list with numbers from the file.
 void writeInBuffer(FILE* file, List** phoneList);
 
-// 
+// Prints a list.
 void printList(List* node);
