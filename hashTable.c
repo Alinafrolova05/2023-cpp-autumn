@@ -1,18 +1,9 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
+#define HASH_TABLE_SIZE 100
 
 #include <stdio.h>
-#include <malloc.h>
-#include <string.h>
 #include "test.h"
 #include "table.h"
-#include "countTask.h"
-
-void printSolution(char* array[], int arraySize, bool* errorCode, CountTask** task) {
-    int sizeOfTable = printTable(array, arraySize, errorCode, task);
-    printf("\ndutyCycle: %d/%d\n", getArraySize(*task), sizeOfTable);
-    printf("averageListLength: %d/%d\n", getAverageListLength(*task), arraySize);
-    printf("maxLength: %d", getMaxListLength(*task));
-}
 
 void task(void) {
     bool errorCode = true;
@@ -23,34 +14,39 @@ void task(void) {
         return;
     }
 
-    char* array[256] = { 0 };
-    int i = 0;
+    HashTable* table = NULL;
+    table = createHashTable(HASH_TABLE_SIZE, &errorCode);
+    if (!errorCode) {
+        printf("Error!!!");
+        return -1;
+    }
 
     char buffer[100] = "";
-    while (fscanf(file, "%99s", buffer) == 1 && i < 256) {
-        array[i] = malloc(strlen(buffer) + 1);
-        if (array[i] == NULL) {
-            printf("Error!");
-            errorCode = false;
-            free(task);
-
-            for (int j = 0; j < i; j++) {
-                free(array[j]);
+    while (fscanf(file, "%99s", buffer) == 1) {
+        if ((float)getElementCountTable(table) / getSizeTable(table) > 0.7) {
+            resizeHashTable(&table, &errorCode);
+            if (!errorCode) {
+                printf("Error!!!");
+                freeTable(table);
+                return -1;
             }
-            return;
         }
-        strcpy(array[i], buffer);
-        i++;
+        insert(table, buffer, &errorCode);
+        if (!errorCode) {
+            printf("Error!!!");
+            freeTable(table);
+            return -1;
+        }
     }
     fclose(file);
 
-    CountTask* task = NULL;
-    printSolution(array, i, &errorCode, &task);
-    free(task);
+    printTable(table);
 
-    for (int j = 0; j < i; j++) {
-        free(array[j]);
-    }
+    printf("Late Load Factor: %0.2f\n", calculateLoadFactor(table));
+    printf("La`te Average List Length: %0.2f\n", calculateAverageListLength(table));
+    printf("Late Max List Length: %d\n", calculateMaxListLength(table));
+
+    freeTable(table);
 }
 
 int main(void) {

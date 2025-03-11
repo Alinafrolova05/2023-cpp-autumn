@@ -16,8 +16,24 @@ char* getKey(Element* element) {
     return element->key;
 }
 
+void* setKey(Element* element, char* key) {
+    element->key = key;
+}
+
+int getCount(Element* element) {
+    return element->count;
+}
+
 Element* getNextElement(Element* element) {
     return element->next;
+}
+
+Element* createElement(void) {
+    return calloc(1, sizeof(Element));
+}
+
+Element** createpointerElement(int initialSize) {
+    return(Element**)calloc(initialSize, sizeof(Element*));
 }
 
 char* myStrdup(char* str, bool* errorCode) {
@@ -33,18 +49,10 @@ char* myStrdup(char* str, bool* errorCode) {
     return copy;
 }
 
-void setNextElement(Element** element) {
-    *element = (*element)->next;
-}
-
 void incrementValueCount(Element* element) {
     if (element != NULL) {
         element->count++;
     }
-}
-
-Element* createElement(void) {
-    return calloc(1, sizeof(Element));
 }
 
 void push(Element** head, char* value, bool* errorCode) {
@@ -70,21 +78,4 @@ void pop(Element** element) {
     free(tmp->key);
     free(tmp);
     return;
-}
-
-void printElements(Element* element) {
-    while (element != NULL) {
-        printf("%s   %d\n", element->key, element->count);
-        element = element->next;
-    }
-}
-
-Element* searchByValueOfElement(Element* element, char* value) {
-    while (element != NULL) {
-        if (strcmp(value, element->key) == 0) {
-            return element;
-        }
-        element = element->next;
-    }
-    return element;
 }

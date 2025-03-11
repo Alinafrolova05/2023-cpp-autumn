@@ -2,5 +2,5 @@
 
 #include <stdbool.h>
 
-// Checks table completion using a simple example.
+// Checks table completion using a simple examples.
 bool test(void);

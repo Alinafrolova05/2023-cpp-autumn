@@ -1,43 +1,53 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <malloc.h>
 #include <stdbool.h>
-#include "table.h"
 #include "list.h"
 
 typedef struct HashTable {
-    Element* table;
+    Element** table;
+    int size;
+    int elementCount;
 } HashTable;
 
-HashTable* createHashTable(int sizeOfTable, bool* errorCode) {
-    HashTable* segment = calloc(sizeOfTable, sizeof(HashTable));
-    if (segment == NULL) {
+int getSizeTable(HashTable* table) {
+    return table->size;
+}
+
+int getElementCountTable(HashTable* table) {
+    return table->elementCount;
+}
+
+HashTable* createHashTable(int initialSize, bool* errorCode) {
+    HashTable* hashTable = (HashTable*)malloc(sizeof(HashTable));
+    if (!hashTable) {
         *errorCode = false;
         return NULL;
     }
-    return segment;
-}
 
-void toChangeHashTableSize(HashTable** table, int sizeOfTable, bool* errorCode) {
-    HashTable* newTable = (HashTable*)realloc(*table, sizeOfTable * sizeof(HashTable));
-    if (newTable == NULL) {
+    hashTable->table = createpointerElement(initialSize);
+    if (!hashTable->table) {
+        free(hashTable);
         *errorCode = false;
-        return;
+        return NULL;
     }
-    for (int i = 0; i < sizeOfTable; ++i) {
-        newTable[i].table = NULL;
-    }
-    *table = newTable;
+
+    hashTable->size = initialSize;
+    hashTable->elementCount = 0;
+    return hashTable;
 }
 
-void freeTable(HashTable* hashTable, int sizeOfTable) {
-    for (int i = 0; i < sizeOfTable; ++i) {
-        Element* current = hashTable[i].table;
-        pop(&(current));
+void freeTable(HashTable* hashTable) {
+    for (int i = 0; i < hashTable->size; ++i) {
+        Element* current = hashTable->table[i];
+        while (current) {
+            Element* temp = current;
+            current = getNextElement(current);
+            free(getKey(temp));
+            free(temp);
+        }
     }
+    free(hashTable->table);
     free(hashTable);
 }
 
@@ -59,108 +69,110 @@ int hash(const char* key, int sizeOfTable) {
     return hashIndex % sizeOfTable;
 }
 
-Element* search(HashTable* segment, int sizeOfTable, const char* key) {
-    int size = sizeOfTable;
-    while (size > 1) {
-        int index = hash(key, size);
-        Element* found = searchByValueOfElement(segment[index].table, key);
-        if (found) {
-            return found;
+Element* search(HashTable* hashTable, const char* key) {
+    int index = hash(key, hashTable->size);
+    Element* current = hashTable->table[index];
+    while (current) {
+        if (strcmp(getKey(current), key) == 0) {
+            return current;
         }
-        size /= 2;
-    }    
+        current = getNextElement(current);
+    }
     return NULL;
 }
 
-void insert(HashTable* segment, int sizeOfTable, const char* key, bool* errorCode) {
-    Element* found = search(segment, sizeOfTable, key);
-    if (found) {
-        incrementValueCount(found);
+void insert(HashTable* hashTable, const char* key, bool* errorCode) {
+    Element* searchElement = search(hashTable, key);
+    if (searchElement != NULL) {
+        incrementValueCount(searchElement);
         return;
     }
-    int index = hash(key, sizeOfTable);
-    push(&(segment[index].table), key, errorCode);
-}
 
-CountTask* calculate(HashTable* segment, int sizeOfTable, int arraySize, bool* errorCode) {
-    CountTask* task = createCountTask();
-    if (task == NULL) {
+    int index = hash(key, hashTable->size);
+    Element* newElement = createElement();
+    if (!newElement) {
         *errorCode = false;
         return;
     }
-    setArraySize(task, arraySize);
 
-    int length = 0;
-    int max = 0;
-    for (int i = 0; i < sizeOfTable; ++i) {
-        Element* current = segment[i].table;
-        int len = 0;
-        while (current != NULL) {
-            len++;
-            setNextElement(&current); 
-        }
-        length += len;
-        if (len > max) {
-            max = len;
-        }
+    setKey(newElement, myStrdup(key, errorCode));
+    if (!*errorCode) {
+        free(newElement);
+        return;
     }
+    incrementValueCount(newElement);
+    Element* current = getNextElement(newElement);
+    current = hashTable->table[index];
+    hashTable->table[index] = newElement;
 
-    if (arraySize > 0) {
-        setAverageListLength(task, length);
-    }
-    setMaxListLength(task, max);
-    return task;
+    hashTable->elementCount++;
 }
 
-HashTable* fillOutTheTable(const char* array[], int* sizeOfTable, int arraySize, bool* errorCode, CountTask** task) {
-    HashTable* segment = createHashTable(*sizeOfTable, errorCode);
-    if (!*errorCode) {
-        return NULL;
+void resizeHashTable(HashTable** table, bool* errorCode) {
+    int newSize = (*table)->size * 2;
+    HashTable* newTable = createHashTable(newSize, errorCode);
+    if (!errorCode) {
+        return;
     }
-    int countInserts = 0;
-    for (int i = 0; i < arraySize; ++i) {
-        insert(segment, *sizeOfTable, array[i], errorCode);
-        if (!*errorCode) {
-            freeTable(segment, *sizeOfTable);
-            return NULL;
-        }
-        countInserts++;
 
-        if (!search(segment, *sizeOfTable, array[i])) {
-            *errorCode = false;
-            freeTable(segment, *sizeOfTable);
-            return NULL;
+    for (int i = 0; i < (*table)->size; ++i) {
+        Element* current = (*table)->table[i];
+        while (current) {
+            insert(newTable, getKey(current), &errorCode);
+            if (!errorCode) {
+                freeTable(newTable);
+                return;
+            }
+            current = getNextElement(current);
         }
+    }
 
-        if (countInserts * 2 > *sizeOfTable) {
-            *sizeOfTable *= 2;
-            toChangeHashTableSize(&segment, *sizeOfTable, errorCode);
-            if (!*errorCode) {
-                freeTable(segment, *sizeOfTable);
-                return NULL;
+    freeTable(*table);
+    *table = newTable;
+}
+
+void printTable(HashTable* hashTable) {
+    for (int i = 0; i < hashTable->size; ++i) {
+        Element* current = hashTable->table[i];
+        if (current) {
+            while (current) {
+                printf("%s    %d\n", getKey(current), getCount(current));
+                current = getNextElement(current);
             }
         }
     }
-    *task = calculate(segment, *sizeOfTable, arraySize, errorCode);
-    if (!*errorCode) {
-        freeTable(segment, *sizeOfTable);
-        return NULL;
-    }
-    return segment;
 }
 
-int printTable(const char* array[], int arraySize, bool* errorCode, CountTask** task) {
-    int sizeofTable = 100;
-    HashTable* hashTable = fillOutTheTable(array, &sizeofTable, arraySize, errorCode, task);
-    for (int i = 0; i < sizeofTable; ++i) {
-        printElements(hashTable[i].table);
-    }
-    freeTable(hashTable, sizeofTable);
-    return sizeofTable;
+double calculateLoadFactor(HashTable* hashTable) {
+    return (double)hashTable->elementCount / hashTable->size;
 }
 
-void solution(const char* array[], int arraySize, bool* errorCode, CountTask** task) {
-    int sizeofTable = 100;
-    HashTable* hashTable = fillOutTheTable(array, &sizeofTable, arraySize, errorCode, task);
-    freeTable(hashTable, sizeofTable);
+double calculateAverageListLength(HashTable* hashTable) {
+    int totalLength = 0;
+    for (int i = 0; i < hashTable->size; ++i) {
+        Element* current = hashTable->table[i];
+        int len = 0;
+        while (current) {
+            len++;
+            current = getNextElement(current);
+        }
+        totalLength += len;
+    }
+    return (double)totalLength / hashTable->size;
+}
+
+int calculateMaxListLength(HashTable* hashTable) {
+    int maxLength = 0;
+    for (int i = 0; i < hashTable->size; ++i) {
+        Element* current = hashTable->table[i];
+        int len = 0;
+        while (current) {
+            len++;
+            current = getNextElement(current);
+        }
+        if (len > maxLength) {
+            maxLength = len;
+        }
+    }
+    return maxLength;
 }
