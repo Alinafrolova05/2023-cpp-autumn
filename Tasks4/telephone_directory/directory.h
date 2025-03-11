@@ -1,5 +1,9 @@
 #pragma once
 
+#define MAX_ENTRIES 100
+#define NAME_LENGTH 50
+#define NUMBER_LENGTH 50
+
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -9,20 +13,23 @@ typedef struct PhoneBook PhoneBook;
 // Creates structure.
 PhoneBook* createPhoneBook(void);
 
-// Returns the name from the structure.
-char* getName(PhoneBook* entry, int i);
+// Sets name.
+void setName(PhoneBook* entry, int i, char* value);
 
-// Returns the number from the structure.
-char* getNumber(PhoneBook* entry, int i);
+// Sets number.
+void setNumber(PhoneBook* entry, int i, char* value);
 
-// Writes a new number
-void getEntryFromUser(PhoneBook* entry, int size);
+// Writes a new number.
+void getEntryFromUser(PhoneBook* entry, int i);
 
-// 0Displays all numbers
-void printAllFile(FILE* file);
+// Displays all numbers.
+void printAllEntries(PhoneBook* entries, int size);
 
-// Writes the number to a file
-void printInFile(FILE* file, PhoneBook* entry, int size);
+// Loads data from a file into a structure.
+void loadFromFile(char* charFile, PhoneBook* entries, int* size, bool* errorCode);
 
-// Finds the recorded number
-void find(FILE* file, char* name, char* buffer, bool* errorCode);
+// Writes the number to a file.
+void saveToFile(char* charFile, PhoneBook* entries, int size, bool* errorCode);
+
+// Finds the recorded number.
+bool find(PhoneBook* entries, char name[], int size);

@@ -4,4 +4,4 @@
 #include <stdio.h>
 
 // Tests the solution on a simple example.
-bool test(FILE* file);
+bool test(void);

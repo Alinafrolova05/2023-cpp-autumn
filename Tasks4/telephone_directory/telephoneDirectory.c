@@ -1,78 +1,74 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 
-#include <stdio.h>
-#include <malloc.h>
-#include <locale.h>
-#include <stdbool.h>
 #include "directory.h"
 #include "test.h"
 
-void printSolution(FILE* file, PhoneBook* entry, int size) {
-    int answer = 8;
-    printf("\nAnswer: ");
-    int result = scanf("%d", &answer);
+void printSolution(char* charFile, PhoneBook* entry, int* size) {
+    bool errorCode = true;
+    loadFromFile(charFile, entry, size, &errorCode);
+    if (!errorCode) {
+        printf("Error loading phonebook from file!\n");
+        return;
+    }
 
-    while (answer != 0) {
-        if (answer == 1) {
-            printf("name = ");
-            int res = scanf("%s", getName(entry, size));
-            printf("number = ");
-            res = scanf("%s", getNumber(entry, size));
-            size++;
+    int option = -1;
+    printf("\nChoose an option: ");
+    scanf("%d", &option);
+
+    while (option != 0) {
+        if (option == 1) {
+            if (*size < MAX_ENTRIES) {
+                getEntryFromUser(entry, *size);
+                (*size)++;
+            }
+            else {
+                printf("Phonebook is full!\n");
+            }
         }
-        else if (answer == 2) {
-            printAllFile(file);
+        else if (option == 2) {
+            printAllEntries(entry, *size);
         }
-        else if (answer == 3) {
-            bool errorCode = true;
-            char name[20] = { 0 };
+        else if (option == 3) {
+            char name[NAME_LENGTH] = "";
             printf("\nInput name: ");
-            int res = scanf("%s", name);
-            char buffer[50] = { 0 };
-            find(file, name, buffer, &errorCode);
-            if (!errorCode) {
-                printf("\nThis name was not found.");
-                continue;
+            scanf("%s", name);
+            if (find(entry, name, *size)) {
+                printf("Found: %s\n", name);
             }
-            printf("%s", buffer);
+            else {
+                printf("This name was not found.\n");
+            }
         }
-        else if (answer == 4) {
-            bool errorCode = true;
-            char number[20] = { 0 };
+        else if (option == 4) {
+            char number[NUMBER_LENGTH] = { 0 };
             printf("\nInput number: ");
-            int res = scanf("%s", number);
-            char buffer[50] = { 0 };
-            find(file, number, buffer, &errorCode);
-            if (!errorCode) {
-                printf("\nThis name was not found.");
-                continue;
+            scanf("%s", number);
+            if (find(entry, number, *size)) {
+                printf("Found: %s\n", number);
             }
-            printf("%s", buffer);
+            else {
+                printf("This number was not found.\n");
+            }
         }
-        else if (answer == 5) {
-            printInFile(file, entry, size);
-            break;
+        else if (option == 5) {
+            saveToFile(charFile, entry, *size, &errorCode);
+            if (!errorCode) {
+                printf("Error saving phonebook to file!\n");
+                break;
+            }
         }
         else {
-            printf("\nInput Error!!!!!");
-            break;
+            printf("Input Error!!!!!\n");
         }
-        printf("\nNext answer: ");
-        result = scanf("%d", &answer);
+        printf("\nNext option: ");
+        scanf("%d", &option);
     }
 }
-
 int main(void) {
-    FILE* file = fopen("text.txt", "a+");
-    if (file == NULL) {
-        printf("\nFile doesn't open!");
+    if (!test()) {
+        printf("Error!!!");
         return -1;
     }
-    if (!test(file)) {
-        printf("Error!");
-        return -1;
-    }
-
     printf("Specify option number:\n");
     printf("0 - exit");
     printf("\n1 - add an entry(name and phone number)");
@@ -83,9 +79,8 @@ int main(void) {
 
     int size = 0;
     PhoneBook* entry = createPhoneBook();
-    printSolution(file, entry, size);
+    printSolution("text.txt", entry, &size);
 
     free(entry);
-    fclose(file);
     return 0;
 }

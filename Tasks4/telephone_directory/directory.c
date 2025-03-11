@@ -1,66 +1,77 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "directory.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 
 typedef struct PhoneBook {
-    char name[12];
-    char number[14];
+    char name[NAME_LENGTH];
+    char number[NUMBER_LENGTH];
 } PhoneBook;
 
-char* getName(PhoneBook* entry, int i) {
-    return entry[i].name;
+void setName(PhoneBook* entry, int i, char* value) {
+    strcpy(entry[i].name, value);
 }
 
-char* getNumber(PhoneBook* entry, int i) {
-    return entry[i].number;
+void setNumber(PhoneBook* entry, int i, char* value) {
+    strcpy(entry[i].number, value);
 }
 
 PhoneBook* createPhoneBook(void) {
     return calloc(100, sizeof(PhoneBook));
 }
 
-void getEntryFromUser(PhoneBook* entry, int size) {
-    printf("name = ");
-    scanf("%s", entry[size].name);
-    printf("number = ");
-    scanf("%s", entry[size].number);
-    size++;
-}
-
-void printAllFile(FILE* file) {
+void loadFromFile(char* charFile, PhoneBook* entries, int* size, bool* errorCode) {
+    FILE* file = fopen(charFile, "r");
     if (!file) {
-        printf("Error reading file!");
+        *errorCode = false;
         return;
     }
-    char line[50] = { 0 };
-    rewind(file);
-    while (fgets(line, 50, file) != NULL) {
-        printf("%s", line);
-    }
-}
-
-void printInFile(FILE* file, PhoneBook* entry, int size) {
-    for (int i = 0; i < size; ++i) {
-        fprintf(file, "\n%s - %s", entry[i].name, entry[i].number);
-    }
-}
-
-void find(FILE* file, char* name, char* buffer, bool* errorCode) {
-    char line[50] = { 0 };
-    rewind(file);
-    while (fgets(line, 50, file) != NULL) {
-        for (int i = 0; i < strlen(line) - strlen(name); ++i) {
-            if (strncmp(name, line + i, strlen(name)) == 0) {
-                strcpy(buffer, line);
-                return;
-            }
+    while (fscanf(file, "%s %s", entries[*size].name, entries[*size].number) == 2) {
+        (*size)++;
+        if (*size >= MAX_ENTRIES) {
+            break;
         }
-        
-
     }
-    *errorCode = false;
+    fclose(file);
+}
+
+void saveToFile(char* charFile, PhoneBook* entries, int size, bool* errorCode) {
+    FILE* file = fopen(charFile, "w");
+    if (!file) {
+        *errorCode = false;
+        return;
+    }
+    for (int i = 0; i < size; ++i) {
+        fprintf(file, "%s %s\n", entries[i].name, entries[i].number);
+    }
+    fclose(file);
+}
+
+void getEntryFromUser(PhoneBook* entry, int i) {
+    printf("Enter name: ");
+    scanf("%s", entry[i].name);
+    printf("Enter number: ");
+    scanf("%s", entry[i].number);
+}
+
+void printAllEntries(PhoneBook* entries, int size) {
+    if (size == 0) {
+        printf("No records found.\n");
+        return;
+    }
+    printf("\nPhonebook Records:\n");
+    for (int i = 0; i < size; i++) {
+        printf("%d. Name: %s, Number: %s\n", i + 1, entries[i].name, entries[i].number);
+    }
+}
+
+bool find(PhoneBook* entries, char name[], int size) {
+    for (int i = 0; i < size; i++) {
+        if (strcmp(entries[i].name, name) == 0) {
+            strcpy(name, entries[i].name);
+            return true;
+        }
+    }
+    return false;
 }

@@ -2,13 +2,17 @@
 #include "test.h"
 #include "directory.h"
 
-bool test(FILE* file) {
+bool test(void) {
+    PhoneBook* entry = createPhoneBook();
+    int size = 0;
     bool errorCode = true;
-    char buffer[50] = { 0 };
-    char name[50] = "rtrt";
-    find(file, name, buffer, &errorCode);
-    if (!errorCode) {
-        return false;
-    }
-    return true;
+
+    setName(entry, size, "rtrt");
+    setNumber(entry, size, "1111");
+    size++;
+
+    char nameToFind[NAME_LENGTH] = "rtrt";
+    bool found = find(entry, nameToFind, size);
+    free(entry);
+    return found;
 }
