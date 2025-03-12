@@ -9,13 +9,17 @@ typedef struct Table {
     Element* element;
 } Table;
 
+Element** getElementInTable(Table* table, int i) {
+    return &table[i].element;
+}
+
 Table* createTable(int size, bool* errorCode) {
-    Table* segment = calloc(size, sizeof(Table));
-    if (segment == NULL) {
+    Table* table = calloc(size, sizeof(Table));
+    if (table == NULL) {
         *errorCode = false;
         return NULL;
     }
-    return segment;
+    return table;
 }
 
 Table* loadFromFile(FILE* file, int* size, bool* errorCode) {
@@ -97,19 +101,19 @@ void deleteTable(Table** segment, int size) {
             free(toDelete);
         }
     }
-    free(*segment);
 }
+
 void solve(Table* table, Table* states, int size, int stateCount, bool* errorCode) {
     if (table == NULL || states == NULL) return;
     int count = size - stateCount;
-    int check = 0;
+    int unreachableCount = 0;
     for (int i = 0; count > 0; ++i) {
         int minVertex = 0;
         int minWeight = INT_MAX;
         findMinElement(states[i % stateCount].element, table, &minWeight, &minVertex);
         if (minWeight == INT_MAX) {
-            check++;
-            if (check > size) {
+            unreachableCount++;
+            if (unreachableCount > size) {
                 break;
             }
             continue;
@@ -142,6 +146,10 @@ Table* fillOutTable(FILE* file, int* numberOfStates, bool* errorCode) {
 
     if (fscanf(file, "%d", &stateCount) == 1) {
         states = createTable(stateCount, errorCode);
+        if (!*errorCode) {
+            deleteTable(&table, size);
+            return NULL;
+        }
     }
     else {
         *errorCode = false;
@@ -152,11 +160,15 @@ Table* fillOutTable(FILE* file, int* numberOfStates, bool* errorCode) {
 
     int number = 0;
     for (int i = 0; fscanf(file, "%d", &number) == 1; ++i) {
-        if (i > stateCount) {
+        if (i >= stateCount) {
             break;
         }
         deleteElementInTable(&table, size, number);
         push(&states[i].element, number, 0, errorCode);
+        if (!*errorCode) {
+            deleteTable(&table, size);
+            return NULL;
+        }
     }
 
     solve(table, states, size, stateCount, errorCode);

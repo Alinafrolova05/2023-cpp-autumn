@@ -2,12 +2,13 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-
-// Forward declaration of the Element structure.
-typedef struct Element Element;
+#include "stack.h"
 
 // Forward declaration of the Table structure.
 typedef struct Table Table;
+
+// Return element from table.
+Element** getElementInTable(Table* table, int i);
 
 // Main function to solve the problem using data from the specified file 
 // and returns a table of cities in each state.

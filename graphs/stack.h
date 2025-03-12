@@ -1,6 +1,6 @@
 #pragma once
 
-#include "solution.h"
+#include <stdbool.h>
 
 // Forward declaration of the Element struct.
 typedef struct Element Element;
