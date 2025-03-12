@@ -3,9 +3,9 @@
 #include <stdio.h>
 
 void swap(int* left, int* right) {
-    int temp = *left;
-    *left = *right;
-    *right = temp;
+    *left = *left + *right;
+    *right = *left - *right;
+    *left = *left - *right;
 }
 
 int main(void) {
