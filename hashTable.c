@@ -5,46 +5,31 @@
 #include "test.h"
 #include "table.h"
 
-void task(void) {
+void task(FILE* file) {
     bool errorCode = true;
 
-    FILE* file = fopen("text.txt", "r");
-    if (file == NULL) {
-        perror("Error!");
-        return;
-    }
-
-    HashTable* table = NULL;
-    table = createHashTable(HASH_TABLE_SIZE, &errorCode);
+    HashTable* table = createHashTable(HASH_TABLE_SIZE, &errorCode);
     if (!errorCode) {
         printf("Error!!!");
-        return -1;
+        return;
     }
 
     char buffer[100] = "";
     while (fscanf(file, "%99s", buffer) == 1) {
-        if ((float)getElementCountTable(table) / getSizeTable(table) > 0.7) {
-            resizeHashTable(&table, &errorCode);
-            if (!errorCode) {
-                printf("Error!!!");
-                freeTable(table);
-                return -1;
-            }
-        }
-        insert(table, buffer, &errorCode);
+        insertInTable(table, buffer, &errorCode);
         if (!errorCode) {
             printf("Error!!!");
             freeTable(table);
-            return -1;
+            return;
         }
     }
     fclose(file);
 
     printTable(table);
 
-    printf("Late Load Factor: %0.2f\n", calculateLoadFactor(table));
-    printf("La`te Average List Length: %0.2f\n", calculateAverageListLength(table));
-    printf("Late Max List Length: %d\n", calculateMaxListLength(table));
+    printf("Late Load Factor: %0.2f\n", calcuHashTableFillFactor(table));
+    printf("La`te Average List Length: %0.2f\n", calcuLateAverageListLength(table));
+    printf("Late Max List Length: %d\n", calcuLateMaxListLength(table));
 
     freeTable(table);
 }
@@ -54,6 +39,12 @@ int main(void) {
         fprintf(stderr, "Error!!!\n");
         return -1;
     }
-    task();
+    FILE* file = fopen("text.txt", "r");
+    if (file == NULL) {
+        perror("Error!");
+        return;
+    }
+    task(file);
+    fclose(file);
     return 0;
 }

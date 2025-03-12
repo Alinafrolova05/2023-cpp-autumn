@@ -14,7 +14,7 @@ int getSizeTable(HashTable* table) {
     return table->size;
 }
 
-int getElementCountTable(HashTable* table) {
+int getHashTableElementCount(HashTable* table) {
     return table->elementCount;
 }
 
@@ -25,7 +25,7 @@ HashTable* createHashTable(int initialSize, bool* errorCode) {
         return NULL;
     }
 
-    hashTable->table = createpointerElement(initialSize);
+    hashTable->table = createElementArray(initialSize);
     if (!hashTable->table) {
         free(hashTable);
         *errorCode = false;
@@ -101,25 +101,22 @@ void insert(HashTable* hashTable, const char* key, bool* errorCode) {
         return;
     }
     incrementValueCount(newElement);
-    Element* current = getNextElement(newElement);
-    current = hashTable->table[index];
     hashTable->table[index] = newElement;
-
     hashTable->elementCount++;
 }
 
 void resizeHashTable(HashTable** table, bool* errorCode) {
     int newSize = (*table)->size * 2;
     HashTable* newTable = createHashTable(newSize, errorCode);
-    if (!errorCode) {
+    if (!*errorCode) {
         return;
     }
 
     for (int i = 0; i < (*table)->size; ++i) {
         Element* current = (*table)->table[i];
         while (current) {
-            insert(newTable, getKey(current), &errorCode);
-            if (!errorCode) {
+            insert(newTable, getKey(current), errorCode);
+            if (!*errorCode) {
                 freeTable(newTable);
                 return;
             }
@@ -129,6 +126,23 @@ void resizeHashTable(HashTable** table, bool* errorCode) {
 
     freeTable(*table);
     *table = newTable;
+}
+
+void insertInTable(HashTable* hashTable, const char* key, bool* errorCode) {
+    if ((float)getHashTableElementCount(hashTable) / getSizeTable(hashTable) > 0.7) {
+        resizeHashTable(&hashTable, errorCode);
+        if (!*errorCode) {
+            printf("Error!!!");
+            freeTable(hashTable);
+            return;
+        }
+    }
+    insert(hashTable, key, errorCode);
+    if (!*errorCode) {
+        printf("Error!!!");
+        freeTable(hashTable);
+        return;
+    }
 }
 
 void printTable(HashTable* hashTable) {
@@ -143,11 +157,11 @@ void printTable(HashTable* hashTable) {
     }
 }
 
-double calculateLoadFactor(HashTable* hashTable) {
+double calcuHashTableFillFactor(HashTable* hashTable) {
     return (double)hashTable->elementCount / hashTable->size;
 }
 
-double calculateAverageListLength(HashTable* hashTable) {
+double calcuLateAverageListLength(HashTable* hashTable) {
     int totalLength = 0;
     for (int i = 0; i < hashTable->size; ++i) {
         Element* current = hashTable->table[i];
@@ -161,7 +175,7 @@ double calculateAverageListLength(HashTable* hashTable) {
     return (double)totalLength / hashTable->size;
 }
 
-int calculateMaxListLength(HashTable* hashTable) {
+int calcuLateMaxListLength(HashTable* hashTable) {
     int maxLength = 0;
     for (int i = 0; i < hashTable->size; ++i) {
         Element* current = hashTable->table[i];

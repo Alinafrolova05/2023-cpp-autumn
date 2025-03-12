@@ -32,8 +32,8 @@ Element* createElement(void) {
     return calloc(1, sizeof(Element));
 }
 
-Element** createpointerElement(int initialSize) {
-    return(Element**)calloc(initialSize, sizeof(Element*));
+Element** createElementArray(int initialSize) {
+    return (Element**)calloc(initialSize, sizeof(Element*));
 }
 
 char* myStrdup(char* str, bool* errorCode) {
@@ -64,6 +64,7 @@ void push(Element** head, char* value, bool* errorCode) {
     element->key = myStrdup(value, errorCode);
     if (element->key == NULL) {
         *errorCode = false;
+        free(element);
         return;
     }
     element->count = 1;
@@ -77,5 +78,4 @@ void pop(Element** element) {
     *element = tmp->next;
     free(tmp->key);
     free(tmp);
-    return;
 }

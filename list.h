@@ -21,7 +21,7 @@ Element* getNextElement(Element* element);
 Element* createElement(void);
 
 // Creates and returns an array of pointers to elements with the specified initial size.
-Element** createpointerElement(int initialSize);
+Element** createElementArray(int initialSize);
 
 // Duplicates the given string and returns a pointer to the new string.
 char* myStrdup(char* str, bool* errorCode);

@@ -4,7 +4,7 @@
 #include "list.h"
 #include "table.h"
 
-bool testCreateHashTable() {
+bool testCreateHashTable(void) {
     bool errorCode = true;
     HashTable* hashTable = createHashTable(10, &errorCode);
     bool result = (hashTable != NULL && errorCode);
@@ -12,11 +12,11 @@ bool testCreateHashTable() {
     return result;
 }
 
-bool testInsertAndSearch() {
-    bool errorCode = true;;
+bool testInsertAndSearch(void) {
+    bool errorCode = true;
     HashTable* hashTable = createHashTable(10, &errorCode);
-    insert(hashTable, "test", &errorCode);
-    insert(hashTable, "example", &errorCode);
+    insertInTable(hashTable, "test", &errorCode);
+    insertInTable(hashTable, "example", &errorCode);
 
     Element* element1 = search(hashTable, "test");
     Element* element2 = search(hashTable, "example");
@@ -30,11 +30,11 @@ bool testInsertAndSearch() {
     return result;
 }
 
-bool testInsertDuplicate() {
+bool testInsertDuplicate(void) {
     bool errorCode = true;
     HashTable* hashTable = createHashTable(10, &errorCode);
-    insert(hashTable, "duplicate", &errorCode);
-    insert(hashTable, "duplicate", &errorCode);
+    insertInTable(hashTable, "duplicate", &errorCode);
+    insertInTable(hashTable, "duplicate", &errorCode);
 
     Element* element = search(hashTable, "duplicate");
     bool result = (element != NULL && getCount(element) == 2);
